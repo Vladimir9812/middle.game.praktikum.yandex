@@ -1,8 +1,12 @@
 import { fileURLToPath, URL } from 'url';
-
 import { defineConfig } from 'vite';
 import dotenv from 'dotenv';
+
 import react from '@vitejs/plugin-react';
+import postcssNested from 'postcss-nested';
+import postcssImport from 'postcss-import';
+import postcssVars from 'postcss-css-variables';
+import postcssAutoprefixer from 'autoprefixer';
 
 dotenv.config();
 
@@ -15,6 +19,11 @@ export default defineConfig({
     __SERVER_PORT__: process.env.SERVER_PORT,
   },
   plugins: [react()],
+  css: {
+    postcss: {
+      plugins: [postcssImport(), postcssNested(), postcssVars(), postcssAutoprefixer()],
+    },
+  },
   resolve: {
     alias: [
       { find: '@app/api', replacement: fileURLToPath(new URL('./src/api', import.meta.url)) },

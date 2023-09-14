@@ -23,7 +23,7 @@
     "paths": {
       "@app/api": ["api"],
       "@app/components": ["components"],
-      "@app/hooks": ["components"],
+      "@app/hooks": ["hooks"],
       "@app/pages": ["pages"],
       "@app/services": ["services"],
       "@app/store": ["store"],
