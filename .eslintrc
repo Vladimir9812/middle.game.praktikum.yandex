@@ -25,6 +25,8 @@
   ],
   "ignorePatterns": [
     "dist/**",
+    "*.d.ts",
+    "*.js",
     "vite.config.ts",
     "jest.config.js",
     "stylelint.config.js"
