@@ -1,3 +1,6 @@
+// For correct redux slice working
+/* eslint-disable no-param-reassign */
+
 import { createSlice } from '@reduxjs/toolkit';
 
 interface CounterState {
