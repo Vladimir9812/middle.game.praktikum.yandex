@@ -73,6 +73,16 @@
         "tsx": "never"
       }
     ],
+    "@typescript-eslint/explicit-member-accessibility": [
+      "error",
+      {
+        "accessibility": "explicit",
+        "overrides": {
+          "properties": "explicit",
+          "methods": "explicit"
+        }
+      }
+    ],
     "object-curly-newline": "off",
     "import/order": [
       "error",
