@@ -1,4 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import '@fontsource/ubuntu-mono/cyrillic.css';
+import '@fontsource/ubuntu-mono/latin.css';
 
 import {
   ErrorPage,
