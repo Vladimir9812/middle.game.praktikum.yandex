@@ -4,6 +4,8 @@ import { ListItem, Button, Wrap, Center, Link as ChakraLink, List, Box } from '@
 import { decrement, increment } from '@app/store';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 
+import { TestIcon } from '../../components/icons/TestIcon';
+
 // type Props = {};
 
 export function MainPage() {
@@ -11,8 +13,11 @@ export function MainPage() {
   const { counter } = useAppSelector((store) => store.counter);
 
   return (
-    <>
-      <Box as="nav" fontFamily="Ubuntu Mono" padding={3} marginBottom={2}>
+    <Center flexDirection="column" alignItems="center" justifyContent="center" padding={10}>
+      <Box>
+        <TestIcon boxSize={20} />
+      </Box>
+      <Box as="nav" fontFamily="Ubuntu Mono" textAlign="center" padding={3} marginBottom={2}>
         <List flexDirection="column">
           <ListItem>
             <ChakraLink as={ReactRouterLink} to="/login">
@@ -68,6 +73,6 @@ export function MainPage() {
           +
         </Button>
       </Wrap>
-    </>
+    </Center>
   );
 }
