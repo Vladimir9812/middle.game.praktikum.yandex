@@ -18,23 +18,12 @@
   font-family:
     Ubuntu Mono,
     sans-serif;
-  font-size: 128px;
-  line-height: 1em;
+  line-height: normal;
   text-transform: uppercase;
 }
 
 .not-found__code_central {
-  display: flex;
-
-  align-items: flex-end;
-
-  height: 215px;
-}
-
-.not-found__go-back-button {
-  position: 'absolute';
-  bottom: 0;
-  left: 0;
-
-  margin-top: '-50px';
+  &::first-letter {
+    vertical-align: sub;
+  }
 }
