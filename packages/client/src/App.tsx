@@ -14,7 +14,7 @@ import {
   RegisterPage,
 } from '@app/pages';
 
-import { theme } from './const/chakraTheme';
+import { theme } from './chakraTheme';
 
 import './App.css';
 
