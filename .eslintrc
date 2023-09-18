@@ -17,12 +17,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": [
-    "import",
-    "@typescript-eslint",
-    "unicorn",
-    "prettier"
-  ],
+  "plugins": ["import", "@typescript-eslint", "unicorn", "prettier"],
   "ignorePatterns": [
     "dist/**",
     "*.d.ts",
@@ -47,10 +42,7 @@
       }
     ],
     "@typescript-eslint/ban-ts-comment": 1,
-    "quotes": [
-      "warn",
-      "single"
-    ],
+    "quotes": ["warn", "single"],
     "react/require-default-props": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",
@@ -92,19 +84,8 @@
             "group": "internal"
           }
         ],
-        "groups": [
-          "builtin",
-          "external",
-          "internal",
-          "parent",
-          [
-            "sibling",
-            "index"
-          ]
-        ],
-        "pathGroupsExcludedImportTypes": [
-          "builtin"
-        ]
+        "groups": ["builtin", "external", "internal", "parent", ["sibling", "index"]],
+        "pathGroupsExcludedImportTypes": ["builtin"]
       }
     ]
   }
