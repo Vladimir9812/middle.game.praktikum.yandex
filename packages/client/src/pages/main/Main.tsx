@@ -4,7 +4,7 @@ import { decrement, increment } from '@app/store';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { Link } from '@app/components';
 
-import { TestIcon } from '../../components/icons/TestIcon';
+import { TestIcon } from '../../components/icons';
 
 // type Props = {};
 

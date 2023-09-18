@@ -1,4 +1,4 @@
-export { ErrorPage } from './error/Error';
+export { NotFoundPage } from './notFound/NotFoundPage';
 export { ForumPage } from './forum/Forum';
 export { GamePage } from './game/Game';
 export { LeaderboardPage } from './leaderboard/Leaderboard';

@@ -1,0 +1,31 @@
+.not-found__go-back-link {
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.not-found__title {
+  font-family:
+    Ubuntu Mono,
+    sans-serif;
+  font-size: 128px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  line-height: 1em;
+  text-transform: uppercase;
+}
+
+.not-found__code_central {
+  height: 215px;
+  display: flex;
+  align-items: flex-end;
+}
+
+.not-found__go-back-button {
+  position: 'absolute';
+  left: 0;
+  bottom: 0;
+  margin-top: '-50px';
+}
