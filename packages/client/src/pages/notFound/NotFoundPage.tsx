@@ -1,6 +1,6 @@
-/* eslint-disable import/order */
 import { Box, Button, Center, Link as ChakraLink, Flex, Image, Text } from '@chakra-ui/react';
 import { Link as ReactRouterLink } from 'react-router-dom';
+
 import Robot from '../../assets/images/robot.png';
 import { GoBackIcon } from '../../components/icons/GoBackIcon';
 import './NotFoundPage.css';
