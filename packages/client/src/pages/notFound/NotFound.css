@@ -1,23 +1,14 @@
 .not-found__go-back-link {
   display: flex;
-
   gap: 10px;
-
   align-items: center;
-
   text-transform: uppercase;
 }
 
 .not-found__title {
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
-
-  font-family:
-    Ubuntu Mono,
-    sans-serif;
   line-height: normal;
   text-transform: uppercase;
 }
