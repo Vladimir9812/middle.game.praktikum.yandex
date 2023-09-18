@@ -1,9 +1,5 @@
 import { extendTheme, defineStyleConfig } from '@chakra-ui/react';
 
-const config = {
-  initialColorMode: 'light',
-  useSystemColorMode: true,
-};
 const Button = defineStyleConfig({
   sizes: {
     lg: {
@@ -15,7 +11,7 @@ const Button = defineStyleConfig({
 });
 
 const baseFont = 'Ubuntu Mono, sans-serif';
-export const theme = extendTheme(config, {
+export const theme = extendTheme({
   components: {
     Button,
   },
