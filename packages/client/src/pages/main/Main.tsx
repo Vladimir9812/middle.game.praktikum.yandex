@@ -2,9 +2,9 @@ import { ListItem, Button, Wrap, Center, List, Box } from '@chakra-ui/react';
 
 import { decrement, increment } from '@app/store';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
+import { Link } from '@app/components';
 
 import { TestIcon } from '../../components/icons/TestIcon';
-import { Link } from '../../components/Link';
 
 // type Props = {};
 
