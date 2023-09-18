@@ -7,10 +7,10 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier",
     "airbnb",
     "airbnb-typescript",
-    "plugin:unicorn/recommended"
+    "plugin:unicorn/recommended",
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -20,8 +20,8 @@
   "plugins": [
     "import",
     "@typescript-eslint",
-    "prettier",
-    "unicorn"
+    "unicorn",
+    "prettier"
   ],
   "ignorePatterns": [
     "dist/**",
@@ -46,11 +46,11 @@
       }
     ],
     "@typescript-eslint/ban-ts-comment": 1,
-    "semi": "error",
     "quotes": [
       "warn",
       "single"
     ],
+    "react/require-default-props": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "max-len": [
@@ -59,9 +59,6 @@
         "code": 100
       }
     ],
-    "space-before-blocks": "error",
-    "no-multi-spaces": "error",
-    "no-trailing-spaces": "error",
     "@typescript-eslint/no-explicit-any": "warn",
     "import/extensions": [
       "error",
