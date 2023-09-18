@@ -35,13 +35,14 @@ const buttonText = 'Sign up';
 export function SignUpForm() {
   return (
     <FormControl as="form" alignItems="center" display="flex" flexDirection="column">
-      {inputs.map((input) =>
-        FormInput({
-          name: input.name,
-          placeholder: input.placeholder,
-          isInvalid: false,
-        }),
-      )}
+      {inputs.map((input) => (
+        <FormInput
+          key={input.name}
+          name={input.name}
+          placeholder={input.placeholder}
+          isInvalid={false}
+        />
+      ))}
       <FormButton label={buttonText.toUpperCase()} />
     </FormControl>
   );
