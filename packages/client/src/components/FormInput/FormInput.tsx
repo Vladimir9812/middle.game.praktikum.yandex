@@ -11,8 +11,9 @@ type FormInputProperties = {
   type?: string;
   errorMessage?: string;
   onChange?: (event: ChangeEvent) => void;
-  mb: number;
+  mb?: number;
 };
+
 
 export const FormInput = forwardRef((properties: FormInputProperties, reference) => {
   const { placeholder = '', errorMessage = '', mb } = properties;
