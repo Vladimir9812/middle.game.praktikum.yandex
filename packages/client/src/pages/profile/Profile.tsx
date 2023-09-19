@@ -1,5 +1,18 @@
-import { Flex, Heading } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import {
+  Button,
+  Flex,
+  Heading,
+  Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  useDisclosure,
+} from '@chakra-ui/react';
+import React, { useEffect, useRef } from 'react';
 
 import { ProfileItem, Link } from '@app/components';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
@@ -20,12 +33,22 @@ import avatar from './profile.jpg';
 export function ProfilePage() {
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.user);
+  const finalReference = useRef(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     dispatch(fetchUser());
   }, []);
 
   let content;
+
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files![0]; // Получаем первый выбранный файл
+    const formData = new FormData();
+    formData.append('avatar', selectedFile);
+    // dispatch(changeAvatar(formData));
+  };
 
   if (user) {
     const profileItems = Object.entries(user).map(([key, value]) => {
@@ -61,7 +84,35 @@ export function ProfilePage() {
           <Link to="/edit-profile" textAlign="center" fontSize="xl">
             <EditIcon position="absolute" top="30" left="50" />
           </Link>
-          <img style={{ width: '307px', height: '287px' }} alt="avatar" src={avatar} />
+          <button
+            style={{
+              width: '307px',
+              height: '287px',
+              cursor: 'pointer',
+              padding: 0,
+              border: 'none',
+              background: 'none',
+            }}
+            type="button"
+            onClick={onOpen}
+          >
+            <img style={{ width: '100%', height: '100%' }} alt="avatar" src={avatar} />
+          </button>
+          <Modal finalFocusRef={finalReference} isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader>Modal Title</ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <Input type="file" name="picture" onChange={handleInputChange} />
+              </ModalBody>
+              <ModalFooter>
+                <Button variant="ghost" onClick={onClose}>
+                  Добавить
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
           <Flex flexDirection="column" style={{ paddingTop: '27px' }}>
             {profileItems}
           </Flex>

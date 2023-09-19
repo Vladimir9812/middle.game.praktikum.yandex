@@ -22,3 +22,17 @@ export const fetchUser = () => async (dispatch: AppDispatch) => {
     dispatch(userSlice.actions.fetchUserError(error));
   }
 };
+// export const changeAvatar = async (formData: FormData) => async () => {
+// try {
+// dispatch()
+// const formData = new FormData(avatar);
+// const response = await fetch(`${baseUrl}/auth/user`, {
+//   method: 'POST',
+//   body: formData,
+// });
+// console.log(await response);
+// dispatch()
+// } catch {
+// dispatch()
+// }
+// };
