@@ -44,10 +44,13 @@ export function ProfilePage() {
 
   // eslint-disable-next-line unicorn/consistent-function-scoping
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFile = event.target.files![0]; // Получаем первый выбранный файл
-    const formData = new FormData();
-    formData.append('avatar', selectedFile);
-    // dispatch(changeAvatar(formData));
+    if (event.target.files) {
+      // console.log(event.target.files[0]);
+      const selectedFile = event.target.files[0]; // Получаем первый выбранный файл
+      const formData = new FormData();
+      formData.append('avatar', selectedFile);
+      // dispatch(changeAvatar(formData));
+    }
   };
 
   if (user) {
