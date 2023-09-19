@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, Heading } from '@chakra-ui/react';
 
 import { Link } from '@app/components';
 
@@ -8,7 +8,9 @@ import { EditProfileForm } from '../../components/EditProfileForm/EditProfileFor
 export function EditProfilePage() {
   return (
     <Flex display="flex" align="center" justify="center" direction="column">
-      <span style={{ marginTop: '66px', fontSize: '72px' }}>Edit profile</span>
+      <Heading as="h1" fontSize="72px" marginTop="66px" fontWeight="400">
+        Edit profile
+      </Heading>
       <Flex
         w="935px"
         h="752px"

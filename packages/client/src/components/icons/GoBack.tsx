@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { createIcon } from '@chakra-ui/icon';
 
 export const GoBackIcon = createIcon({
