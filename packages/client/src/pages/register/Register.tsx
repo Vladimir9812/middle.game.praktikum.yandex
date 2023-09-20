@@ -18,7 +18,7 @@ export function RegisterPage() {
         <Heading as="h1" mb="5" size="4xl">
           {RegisterText.heading}
         </Heading>
-        <Box width="2xl" height="3xl" bg="lightBlue" borderRadius={5} p={10} mb={8}>
+        <Box width="2xl" height="3xl" bg="lightBlue" borderRadius={5} p={10}>
           <Flex gap={8} direction="column">
             <SignUpForm />
             <Link to={ROUTES.LOGIN} textAlign="center" fontSize="xl">
