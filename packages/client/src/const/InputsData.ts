@@ -43,5 +43,5 @@ const inputs: Array<Input> = [
 
 export const profileInputs = inputs;
 export const loginInputs = inputs.filter(
-  (input: Input) => input.name === InputNames.login || InputNames.password,
+  (input: Input) => input.name === InputNames.login || input.name === InputNames.password,
 );
