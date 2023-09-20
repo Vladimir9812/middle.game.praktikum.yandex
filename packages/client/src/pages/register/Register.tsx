@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ErrorBoundary, Link, SignUpForm } from '@app/components';
 
 import logo from '../../assets/images/logo.jpg';
+import { ROUTES } from '../../types/Routes';
 
 const enum RegisterText {
   heading = 'New player',
@@ -31,7 +32,7 @@ export function RegisterPage() {
         <Box width="2xl" height="3xl" bg="lightBlue" borderRadius={5} p={10} mb={8}>
           <Flex gap={8} direction="column">
             <SignUpForm />
-            <Link to="/login" textAlign="center" fontSize="xl">
+            <Link to={ROUTES.LOGIN} textAlign="center" fontSize="xl">
               {RegisterText.link.toUpperCase()}
             </Link>
           </Flex>
