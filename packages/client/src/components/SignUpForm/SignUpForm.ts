@@ -1,34 +1,9 @@
-import { Form } from '../Form/Form';
+import { Form } from '@app/components';
 
-const inputs = [
-  {
-    name: 'first_name',
-    placeholder: 'Enter your name',
-  },
-  {
-    name: 'login',
-    placeholder: 'Enter your nickname',
-  },
-  {
-    name: 'phone',
-    placeholder: 'Enter your phone',
-  },
-  {
-    name: 'email',
-    placeholder: 'Enter your email',
-  },
-  {
-    name: 'password',
-    placeholder: 'Enter password',
-  },
-  {
-    name: 'password_repeat',
-    placeholder: 'Repeat password',
-  },
-];
+import { profileInputs } from '../../const/InputsData';
 
 const buttonText = 'Sign up';
 
 export function SignUpForm() {
-  return Form({ inputs, buttonText });
+  return Form({ inputs: profileInputs, buttonText });
 }
