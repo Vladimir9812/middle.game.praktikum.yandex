@@ -1,38 +1,38 @@
-import AbstractEntity from '../AbstractEntity'
+import AbstractEntity from '../AbstractEntity';
 
 export default class EntityService {
-  private static _instance: EntityService
-  public readonly entities: AbstractEntity[]
+  private static _instance: EntityService;
+
+  public readonly entities: AbstractEntity[] = [];
+
   private constructor() {
-    this.entities = []
+    this.entities = [];
   }
 
   public static getInstance() {
     if (EntityService._instance) {
-      return EntityService._instance
+      return EntityService._instance;
     }
-
-    const newEntityService = new EntityService()
-    EntityService._instance = newEntityService
-    return newEntityService
+    EntityService._instance = new EntityService();
+    return EntityService._instance;
   }
 
   public registerEntity(entity: AbstractEntity) {
-    this.entities.push(entity)
+    this.entities.push(entity);
   }
 
   public registerEntities(...entities: AbstractEntity[]) {
-    this.entities.push(...entities)
+    this.entities.push(...entities);
   }
 
   public destroyEntity(entity: AbstractEntity) {
-    const index = this.entities.indexOf(entity)
+    const index = this.entities.indexOf(entity);
     if (index !== -1) {
-      this.entities.splice(index, 1)
+      this.entities.splice(index, 1);
     }
   }
 
   public destroyAllEntities() {
-    this.entities.splice(0, this.entities.length)
+    this.entities.splice(0, this.entities.length);
   }
 }

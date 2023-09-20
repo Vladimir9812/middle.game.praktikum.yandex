@@ -1,1 +1,1 @@
-export { default } from './EntityService'
+export { default } from './EntityService';

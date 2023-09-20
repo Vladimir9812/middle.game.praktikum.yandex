@@ -81,7 +81,7 @@ export enum KeyCode {
   PrintScreen = 'PrintScreen',
   ScrollLock = 'ScrollLock',
   Pause = 'Pause',
-  NumLock = 'NumLock',
+  NumberLock = 'NumLock',
   Numpad0 = 'Numpad0',
   Numpad1 = 'Numpad1',
   Numpad2 = 'Numpad2',
@@ -115,11 +115,11 @@ export enum KeyCode {
 }
 
 export type InputKeysState = {
-  [K in KeyCode]: boolean
-}
+  [K in KeyCode]: boolean;
+};
 
-export type KeyInputListener = (value: boolean) => void
+export type KeyInputListener = (value: boolean) => void;
 
 export type KeyInputEvents = {
-  [K in KeyCode]: KeyInputListener[]
-}
+  [K in KeyCode]: KeyInputListener[];
+};

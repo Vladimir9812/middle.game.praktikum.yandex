@@ -1,37 +1,32 @@
-import AbstractEntity from '../AbstractEntity'
-import Game from '../Game'
-import EntityService from '../EntityService'
+import AbstractEntity from '../AbstractEntity';
+import EntityService from '../EntityService';
 
 export default abstract class AbstractScene {
-  protected readonly game: Game
-  protected readonly _entityService = EntityService.getInstance()
-  protected constructor(game: Game) {
-    this.game = game
-  }
+  protected readonly entityService = EntityService.getInstance();
 
-  public abstract update(deltaTime: number): void
+  public abstract update(deltaTime: number): void;
 
   public abstract render(
     deltaTime: number,
     context: CanvasRenderingContext2D,
-    canvas: HTMLCanvasElement
-  ): void
+    canvas: HTMLCanvasElement,
+  ): void;
 
   public registerEntities(...entities: AbstractEntity[]) {
-    entities.forEach(entity => {
-      this._entityService.registerEntity(entity)
-    })
+    for (const entity of entities) {
+      this.entityService.registerEntity(entity);
+    }
   }
 
   public destroyEntity(entity: AbstractEntity) {
-    this._entityService.destroyEntity(entity)
+    this.entityService.destroyEntity(entity);
   }
 
   public destroy() {
-    this.destroyAllEntities()
+    this.destroyAllEntities();
   }
 
   public destroyAllEntities() {
-    this._entityService.destroyAllEntities()
+    this.entityService.destroyAllEntities();
   }
 }
