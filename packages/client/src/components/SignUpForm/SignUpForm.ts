@@ -5,5 +5,5 @@ import { profileInputs } from '../../const/InputsData';
 const buttonText = 'Sign up';
 
 export function SignUpForm() {
-  return Form({ inputs: profileInputs, buttonText });
+  return Form({ inputs: profileInputs, buttonText, mb: 8 });
 }

@@ -1,5 +1,4 @@
 import { Box, FormErrorMessage, Input } from '@chakra-ui/react';
-import { ChangeEvent } from 'react';
 
 type FormInputProperties = {
   name: string;
@@ -9,12 +8,21 @@ type FormInputProperties = {
   type?: string;
   errorMessage?: string;
   onChange?: (event: ChangeEvent) => void;
+  mb: number;
 };
 
 export function FormInput(properties: FormInputProperties) {
-  const { name, placeholder, isInvalid, type, errorMessage, onChange } = properties;
+  const {
+    name,
+    placeholder,
+    isInvalid,
+    type = 'text',
+    errorMessage = '',
+    mb,
+    onChange,
+  } = properties;
   return (
-    <Box mb={8}>
+    <Box mb={mb}>
       <Input
         type={type}
         name={name}
