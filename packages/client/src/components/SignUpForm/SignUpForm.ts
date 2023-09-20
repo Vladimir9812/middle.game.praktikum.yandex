@@ -1,6 +1,4 @@
-import { FormControl } from '@chakra-ui/react';
-
-import { FormInput, FormButton } from '@app/components';
+import { Form } from '../Form/Form';
 
 const inputs = [
   {
@@ -32,17 +30,5 @@ const inputs = [
 const buttonText = 'Sign up';
 
 export function SignUpForm() {
-  return (
-    <FormControl as="form" alignItems="center" display="flex" flexDirection="column">
-      {inputs.map((input) => (
-        <FormInput
-          key={input.name}
-          name={input.name}
-          placeholder={input.placeholder}
-          isInvalid={false}
-        />
-      ))}
-      <FormButton label={buttonText.toUpperCase()} />
-    </FormControl>
-  );
+  return Form({ inputs, buttonText });
 }
