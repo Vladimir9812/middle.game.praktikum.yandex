@@ -36,16 +36,12 @@ export default class Vector {
 
   // Метод для умножения вектора на скаляр
   public multiplyScalar(scalar: number): Vector {
-    // const newX = Math.round(this.x * scalar)
-    // const newY = Math.round(this.y * scalar)
     const newX = this.x * scalar;
     const newY = this.y * scalar;
     return new Vector(newX, newY);
   }
 
   public divideScalar(scalar: number): Vector {
-    // const newX = Math.round(this.x / scalar)
-    // const newY = Math.round(this.y / scalar)
     const newX = this.x / scalar;
     const newY = this.y / scalar;
     return new Vector(newX, newY);

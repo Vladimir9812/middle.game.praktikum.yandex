@@ -117,9 +117,3 @@ export enum KeyCode {
 export type InputKeysState = {
   [K in KeyCode]: boolean;
 };
-
-export type KeyInputListener = (value: boolean) => void;
-
-export type KeyInputEvents = {
-  [K in KeyCode]: KeyInputListener[];
-};

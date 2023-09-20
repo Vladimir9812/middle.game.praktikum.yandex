@@ -14,4 +14,8 @@ export default class SampleObstacle extends AbstractEntity {
   public update(_: number) {
     // TODO: реализовать
   }
+
+  public destroy(): void {
+    // TODO: реализовать метод
+  }
 }

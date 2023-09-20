@@ -63,9 +63,15 @@ export default abstract class AbstractEntity {
     );
   }
 
-  // public calculateCollisionShape(other: AbstractEntity) {}
+  public calculateCollisionShape(other: AbstractEntity) {
+    console.log(other);
+    // TODO: реализовать вычисление области коллизии
+  }
 
-  // public resolveCollision(other: AbstractEntity) {}
+  public resolveCollision(other: AbstractEntity) {
+    console.log(other);
+    // TODO: реализовать разрешение коллизии
+  }
 
   public abstract update(deltaTime: number): void;
 
