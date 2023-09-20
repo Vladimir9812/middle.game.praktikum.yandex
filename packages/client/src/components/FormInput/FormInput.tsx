@@ -7,13 +7,22 @@ type FormInputProperties = {
   value?: string;
   type?: string;
   errorMessage?: string;
+  mb: number;
 };
 
 export function FormInput(properties: FormInputProperties) {
-  const { name, placeholder, isInvalid, value = '', type = 'text', errorMessage = '' } = properties;
+  const {
+    name,
+    placeholder,
+    isInvalid,
+    value = '',
+    type = 'text',
+    errorMessage = '',
+    mb,
+  } = properties;
   console.log(value);
   return (
-    <Box mb={8}>
+    <Box mb={mb}>
       <Input
         type={type}
         name={name}
