@@ -5,3 +5,4 @@ export { SignUpForm } from './SignUpForm/SignUpForm';
 export { GoBackIcon } from './icons/GoBackIcon';
 export { TestIcon } from './icons/TestIcon';
 export { Form } from './Form/Form';
+export { LoginForm } from './LoginForm/LoginForm';
