@@ -7,11 +7,8 @@ import logo from '../../assets/images/logo.jpg';
 
 const enum RegisterText {
   heading = 'New player',
+  link = 'Already have account',
 }
-
-const registerTexts = {
-  link: 'Already have account',
-};
 
 export function RegisterPage() {
   const [imageLoadError, setImageLoadError] = useState(false);
@@ -35,7 +32,7 @@ export function RegisterPage() {
           <Flex gap={8} direction="column">
             <SignUpForm />
             <Link to="/login" textAlign="center" fontSize="xl">
-              {registerTexts.link.toUpperCase()}
+              {RegisterText.link.toUpperCase()}
             </Link>
           </Flex>
         </Box>
