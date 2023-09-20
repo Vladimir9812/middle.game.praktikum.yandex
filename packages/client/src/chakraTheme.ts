@@ -27,5 +27,6 @@ export const theme = extendTheme({
   sizes: {
     '2xl': '40.5rem',
     '3xl': '43rem',
+    '3.5xl': '45rem',
   },
 });
