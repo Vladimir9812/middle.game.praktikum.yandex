@@ -1,0 +1,45 @@
+.forum {
+  border-radius: 16px;
+}
+
+.newtopic {
+  text-transform: uppercase;
+  border-radius: 0 0 6px 6px !important;
+}
+
+.griditem {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 20px;
+}
+
+.griditem_title {
+  text-transform: uppercase;
+}
+
+.griditem_row {
+  text-transform: capitalize;
+}
+
+.forumlist {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.forumlist_header {
+  position: sticky;
+  top: 5px;
+}
+
+.griditem_box {
+  display: inline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modal_footer {
+  gap: 20px;
+  justify-content: flex-end;
+}
