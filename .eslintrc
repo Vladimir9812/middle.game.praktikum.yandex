@@ -49,7 +49,7 @@
     "max-len": [
       "error",
       {
-        "code": 100
+        "code": 150
       }
     ],
     "@typescript-eslint/no-explicit-any": "warn",
