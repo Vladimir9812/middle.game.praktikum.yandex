@@ -4,6 +4,7 @@ import { GoBackIcon, Link } from '@app/components';
 
 import Robot from '../../assets/images/robot.png';
 import './NotFound.css';
+import { errorLinkText } from '../../const/errorLinkText';
 
 export function NotFoundPage() {
   return (
@@ -24,9 +25,16 @@ export function NotFoundPage() {
         </Flex>
         <Flex mb={20}>
           <Button variant="link" className="service-unavailable__go-back-button">
-            <Link className="service-unavailable__go-back-link" to="/">
+            <Link
+              className="service-unavailable__go-back-link"
+              fontWeight="normal"
+              fontSize="2xl"
+              lineHeight={7}
+              color="black"
+              to="/"
+            >
               <GoBackIcon />
-              Go back
+              {errorLinkText}
             </Link>
           </Button>
         </Flex>
