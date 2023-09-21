@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 import { createIcon } from '@chakra-ui/icon';
 
-export const GoBackIcon = createIcon({
+export const GoBack = createIcon({
   displayName: 'EditIcon',
   viewBox: '0 0 52 52',
   defaultProps: {

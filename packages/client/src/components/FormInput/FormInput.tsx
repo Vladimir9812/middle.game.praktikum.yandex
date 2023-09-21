@@ -12,6 +12,7 @@ type FormInputProperties = {
   errorMessage?: string;
   onChange?: (event: ChangeEvent) => void;
   mb?: number;
+  id?: string;
 };
 
 
@@ -33,6 +34,7 @@ export const FormInput = forwardRef((properties: FormInputProperties, reference)
         focusBorderColor="blue"
         bg="white"
         textAlign="center"
+        id={id}
         _hover={{
           background: 'white',
         }}

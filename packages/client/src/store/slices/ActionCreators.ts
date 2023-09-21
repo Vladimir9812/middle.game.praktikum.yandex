@@ -2,13 +2,14 @@ import { AppDispatch } from '@app/store';
 
 import { userSlice } from './UserSlice';
 
+// TODO: для запросов
 // const baseUrl = 'ya-praktikum.tech/api/v2';
 
 // eslint-disable-next-line unicorn/consistent-function-scoping
 export const fetchUser = () => async (dispatch: AppDispatch) => {
   try {
     dispatch(userSlice.actions.fetchUser());
-    // заменить адрес
+    // TODO: заменить адрес
     // baseUrl + '/auth/user'
     const response = await fetch('https://jsonplaceholder.typicode.com/users');
     // заменить обработку ответа
@@ -22,6 +23,8 @@ export const fetchUser = () => async (dispatch: AppDispatch) => {
     dispatch(userSlice.actions.fetchUserError(error));
   }
 };
+
+// TODO: для запроса смены аватара
 // export const changeAvatar = async (formData: FormData) => async () => {
 // try {
 // dispatch()

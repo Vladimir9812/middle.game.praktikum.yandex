@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, Text } from '@chakra-ui/react';
 
 type Properties = {
   name: string;
@@ -10,19 +10,24 @@ export function ProfileItem({ name, value, color }: Properties) {
   return (
     <Flex
       borderBottom="1px dashed"
-      w="508px"
+      w="lg"
       justify="space-between"
-      paddingBottom="9px"
-      paddingTop="23px"
+      paddingBottom="2"
+      paddingTop="6"
       align="center"
       fontWeight="700"
     >
-      <span style={{ fontSize: '28px', letterSpacing: '5.6px' }}>{name}</span>
+      <Text fontSize="3xl" letterSpacing="widest">
+        {name}
+      </Text>
       {color ? (
-        // eslint-disable-next-line max-len
-        <span style={{ fontSize: '20px', color: `${color}`, letterSpacing: '4px' }}>{value}</span>
+        <Text fontSize="xl" color={color} letterSpacing="widest">
+          {value}
+        </Text>
       ) : (
-        <span style={{ fontSize: '20px', letterSpacing: '4px' }}>{value}</span>
+        <Text fontSize="xl" letterSpacing="widest">
+          {value}
+        </Text>
       )}
     </Flex>
   );

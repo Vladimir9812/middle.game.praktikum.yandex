@@ -1,4 +1,4 @@
-import { FormControl } from '@chakra-ui/react';
+import { FormControl, FormLabel } from '@chakra-ui/react';
 import { Fragment } from 'react';
 
 import { FormInput, FormButton } from '@app/components';
@@ -6,63 +6,66 @@ import { FormInput, FormButton } from '@app/components';
 const inputs = [
   {
     name: 'first_name',
-    text: 'Name',
+    label: 'Name',
     placeholder: 'Enter your name',
   },
   {
     name: 'login',
-    text: 'Nickname',
+    label: 'Nickname',
     placeholder: 'Enter your nickname',
   },
   {
     name: 'email',
-    text: 'Email',
+    label: 'Email',
     placeholder: 'Enter your email',
   },
   {
     name: 'phone',
-    text: 'Phone',
+    label: 'Phone',
     placeholder: 'Enter your phone',
   },
   {
     name: 'password',
-    text: 'Password',
+    label: 'Password',
     placeholder: 'Enter password',
   },
   {
     name: 'password_repeat',
-    text: 'Repeat password',
+    label: 'Repeat password',
     placeholder: 'Repeat password',
   },
 ];
 const buttonText = 'save';
+
+const handleEditClick = () => {
+  // TODO: для отправки данных на изменение
+};
 
 export function EditProfileForm() {
   return (
     <FormControl as="form" alignItems="center" display="flex" flexDirection="column">
       {inputs.map((input) => (
         <Fragment key={input.name}>
-          <span
-            style={{
-              fontSize: '28px',
-              fontWeight: 400,
-              textAlign: 'start',
-              width: '100%',
-              display: 'block',
-            }}
+          <FormLabel
+            htmlFor={input.name}
+            fontSize="2xl"
+            textAlign="start"
+            width="100%"
+            display="block"
           >
-            {input.text}
-          </span>
+            {input.label}
+          </FormLabel>
           <FormInput
             key={input.name}
             name={input.name}
             placeholder={input.placeholder}
             isInvalid={false}
             mb={4}
+            id={input.name}
           />
         </Fragment>
       ))}
-      <FormButton label={buttonText.toUpperCase()} />
+      <FormButton label={buttonText.toUpperCase()} onClick={handleEditClick} />
     </FormControl>
   );
 }
