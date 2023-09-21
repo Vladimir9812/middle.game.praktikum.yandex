@@ -1,4 +1,4 @@
-import { Box, FormErrorMessage, Input } from '@chakra-ui/react';
+import { Box, FormErrorMessage, Textarea } from '@chakra-ui/react';
 import { ChangeEvent } from 'react';
 
 type FormInputProperties = {
@@ -6,26 +6,25 @@ type FormInputProperties = {
   placeholder: string;
   isInvalid: boolean;
   value?: string;
-  type?: string;
   errorMessage?: string;
+  height?: string;
   onChange?: (event: ChangeEvent) => void;
 };
 
-export function FormInput(properties: FormInputProperties) {
+export function FormTextArea(properties: FormInputProperties) {
   const {
     name,
     placeholder,
     isInvalid,
     value = '',
-    type = 'text',
     errorMessage = '',
+    height = 'auto',
     onChange = (e) => console.log(e.target),
   } = properties;
   console.log(value);
   return (
     <Box mb={8}>
-      <Input
-        type={type}
+      <Textarea
         name={name}
         isInvalid={isInvalid}
         placeholder={placeholder.toUpperCase()}
@@ -37,12 +36,7 @@ export function FormInput(properties: FormInputProperties) {
         focusBorderColor="blue"
         bg="white"
         textAlign="center"
-        _hover={{
-          background: 'white',
-        }}
-        _placeholder={{
-          textAlign: 'center',
-        }}
+        h={height}
         onChange={onChange}
       />
       <FormErrorMessage>{errorMessage}</FormErrorMessage>
