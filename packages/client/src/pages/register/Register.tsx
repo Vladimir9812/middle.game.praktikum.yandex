@@ -29,8 +29,8 @@ export function RegisterPage() {
         <Heading as="h1" mb="5" size="4xl">
           {RegisterText.heading}
         </Heading>
-        <Box width="2xl" height="3xl" bg="lightBlue" borderRadius={5} p={10}>
-          <Flex gap={8} direction="column">
+        <Box width="1.5xl" height="3.5xl" bg="lightBlue" borderRadius={5} p={10}>
+          <Flex gap={2} h="100%" justifyContent="space-between" direction="column">
             <SignUpForm />
             <Link to={ROUTES.LOGIN} textAlign="center" fontSize="xl">
               {RegisterText.link.toUpperCase()}
