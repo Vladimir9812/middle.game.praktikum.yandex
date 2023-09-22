@@ -487,6 +487,68 @@
         "dateOfCreate": "2023-09-19T10:54:07.311Z",
         "commentsCount": 28
       }
+    ],
+    "comments": [
+      {
+        "id": 1,
+        "name": "Vasya",
+        "comment": "Ничего не понял",
+        "dateOfCreate": "2023-09-21T10:54:07.311Z"
+      },
+      {
+        "id": 2,
+        "name": "Vasya 2",
+        "comment": "hello",
+        "dateOfCreate": "2023-09-21T10:54:07.311Z"
+      },
+      {
+        "id": 3,
+        "name": "Vasya 3",
+        "comment": "asd ad asd asd",
+        "dateOfCreate": "2023-09-21T10:54:07.311Z"
+      },
+      {
+        "id": 4,
+        "name": "Asdasd",
+        "comment": "asd ad asd asd asd asd ad asd asd asd as",
+        "dateOfCreate": "2023-09-21T10:54:07.311Z"
+      },
+      {
+        "id": 5,
+        "name": "Ivan",
+        "comment": "no",
+        "dateOfCreate": "2023-09-21T10:54:07.311Z"
+      },
+      {
+        "id": 1,
+        "name": "Vasya",
+        "comment": "Ничего не понял",
+        "dateOfCreate": "2023-09-21T10:54:07.311Z"
+      },
+      {
+        "id": 2,
+        "name": "Vasya 2",
+        "comment": "hello",
+        "dateOfCreate": "2023-09-21T10:54:07.311Z"
+      },
+      {
+        "id": 3,
+        "name": "Vasya 3",
+        "comment": "asd ad asd asd",
+        "dateOfCreate": "2023-09-21T10:54:07.311Z"
+      },
+      {
+        "id": 4,
+        "name": "Asdasd",
+        "comment": "asd ad asd asd asd asd ad asd asd asd as",
+        "dateOfCreate": "2023-09-21T10:54:07.311Z"
+      },
+      {
+        "id": 5,
+        "name": "Ivan",
+        "comment": "no",
+        "dateOfCreate": "2023-09-21T10:54:07.311Z"
+      }
     ]
   }
 }
