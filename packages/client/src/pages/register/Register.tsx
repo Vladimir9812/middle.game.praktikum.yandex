@@ -15,6 +15,7 @@ const registerTexts = {
 
 export function RegisterPage() {
   const [imageLoadError, setImageLoadError] = useState(false);
+
   return (
     <SimpleGrid columns={2} spacingX={12} p={12} minChildWidth="lg" h="100%" w="100%" maxW="1800px">
       <ErrorBoundary errorDeploy={imageLoadError} componentName="Register Logo">

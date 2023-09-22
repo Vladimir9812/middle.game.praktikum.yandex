@@ -6,11 +6,12 @@ type Properties = {
 
 export function ErrorFallbackComponent(properties: Properties) {
   const { componentName } = properties;
+  const textTemplate = 'An error occurred while loading the component';
   return (
     <Center bg="transparent" h="100%" color="initial">
       <Flex flexDirection="column">
         <Heading>
-          An error occurred while loading the component
+          {textTemplate}
           <Text as="b">{`< ${componentName} >`}</Text>
         </Heading>
       </Flex>
