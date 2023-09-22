@@ -1,10 +1,9 @@
 import { Box, Button, Flex, IconButton, useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
-import { Modal, Pagination } from '@app/components';
+import { Icons, Modal, Pagination } from '@app/components';
+import { dateFormat } from '@app/utils';
 
-import { CreateItemIcon, TrashItemIcon } from '../../../components/icons';
-import { dateFormat } from '../../../utils/dateFormatter';
 import styles from '../Forum.module.css';
 import mock from '../mock.json';
 
@@ -59,7 +58,7 @@ export function ForumList() {
     <>
       <Flex justifyContent="center" w="100%">
         <Button
-          leftIcon={<CreateItemIcon />}
+          leftIcon={<Icons.CreateItemIcon />}
           variant="solid"
           colorScheme="teal"
           className={styles.newtopic}
@@ -84,7 +83,7 @@ export function ForumList() {
               item.commentsCount,
               <IconButton
                 aria-label="delete thread"
-                icon={<TrashItemIcon />}
+                icon={<Icons.TrashItemIcon />}
                 onClick={() => deleteRowItem(item.id)}
               />,
             ]}
