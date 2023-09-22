@@ -6,6 +6,4 @@ export { Link } from './Link/Link';
 export { Modal } from './Modal/Modal';
 export { Pagination } from './Pagination/Pagination';
 export { SignUpForm } from './SignUpForm/SignUpForm';
-export { Crown } from './icons/Crown';
-export { GoBackIcon } from './icons/GoBackIcon';
-export { TestIcon } from './icons/TestIcon';
+export { Icons } from './icons';

@@ -1,6 +1,6 @@
 import { Avatar, Grid, GridItem, Text } from '@chakra-ui/react';
 
-import { Crown } from '@app/components';
+import { Icons } from '@app/components';
 
 import avatar from '../../../assets/images/avatar.png';
 import style from '../Forum.module.css';
@@ -12,7 +12,7 @@ export function ForumTopicComment({ item }: any) {
         <Avatar size="xl" name="Segun Adebayo" src={avatar} />
         <Text>{item.name}</Text>
         <Text>
-          <Crown /> 123456
+          <Icons.Crown /> 123456
         </Text>
       </GridItem>
       <GridItem
