@@ -2,7 +2,7 @@ import { Box, Button, Container, Flex, IconButton, useDisclosure } from '@chakra
 import { useEffect, useState } from 'react';
 import { v4 as makeUUID } from 'uuid';
 
-import { Modal } from '@app/components';
+import { Modal, Pagination } from '@app/components';
 
 import { CreateItemIcon, TrashItemIcon } from '../../components/icons';
 import { dateFormat } from '../../utils/dateFormatter';
@@ -20,12 +20,18 @@ type GridItemType = {
   commentsCount: number;
 };
 
+const titleItemList = ['Themes', 'Date', 'Comments', ''];
+const itemsPerPage = 5;
+
 export function ForumPage() {
   const [data, setData] = useState(mock.data.allTheme);
   const [rowItemList, setRowItemList] = useState<GridItemType[]>([]);
+  const [itemOffset, setItemOffset] = useState(0);
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const titleItemList = ['Themes', 'Date', 'Comments', ''];
+  const endOffset = itemOffset + itemsPerPage;
+  const paginatedItems = rowItemList.slice(itemOffset, endOffset);
 
   useEffect(() => {
     const sortedList = data.sort((a, b) => b.dateOfCreate.localeCompare(a.dateOfCreate));
@@ -44,6 +50,11 @@ export function ForumPage() {
     newData.push(newItem);
     setData(newData);
     onClose();
+  };
+
+  const handlePageClick = (event: { selected: number }) => {
+    const newOffset = (event.selected * itemsPerPage) % rowItemList.length;
+    setItemOffset(newOffset);
   };
 
   return (
@@ -74,7 +85,7 @@ export function ForumPage() {
           <Box className={styles.forumlist_header}>
             <GridColumnTemplate isTitle itemList={titleItemList} />
           </Box>
-          {rowItemList.map((item) => (
+          {paginatedItems.map((item) => (
             <GridColumnTemplate
               isTitle={false}
               key={makeUUID()}
@@ -91,6 +102,11 @@ export function ForumPage() {
             />
           ))}
         </Box>
+        <Pagination
+          dataLength={rowItemList.length}
+          handlePageClick={handlePageClick}
+          itemsPerPage={itemsPerPage}
+        />
       </Flex>
       <Modal
         isOpen={isOpen}
