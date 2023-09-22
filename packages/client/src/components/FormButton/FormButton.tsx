@@ -1,8 +1,15 @@
 import { Button } from '@chakra-ui/react';
 
-export function FormButton({ label }: { label: string }) {
+type Properties = {
+  label: string;
+  type?: 'submit' | 'reset';
+  isDisabled: boolean;
+};
+
+export function FormButton({ isDisabled, label, type }: Properties) {
+  console.log(isDisabled);
   return (
-    <Button size="lg" colorScheme="red">
+    <Button isDisabled={isDisabled} size="lg" colorScheme="red" type={type ?? 'submit'}>
       {label}
     </Button>
   );

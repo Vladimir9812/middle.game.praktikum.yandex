@@ -1,9 +1,8 @@
 import { Form } from '@app/components';
 
-import { profileInputs } from '../../const/InputsData';
+import { profileFields, profileSchema } from '../../const';
 
 const buttonText = 'Sign up';
-
 export function SignUpForm() {
-  return Form({ inputs: profileInputs, buttonText, mb: 8 });
+  return Form({ inputs: profileFields, buttonText, mb: 3, validationSchema: profileSchema });
 }

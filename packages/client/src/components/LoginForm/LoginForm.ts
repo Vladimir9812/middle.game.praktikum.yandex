@@ -1,9 +1,9 @@
 import { Form } from '@app/components';
 
-import { loginInputs } from '../../const/InputsData';
+import { loginFields, loginSchema } from '../../const';
 
 const buttonText = 'Enter';
 
 export function LoginForm() {
-  return Form({ inputs: loginInputs, buttonText, mb: 9 });
+  return Form({ inputs: loginFields, buttonText, mb: 5, validationSchema: loginSchema });
 }
