@@ -46,6 +46,7 @@
     "react/require-default-props": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "off",
+    "no-restricted-syntax": "off",
     "max-len": [
       "error",
       {
