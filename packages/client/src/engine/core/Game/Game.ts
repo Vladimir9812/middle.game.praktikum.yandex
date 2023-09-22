@@ -1,4 +1,6 @@
 import AbstractScene from '../AbstractScene';
+import InputService from '../InputService';
+import EntityService from '../EntityService';
 
 export default class Game {
   private readonly _canvas: HTMLCanvasElement;
@@ -6,6 +8,8 @@ export default class Game {
   private readonly _context: CanvasRenderingContext2D;
 
   private _activeScene: AbstractScene;
+
+  private _stopped = false;
 
   public constructor(
     canvas: HTMLCanvasElement,
@@ -34,13 +38,18 @@ export default class Game {
     return this._canvas;
   }
 
-  public start(): void {
+  public start() {
     let last = performance.now();
     const step = 1 / 60;
     let dt = 0;
     let now: number;
 
     const gameLoop = () => {
+      if (this._stopped) {
+        this._stopped = false;
+        this.afterGameHasStopped();
+        return;
+      }
       now = performance.now();
       dt += Math.min(1, (now - last) / 1000);
       while (dt > step) {
@@ -54,6 +63,10 @@ export default class Game {
     };
 
     gameLoop();
+  }
+
+  public stop() {
+    this._stopped = true;
   }
 
   public update(deltaTime: number) {
@@ -71,5 +84,10 @@ export default class Game {
     }
 
     this._activeScene = new Scene(this);
+  }
+
+  private afterGameHasStopped() {
+    InputService.getInstance().destroy();
+    EntityService.getInstance().destroyAllEntities();
   }
 }

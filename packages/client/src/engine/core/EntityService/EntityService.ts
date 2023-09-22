@@ -33,6 +33,6 @@ export default class EntityService {
   }
 
   public destroyAllEntities() {
-    this.entities.splice(0, this.entities.length);
+    this.entities.length = 0;
   }
 }

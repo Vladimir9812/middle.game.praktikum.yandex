@@ -3,7 +3,17 @@ import type { KeyCode, InputKeysState } from './types';
 export default class InputService {
   public readonly inputKeysState: Partial<InputKeysState> = {};
 
-  private static _instance: InputService;
+  private static _instance?: InputService;
+
+  private _onKeyDown = (event: KeyboardEvent) => {
+    const code = event.code as KeyCode;
+    this.changeInputKeyState(code, true);
+  };
+
+  private _onKeyUp = (event: KeyboardEvent) => {
+    const code = event.code as KeyCode;
+    this.changeInputKeyState(code, false);
+  };
 
   private constructor() {
     this._attachKeyDownEvent();
@@ -19,17 +29,11 @@ export default class InputService {
   }
 
   private _attachKeyDownEvent() {
-    document.addEventListener('keydown', (event) => {
-      const code = event.code as KeyCode;
-      this.changeInputKeyState(code, true);
-    });
+    document.addEventListener('keydown', this._onKeyDown);
   }
 
   private _attachKeyUpEvent() {
-    document.addEventListener('keyup', (event) => {
-      const code = event.code as KeyCode;
-      this.changeInputKeyState(code, false);
-    });
+    document.addEventListener('keyup', this._onKeyUp);
   }
 
   public getInputKeyState(key: KeyCode) {
@@ -38,6 +42,12 @@ export default class InputService {
 
   public changeInputKeyState(key: KeyCode, value: boolean) {
     this.inputKeysState[key] = value;
+  }
+
+  public destroy() {
+    document.removeEventListener('keydown', this._onKeyDown);
+    document.removeEventListener('keyup', this._onKeyUp);
+    delete InputService._instance;
   }
 
   public toggleInputKeyState(key: KeyCode) {
