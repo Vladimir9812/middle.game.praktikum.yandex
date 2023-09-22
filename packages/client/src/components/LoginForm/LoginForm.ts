@@ -1,6 +1,5 @@
 import { Form } from '@app/components';
-
-import { loginFields, loginSchema } from '../../const';
+import { loginFields, loginSchema } from '@app/const';
 
 const buttonText = 'Enter';
 
