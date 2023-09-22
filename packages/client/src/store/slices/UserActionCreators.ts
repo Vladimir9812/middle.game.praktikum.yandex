@@ -15,8 +15,8 @@ export const fetchData = createAsyncThunk('fetchData', async () => {
 
 // данные для запроса
 const user = {
-  login: 'Korol123',
-  password: 'korol123',
+  login: 'lertwq',
+  password: 'Aswee1111',
 };
 
 // запрос для получения куков

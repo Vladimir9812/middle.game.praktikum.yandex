@@ -102,7 +102,12 @@ export function EditProfileForm({
   };
 
   const handleSubmit = () => {
-    delete passwordData[2];
+    delete passwordData.password_repeat;
+    console.log(passwordData);
+
+    const updatedPasswordData = { ...passwordData };
+    delete updatedPasswordData.password_repeat;
+    console.log(passwordData);
     dispatch(changeProfile(userData));
     dispatch(changePassword(passwordData));
     setIsEditing(false);
