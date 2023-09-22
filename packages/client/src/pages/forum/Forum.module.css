@@ -43,3 +43,11 @@
   gap: 20px;
   justify-content: flex-end;
 }
+
+.topic_item_avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: #febe60;
+}
