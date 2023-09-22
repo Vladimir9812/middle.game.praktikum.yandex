@@ -3,8 +3,7 @@ import { Box, Button, Center, List, ListItem, Wrap } from '@chakra-ui/react';
 import { Link } from '@app/components';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { decrement, increment } from '@app/store';
-
-import { ROUTES } from '../../types/Routes';
+import { ROUTES } from '@app/types';
 
 export function MainPage() {
   const dispatch = useAppDispatch();

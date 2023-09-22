@@ -1,9 +1,9 @@
 import { Box, Center, Flex, Heading, Image } from '@chakra-ui/react';
 
 import { LoginForm, Link } from '@app/components';
+import { ROUTES } from '@app/types';
 
 import logo from '../../assets/images/logo_login.jpg';
-import { ROUTES } from '../../types/Routes';
 
 const enum LoginText {
   heading = 'Welcome, hero!',

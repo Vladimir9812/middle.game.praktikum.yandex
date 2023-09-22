@@ -1,10 +1,10 @@
 import { Box, Flex, Heading, Image, SimpleGrid } from '@chakra-ui/react';
 import { useState } from 'react';
 
+import { ROUTES } from '@app/types';
 import { ErrorBoundary, Link, SignUpForm } from '@app/components';
 
 import logo from '../../assets/images/logo.jpg';
-import { ROUTES } from '../../types/Routes';
 
 const enum RegisterText {
   heading = 'New player',
