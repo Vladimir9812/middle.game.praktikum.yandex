@@ -13,6 +13,7 @@ type FormInputProperties = {
   onChange?: (event: ChangeEvent) => void;
   mb?: number;
   id?: string;
+  width?: string;
 };
 
 
@@ -27,14 +28,17 @@ export const FormInput = forwardRef((properties: FormInputProperties, reference)
         mb={0}
         placeholder={placeholder.toUpperCase()}
         size="lg"
-        width="lg"
+        // width="lg"
+        width={width || 'lg'}
         borderRadius={4}
         borderWidth={3}
         borderColor="blue"
         focusBorderColor="blue"
         bg="white"
         textAlign="center"
+        value={value}
         id={id}
+        onChange={onChange}
         _hover={{
           background: 'white',
         }}

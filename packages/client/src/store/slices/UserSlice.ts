@@ -2,25 +2,27 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-// type TUser = {
-//   id: number;
-//   first_name: string;
-//   second_name: string;
-//   display_name: string;
-//   phone: string;
-//   login: string;
-//   avatar: string;
-//   email: string;
-// };
+import { changeAvatar, changeProfile, fetchData, fetchDataUser } from './UserActionCreators';
+
+type TUser = {
+  id: number;
+  first_name: string;
+  second_name: string;
+  display_name: string;
+  phone: string;
+  login: string;
+  avatar: string;
+  email: string;
+};
 interface UserState {
-  user: unknown | null;
+  user: TUser | null;
   isLoading: boolean;
-  error: string;
+  error: string | undefined;
 }
 
 const initialState: UserState = {
   // user: null, ошибка lint
-  user: undefined,
+  user: null,
   isLoading: false,
   error: '',
 };
@@ -28,21 +30,55 @@ const initialState: UserState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    fetchUser(state) {
-      state.isLoading = true;
-    },
-    fetchUserSuccess(state, action) {
-      state.isLoading = false;
-      state.user = action.payload;
-      state.error = '';
-    },
-    fetchUserError(state, action) {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchData.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchData.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user = action.payload;
+      })
+      .addCase(fetchData.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+
+      .addCase(fetchDataUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchDataUser.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(fetchDataUser.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+
+      .addCase(changeProfile.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(changeProfile.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(changeProfile.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+
+      .addCase(changeAvatar.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(changeAvatar.fulfilled, (state, action) => {
+        state.user = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(changeAvatar.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      });
   },
 });
 
-export const { fetchUser, fetchUserSuccess, fetchUserError } = userSlice.actions;
 export default userSlice.reducer;
