@@ -58,7 +58,7 @@ const passwordInputs = [
 
 const buttonText = 'save';
 
-type FormData = {
+type FormDataUser = {
   [key: string]: string;
 };
 
@@ -70,19 +70,7 @@ export function EditProfileForm({
   const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
-  // const [formData, setFormData] = useState<FormData>({
-  //   first_name: user ? user.first_name : '',
-  //   second_name: user ? user.second_name : '',
-  //   display_name: user ? user.display_name : '',
-  //   login: user ? user.login : '',
-  //   email: user ? user.email : '',
-  //   phone: user ? user.phone : '',
-  //   oldPassword: '',
-  //   newPassword: '',
-  //   password_repeat: ''
-  // });
-
-  const [userData, setUserData] = useState<FormData>({
+  const [userData, setUserData] = useState<FormDataUser>({
     first_name: user ? user.first_name : '',
     second_name: user ? user.second_name : '',
     display_name: user ? user.display_name : '',
@@ -91,23 +79,11 @@ export function EditProfileForm({
     phone: user ? user.phone : '',
   });
 
-  const [passwordData, setPasswordData] = useState<FormData>({
+  const [passwordData, setPasswordData] = useState<FormDataUser>({
     oldPassword: '',
     newPassword: '',
     password_repeat: '',
   });
-
-  // const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-  //   const { name, value } = event.target;
-  //   setFormData((previousFormData) => ({
-  //     ...previousFormData,
-  //     [name]: value,
-  //   }));
-  // };
-  //
-  // const handleSubmit = () => {
-  //   // Обработка отправки формы
-  //   console.log('Form data:', formData);
 
   const handleUserDataChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;

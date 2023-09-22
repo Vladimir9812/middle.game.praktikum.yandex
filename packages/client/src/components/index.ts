@@ -12,6 +12,7 @@ export { EngineCanvas } from './EngineCanvas/EngineCanvas';
 export { Icons } from './icons';
 export { ViewProfileContent } from './ViewProfileContent/ViewProfileContent';
 export { EditProfileContent } from './EditProfileContent/EditProfileContent';
+export { EditProfileForm } from './EditProfileForm/EditProfileForm';
 export { Form } from './Form/Form';
 export { LoginForm } from './LoginForm/LoginForm';
 

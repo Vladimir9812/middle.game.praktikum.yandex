@@ -1,9 +1,7 @@
 import { Button, Flex, Heading } from '@chakra-ui/react';
 import { Dispatch, SetStateAction } from 'react';
 
-import { GoBack } from '@app/components';
-
-import { EditProfileForm } from '../EditProfileForm/EditProfileForm';
+import { EditProfileForm, GoBack } from '@app/components';
 
 export function EditProfileContent({
   handleSaveClick,

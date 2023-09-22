@@ -2,6 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const baseUrl = 'https://ya-praktikum.tech/api/v2';
 
+type FormDataUser = {
+  [key: string]: string;
+};
+
 export const fetchData = createAsyncThunk('fetchData', async () => {
   const response = await fetch(`${baseUrl}/auth/user`, {
     credentials: 'include',
@@ -28,7 +32,7 @@ export const fetchDataUser = createAsyncThunk('fetchDataUser', async () => {
   return response.json();
 });
 
-export const changeProfile = createAsyncThunk('changeProfile', async (userData) => {
+export const changeProfile = createAsyncThunk('changeProfile', async (userData: FormDataUser) => {
   const response = await fetch(`${baseUrl}/user/profile`, {
     method: 'PUT',
     headers: {
@@ -40,23 +44,24 @@ export const changeProfile = createAsyncThunk('changeProfile', async (userData) 
   return response.json();
 });
 
-export const changePassword = createAsyncThunk('changeProfile', async (passwordData) => {
-  const response = await fetch(`${baseUrl}/user/password`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    body: JSON.stringify(passwordData),
-    credentials: 'include',
-  });
-  return response.json();
-});
+export const changePassword = createAsyncThunk(
+  'changeProfile',
+  async (passwordData: FormDataUser) => {
+    const response = await fetch(`${baseUrl}/user/password`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(passwordData),
+      credentials: 'include',
+    });
+    return response.json();
+  },
+);
 
-export const changeAvatar = createAsyncThunk('changeAvatar', async (formData) => {
+export const changeAvatar = createAsyncThunk('changeAvatar', async (formData: FormData) => {
   const response = await fetch(`${baseUrl}/user/profile/avatar`, {
     method: 'PUT',
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     body: formData,
     credentials: 'include',
   });
