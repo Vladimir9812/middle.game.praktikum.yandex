@@ -2,7 +2,6 @@
 
 import { FormControl } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi, { PartialSchemaMap } from 'joi';
 

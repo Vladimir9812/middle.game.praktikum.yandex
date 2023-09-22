@@ -1,6 +1,6 @@
 import { Input, FieldName } from '@app/types';
 
-export const fields: Array<Input> = [
+const fields: Array<Input> = [
   {
     name: FieldName.FIRST_NAME,
     placeholder: 'Enter your name',
