@@ -112,14 +112,8 @@ export function EditProfileForm({
     <FormControl as="form" alignItems="center" display="flex" flexDirection="column">
       <Grid templateColumns="repeat(2, 1fr)" gap={4}>
         {userInputs.map((input) => (
-          <GridItem key={input.name} width="300px">
-            <FormLabel
-              htmlFor={input.name}
-              fontSize="2xl"
-              textAlign="start"
-              width="100%"
-              display="block"
-            >
+          <GridItem key={input.name} width="xs">
+            <FormLabel htmlFor={input.name} fontSize="2xl" textAlign="start" display="block">
               {input.label}
             </FormLabel>
             <FormInput
@@ -143,7 +137,7 @@ export function EditProfileForm({
           </GridItem>
         ))}
         {passwordInputs.map((input) => (
-          <GridItem key={input.name} width="300px">
+          <GridItem key={input.name} width="18.7rem">
             <FormLabel
               htmlFor={input.name}
               fontSize="2xl"

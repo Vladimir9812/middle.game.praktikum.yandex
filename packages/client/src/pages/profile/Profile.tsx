@@ -15,17 +15,16 @@ export function ProfilePage() {
 
   useEffect(() => {
     dispatch(fetchDataUser()).then(() => {
-      // fetchData успешно выполнена, теперь можно вызвать fetchDataUser
       dispatch(fetchData());
     });
   }, []);
 
   const handleEditClick = () => {
-    setIsEditing(true); // Переключаем в режим редактирования
+    setIsEditing(true);
   };
 
   const handleSaveClick = () => {
-    setIsEditing(false); // Выходим из режима редактирования
+    setIsEditing(false);
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

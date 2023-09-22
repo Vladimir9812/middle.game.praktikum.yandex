@@ -12,12 +12,12 @@ export function EditProfileContent({
 }) {
   return (
     <Flex display="flex" align="center" justify="center" direction="column">
-      <Heading as="h1" fontSize="72px" marginTop="66px" fontWeight="400">
+      <Heading as="h1" fontSize="4.5rem" mt="4.1rem" fontWeight="400">
         Edit profile
       </Heading>
       <Flex
-        w="935px"
-        h="752px"
+        w="4xl"
+        h="3xl"
         borderRadius="15"
         backgroundColor="lightBlue"
         justify="center"

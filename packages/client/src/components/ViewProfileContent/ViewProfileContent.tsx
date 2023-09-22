@@ -48,12 +48,12 @@ export function ViewProfileContent({
 
   return (
     <Flex display="flex" align="center" justify="center" direction="column">
-      <Heading as="h1" fontSize="72px" marginTop="66px" fontWeight="400">
+      <Heading as="h1" fontSize="7xl" marginTop="16" fontWeight="400">
         Player
       </Heading>
       <Flex
-        w="935px"
-        h="752px"
+        w="58.5rem"
+        h="47rem"
         borderRadius="15"
         backgroundColor="#CBFDFD"
         justify="flex-start"
@@ -75,8 +75,8 @@ export function ViewProfileContent({
         <Button
           border="none"
           padding="0"
-          width="307px"
-          height="287px"
+          width="19rem"
+          height="18rem"
           type="button"
           onClick={onOpen}
         >
@@ -101,7 +101,7 @@ export function ViewProfileContent({
             </ModalFooter>
           </ModalContent>
         </Modal>
-        <Flex flexDirection="column" style={{ paddingTop: '27px' }}>
+        <Flex flexDirection="column" style={{ paddingTop: '1.6rem' }}>
           {profileItems}
         </Flex>
       </Flex>
