@@ -58,7 +58,6 @@ export function EditProfileForm({
 
   const handleSubmit = () => {
     delete passwordData.password_repeat;
-    console.log(passwordData);
     dispatch(changeProfile(userData));
     dispatch(changePassword(passwordData));
     setIsEditing(false);
