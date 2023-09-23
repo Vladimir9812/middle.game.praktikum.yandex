@@ -17,7 +17,7 @@ export function ForumTopicComment({ item }: any) {
         </Text>
       </GridItem>
       <GridItem padding={5} bg="#fff">
-        <Box fontSize="xs">{dateFormat(item.dateOfCreate)}</Box>
+        <Box fontSize="xs">{dateFormat(item.creationDate)}</Box>
         <Text>{item.comment}</Text>
       </GridItem>
     </Grid>

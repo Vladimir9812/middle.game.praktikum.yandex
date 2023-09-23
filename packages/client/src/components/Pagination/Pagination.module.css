@@ -37,6 +37,6 @@
   transition: all 0.3s ease;
 
   &:hover {
-    border: 3px solid #e53e3e !important;
+    border: 3px solid #e53e3e;
   }
 }

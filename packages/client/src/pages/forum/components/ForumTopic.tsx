@@ -5,15 +5,15 @@ import { v4 as makeUUID } from 'uuid';
 
 import { FormTextArea, Icons, Link, Pagination } from '@app/components';
 
-import mock from '../mock.json';
 import styles from '../Forum.module.css';
+import mock from '../mock.json';
 
 import { ForumTopicComment } from './ForumTopicComment';
 
 type GridItemType = {
   id?: number | string /* пока что добавляю string для создания топика */;
   name?: string;
-  dateOfCreate?: Date | string;
+  creationDate?: Date | string;
   commentsCount?: number;
   comments?: any;
 };
@@ -66,7 +66,7 @@ export function ForumTopic() {
     dataCopy.comments.push({
       id: makeUUID(),
       name: 'Ivanessson',
-      dateOfCreate: new Date().toISOString(),
+      creationDate: new Date().toISOString(),
       comment: inputText,
       commentsCount: dataCopy.commentsCount,
     });

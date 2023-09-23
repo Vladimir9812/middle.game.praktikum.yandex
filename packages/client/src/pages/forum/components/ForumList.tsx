@@ -13,7 +13,7 @@ import { GridColumnTemplate } from './GridColumnTemplate';
 type GridItemType = {
   id: number | string /* пока что добавляю string для создания топика */;
   name: string;
-  dateOfCreate: Date | string;
+  creationDate: Date | string;
   commentsCount: number;
 };
 
@@ -29,7 +29,7 @@ export function ForumList() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
-    const sortedList = [...data].sort((a, b) => b.dateOfCreate.localeCompare(a.dateOfCreate));
+    const sortedList = [...data].sort((a, b) => b.creationDate.localeCompare(a.creationDate));
     const endOffset = itemOffset + itemsPerPage;
     const sortedPaginatedItems = sortedList.slice(itemOffset, endOffset);
 
@@ -83,7 +83,7 @@ export function ForumList() {
             key={index}
             itemList={[
               <Link to={`/forum/${item.id}`}>{item.name}</Link>,
-              dateFormat(item.dateOfCreate),
+              dateFormat(item.creationDate),
               item.commentsCount,
               <IconButton
                 aria-label="delete thread"

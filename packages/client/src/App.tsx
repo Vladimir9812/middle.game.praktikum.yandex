@@ -13,7 +13,6 @@ import {
   NotFoundPage,
   ProfilePage,
   RegisterPage,
-  ServiceUnavailable,
 } from '@app/pages';
 
 import './App.css';
@@ -27,18 +26,19 @@ export function App() {
       <BrowserRouter>
         <ErrorBoundary isPage componentName="App">
           <Routes>
-            <Route index path="/" element={<MainPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/game" element={<GamePage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/forum" element={<ForumPage />}>
-              <Route index path="" element={<ForumList />} />
-              <Route path=":id" element={<ForumTopic />} />
+            <Route path="/">
+              <Route index element={<MainPage />} />
+              <Route path="login" element={<LoginPage />} />
+              <Route path="register" element={<RegisterPage />} />
+              <Route path="game" element={<GamePage />} />
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="forum" element={<ForumPage />}>
+                <Route index element={<ForumList />} />
+                <Route path=":id" element={<ForumTopic />} />
+              </Route>
+              <Route path="leaderboard" element={<LeaderboardPage />} />
+              <Route path="*" element={<NotFoundPage />} />
             </Route>
-            <Route path="/leaderboard" element={<LeaderboardPage />} />
-            <Route path="/service-unavailable" element={<ServiceUnavailable />} />
-            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </ErrorBoundary>
       </BrowserRouter>

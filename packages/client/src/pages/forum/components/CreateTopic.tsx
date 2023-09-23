@@ -18,7 +18,7 @@ export function CreateTopic({ onConfirm, onClose }: CreateTopicProperties) {
     onConfirm({
       id: topicName,
       name: topicName,
-      dateOfCreate: new Date().toISOString(),
+      creationDate: new Date().toISOString(),
       commentsCount: 0,
     });
   };
