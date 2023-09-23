@@ -2,7 +2,7 @@ import Vector from '../Vector';
 
 import { EntityConstructorParameters } from './types';
 
-export default abstract class AbstractEntity {
+export abstract class AbstractEntity {
   public position: Vector;
 
   public width: number;

@@ -1,10 +1,10 @@
-import AbstractEntity from '../../core/AbstractEntity';
-import InputService from '../../core/InputService';
+import { AbstractEntity } from '../../core/AbstractEntity/AbstractEntity';
+import { InputService } from '../../core/InputService/InputService';
 import { KeyCode } from '../../core/InputService/types';
 import Vector from '../../core/Vector';
 import apple from '../../../assets/Apple.png';
 
-export default class SampleEntity extends AbstractEntity {
+export class SampleEntity extends AbstractEntity {
   private inputService: InputService = InputService.getInstance();
 
   public velocity = new Vector(0, 0);

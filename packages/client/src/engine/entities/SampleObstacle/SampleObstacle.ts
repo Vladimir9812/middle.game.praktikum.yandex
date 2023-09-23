@@ -1,7 +1,8 @@
-import AbstractEntity from '../../core/AbstractEntity';
+import { AbstractEntity } from '@app/engine';
+
 import Vector from '../../core/Vector';
 
-export default class SampleObstacle extends AbstractEntity {
+export class SampleObstacle extends AbstractEntity {
   public constructor() {
     super({ position: new Vector(0, 0), width: 50, height: 600 });
   }
