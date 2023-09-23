@@ -3,9 +3,10 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as makeUUID } from 'uuid';
 
-import { FormTextArea, Pagination } from '@app/components';
+import { FormTextArea, Icons, Link, Pagination } from '@app/components';
 
 import mock from '../mock.json';
+import styles from '../Forum.module.css';
 
 import { ForumTopicComment } from './ForumTopicComment';
 
@@ -74,7 +75,11 @@ export function ForumTopic() {
 
   return (
     <Flex direction="column" justifyContent="space-between" h="100%">
-      <Box h="100%" overflowY="auto" mb={5} mt={5}>
+      <Link to="/forum" className={styles.go_back_icon}>
+        <Icons.GoBackIcon />
+        Go back to forum
+      </Link>
+      <Box h="100%" overflowY="auto" mb={5}>
         {paginatedItems.map((index: any) => (
           <ForumTopicComment item={index} key={index.id} />
         ))}

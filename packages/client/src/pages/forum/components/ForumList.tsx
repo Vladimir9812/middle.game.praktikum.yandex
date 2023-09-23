@@ -1,7 +1,7 @@
 import { Box, Button, Flex, IconButton, useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 
-import { Icons, Modal, Pagination } from '@app/components';
+import { Icons, Link, Modal, Pagination } from '@app/components';
 import { dateFormat } from '@app/utils';
 
 import styles from '../Forum.module.css';
@@ -23,17 +23,19 @@ const itemsPerPage = 5;
 export function ForumList() {
   const [data, setData] = useState(mock.data.allTheme);
   const [rowItemList, setRowItemList] = useState<GridItemType[]>([]);
+  const [paginatedItems, setPaginatedItems] = useState<GridItemType[]>([]);
   const [itemOffset, setItemOffset] = useState(0);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const endOffset = itemOffset + itemsPerPage;
-  const paginatedItems = rowItemList.slice(itemOffset, endOffset);
-
   useEffect(() => {
-    const sortedList = data.sort((a, b) => b.dateOfCreate.localeCompare(a.dateOfCreate));
+    const sortedList = [...data].sort((a, b) => b.dateOfCreate.localeCompare(a.dateOfCreate));
+    const endOffset = itemOffset + itemsPerPage;
+    const sortedPaginatedItems = sortedList.slice(itemOffset, endOffset);
+
     setRowItemList(sortedList);
-  }, [data]);
+    setPaginatedItems(sortedPaginatedItems);
+  }, [data, itemOffset]);
 
   const deleteRowItem = (id: number | string) => {
     const itemIndex = data.findIndex((it) => it.id === id);
@@ -45,6 +47,7 @@ export function ForumList() {
   const onConfirm = (newItem: any) => {
     const newData = [...data];
     newData.push(newItem);
+    setItemOffset(0);
     setData(newData);
     onClose();
   };
@@ -73,12 +76,13 @@ export function ForumList() {
         <Box className={styles.forumlist_header}>
           <GridColumnTemplate isTitle itemList={titleItemList} />
         </Box>
-        {paginatedItems.map((item) => (
+        {paginatedItems.map((item, index) => (
           <GridColumnTemplate
             isTitle={false}
-            key={dateFormat(item.dateOfCreate)}
+            /* eslint-disable-next-line react/no-array-index-key */
+            key={index}
             itemList={[
-              item.name,
+              <Link to={`/forum/${item.id}`}>{item.name}</Link>,
               dateFormat(item.dateOfCreate),
               item.commentsCount,
               <IconButton

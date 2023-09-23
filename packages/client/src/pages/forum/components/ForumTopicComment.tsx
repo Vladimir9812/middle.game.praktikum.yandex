@@ -1,6 +1,7 @@
-import { Avatar, Grid, GridItem, Text } from '@chakra-ui/react';
+import { Avatar, Box, Grid, GridItem, Text } from '@chakra-ui/react';
 
 import { Icons } from '@app/components';
+import { dateFormat } from '@app/utils';
 
 import avatar from '../../../assets/images/avatar.png';
 import style from '../Forum.module.css';
@@ -12,16 +13,12 @@ export function ForumTopicComment({ item }: any) {
         <Avatar size="xl" name="Segun Adebayo" src={avatar} />
         <Text>{item.name}</Text>
         <Text>
-          <Icons.Crown /> 123456
+          <Icons.Crown /> {item.score || '128995'}
         </Text>
       </GridItem>
-      <GridItem
-        // className={currentClassName}
-        // fontSize={fonSize}
-        padding={5}
-        bg="#fff"
-      >
-        {item.comment}
+      <GridItem padding={5} bg="#fff">
+        <Box fontSize="xs">{dateFormat(item.dateOfCreate)}</Box>
+        <Text>{item.comment}</Text>
       </GridItem>
     </Grid>
   );
