@@ -5,7 +5,6 @@ import '@fontsource/ubuntu-mono/latin.css';
 
 import { ErrorBoundary } from '@app/components';
 import {
-  NotFoundPage,
   ForumPage,
   GamePage,
   LeaderboardPage,

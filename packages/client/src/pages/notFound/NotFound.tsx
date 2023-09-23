@@ -6,7 +6,7 @@ import Robot from '../../assets/images/robot.png';
 
 import styles from './NotFound.module.css';
 
-const GO_GOME_TEMPLATE = 'Go home';
+const GO_HOME_TEMPLATE = 'Go home';
 
 export function NotFoundPage() {
   return (
@@ -36,7 +36,7 @@ export function NotFoundPage() {
               to="/"
             >
               <GoBackIcon />
-              {GO_GOME_TEMPLATE}
+              {GO_HOME_TEMPLATE}
             </Link>
           </Button>
         </Flex>
