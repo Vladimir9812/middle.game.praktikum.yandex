@@ -27,6 +27,7 @@
     "stylelint.config.js"
   ],
   "rules": {
+    "number-leading-zero": "warn",
     "import/prefer-default-export": "off",
     "react/react-in-jsx-scope": "off",
     "unicorn/prevent-abbreviations": "warn",
