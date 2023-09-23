@@ -1,7 +1,6 @@
-import { AbstractEntity } from '../../core/AbstractEntity/AbstractEntity';
-import { InputService } from '../../core/InputService/InputService';
+import { AbstractEntity, InputService, Vector } from '@app/engine';
+
 import { KeyCode } from '../../core/InputService/types';
-import Vector from '../../core/Vector';
 import apple from '../../../assets/Apple.png';
 
 export class SampleEntity extends AbstractEntity {

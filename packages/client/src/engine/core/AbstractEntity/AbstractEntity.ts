@@ -1,4 +1,4 @@
-import Vector from '../Vector';
+import { Vector } from '../Vector/Vector';
 
 import { EntityConstructorParameters } from './types';
 

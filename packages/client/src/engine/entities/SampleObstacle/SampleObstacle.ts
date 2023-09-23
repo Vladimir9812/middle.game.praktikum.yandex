@@ -1,6 +1,4 @@
-import { AbstractEntity } from '@app/engine';
-
-import Vector from '../../core/Vector';
+import { AbstractEntity, Vector } from '@app/engine';
 
 export class SampleObstacle extends AbstractEntity {
   public constructor() {
