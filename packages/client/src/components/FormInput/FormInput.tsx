@@ -28,7 +28,6 @@ export const FormInput = forwardRef((properties: FormInputProperties, reference)
         mb={0}
         placeholder={placeholder.toUpperCase()}
         size="lg"
-        // width="lg"
         width={width || 'lg'}
         borderRadius={4}
         borderWidth={3}

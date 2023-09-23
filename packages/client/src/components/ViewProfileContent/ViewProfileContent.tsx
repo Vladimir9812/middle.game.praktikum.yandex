@@ -10,12 +10,22 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  Image,
 } from '@chakra-ui/react';
 import { ChangeEvent, useRef } from 'react';
 
 import { EditIcon, ProfileItem } from '@app/components';
 import { useAppSelector } from '@app/hooks';
 
+import { TUser } from '../../store/slices/UserActionCreators';
+
+export type TField = {
+  name: string;
+  label: string;
+  placeholder: string;
+  profileItem?: boolean;
+  editProfileItem?: boolean;
+};
 export function ViewProfileContent({
   handleEditClick,
   handleInputChange,
@@ -23,6 +33,7 @@ export function ViewProfileContent({
   isOpen,
   onOpen,
   onClose,
+  fields,
 }: {
   handleEditClick: () => void;
   handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -30,21 +41,41 @@ export function ViewProfileContent({
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
+  fields: TField[];
 }) {
   const { user } = useAppSelector((state) => state.user);
   const finalReference = useRef(null);
-  const profileItems = user ? (
-    <>
-      <ProfileItem name="Score" value={user.id} />
-      <ProfileItem name="Name" value={`${user.first_name} ${user.second_name}`} />
-      <ProfileItem name="Nickname" value={user.display_name} />
+  const createsItem = (field: TField) => {
+    if (field.name === 'full_name') {
+      return (
+        <ProfileItem
+          key="name"
+          name={field.label}
+          value={`${user?.first_name || ''} ${user?.second_name || ''}`}
+        />
+      );
+    }
+    if (field.name === 'phone') {
+      return (
+        <ProfileItem
+          key={field.name}
+          name={field.label}
+          value={user?.phone.replace(/(\d)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5') || ''}
+        />
+      );
+    }
+    return (
       <ProfileItem
-        name="Phone"
-        value={user.phone.replace(/(\d)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5')}
+        key={field.name}
+        name={field.label}
+        value={user ? user[field.name as keyof TUser] : ''}
       />
-      <ProfileItem name="Email" value={user.email} />
-    </>
-  ) : null;
+    );
+  };
+
+  const profileItems = fields
+    .filter((field) => field?.profileItem)
+    .map((field) => createsItem(field));
 
   return (
     <Flex display="flex" align="center" justify="center" direction="column">
@@ -53,9 +84,9 @@ export function ViewProfileContent({
       </Heading>
       <Flex
         w="58.5rem"
-        h="47rem"
+        h="3xl"
         borderRadius="15"
-        backgroundColor="#CBFDFD"
+        backgroundColor="lightBlue"
         justify="flex-start"
         pt={29}
         direction="column"
@@ -80,8 +111,9 @@ export function ViewProfileContent({
           type="button"
           onClick={onOpen}
         >
-          <img
-            style={{ width: '100%', height: '100%' }}
+          <Image
+            w="100%"
+            h="100%"
             alt="avatar"
             src={`https://ya-praktikum.tech/api/v2/resources/${user?.avatar}`}
           />
@@ -101,7 +133,7 @@ export function ViewProfileContent({
             </ModalFooter>
           </ModalContent>
         </Modal>
-        <Flex flexDirection="column" style={{ paddingTop: '1.6rem' }}>
+        <Flex flexDirection="column" pt="1.6rem">
           {profileItems}
         </Flex>
       </Flex>

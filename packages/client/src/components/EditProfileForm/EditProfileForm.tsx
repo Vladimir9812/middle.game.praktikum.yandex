@@ -5,56 +5,7 @@ import { FormInput, FormButton } from '@app/components';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 
 import { changePassword, changeProfile } from '../../store/slices/UserActionCreators';
-
-const userInputs = [
-  {
-    name: 'first_name',
-    label: 'Name',
-    placeholder: 'Enter your name',
-  },
-  {
-    name: 'second_name',
-    label: 'Surname',
-    placeholder: 'Enter your name',
-  },
-  {
-    name: 'display_name',
-    label: 'Nickname',
-    placeholder: 'Enter your nickname',
-  },
-  {
-    name: 'login',
-    label: 'Login',
-    placeholder: 'Enter your nickname',
-  },
-  {
-    name: 'email',
-    label: 'Email',
-    placeholder: 'Enter your email',
-  },
-  {
-    name: 'phone',
-    label: 'Phone',
-    placeholder: 'Enter your phone',
-  },
-];
-const passwordInputs = [
-  {
-    name: 'newPassword',
-    label: 'Password',
-    placeholder: 'Enter password',
-  },
-  {
-    name: 'oldPassword',
-    label: 'Old password',
-    placeholder: 'Enter password',
-  },
-  {
-    name: 'password_repeat',
-    label: 'Repeat password',
-    placeholder: 'Repeat password',
-  },
-];
+import { TField } from '../ViewProfileContent/ViewProfileContent';
 
 const buttonText = 'save';
 
@@ -64,8 +15,12 @@ type FormDataUser = {
 
 export function EditProfileForm({
   setIsEditing,
+  fields,
+  passwordInputs,
 }: {
   setIsEditing: Dispatch<SetStateAction<boolean>>;
+  fields: TField[];
+  passwordInputs: TField[];
 }) {
   const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
@@ -104,19 +59,17 @@ export function EditProfileForm({
   const handleSubmit = () => {
     delete passwordData.password_repeat;
     console.log(passwordData);
-
-    const updatedPasswordData = { ...passwordData };
-    delete updatedPasswordData.password_repeat;
-    console.log(passwordData);
     dispatch(changeProfile(userData));
     dispatch(changePassword(passwordData));
     setIsEditing(false);
   };
 
+  const editProfileItems = fields.filter((field) => field?.editProfileItem);
+
   return (
-    <FormControl as="form" alignItems="center" display="flex" flexDirection="column">
+    <FormControl as="form" alignItems="center" display="flex" flexDirection="column" w="80%">
       <Grid templateColumns="repeat(2, 1fr)" gap={4}>
-        {userInputs.map((input) => (
+        {editProfileItems.map((input) => (
           <GridItem key={input.name} width="xs">
             <FormLabel htmlFor={input.name} fontSize="2xl" textAlign="start" display="block">
               {input.label}
@@ -166,7 +119,7 @@ export function EditProfileForm({
           </GridItem>
         ))}
       </Grid>
-      <FormButton label={buttonText.toUpperCase()} onClick={handleSubmit} />
+      <FormButton label={buttonText.toUpperCase()} type="submit" onSubmit={handleSubmit} />
     </FormControl>
   );
 }

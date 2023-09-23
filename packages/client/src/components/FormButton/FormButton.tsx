@@ -3,13 +3,15 @@ import { MouseEventHandler } from 'react';
 
 type Properties = {
   label: string;
+  onSubmit?: MouseEventHandler<HTMLButtonElement>;
   isDisabled: boolean;
+  type?: 'button' | 'submit' | 'reset' | undefined;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
-export function FormButton({ isDisabled, label, onClick }: Properties) {
+export function FormButton({ isDisabled, label,  onSubmit, type, onClick }: Properties) {
   return (
-    <Button isDisabled={isDisabled} size="lg" colorScheme="red" onClick={onClick} type="submit">
+    <Button isDisabled={isDisabled} size="lg" colorScheme="red" onClick={onSubmit} type={type}>
       {label}
     </Button>
   );

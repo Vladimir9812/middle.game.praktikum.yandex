@@ -3,12 +3,18 @@ import { Dispatch, SetStateAction } from 'react';
 
 import { EditProfileForm, GoBack } from '@app/components';
 
+import { TField } from '../ViewProfileContent/ViewProfileContent';
+
 export function EditProfileContent({
   handleSaveClick,
   setIsEditing,
+  fields,
+  passwordInputs,
 }: {
   handleSaveClick: () => void;
   setIsEditing: Dispatch<SetStateAction<boolean>>;
+  fields: TField[];
+  passwordInputs: TField[];
 }) {
   return (
     <Flex display="flex" align="center" justify="center" direction="column">
@@ -37,7 +43,11 @@ export function EditProfileContent({
         >
           <GoBack />
         </Button>
-        <EditProfileForm setIsEditing={setIsEditing} />
+        <EditProfileForm
+          setIsEditing={setIsEditing}
+          fields={fields}
+          passwordInputs={passwordInputs}
+        />
       </Flex>
     </Flex>
   );

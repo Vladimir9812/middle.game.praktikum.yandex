@@ -2,27 +2,16 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-import { changeAvatar, changeProfile, fetchData, fetchDataUser } from './UserActionCreators';
+import { changeAvatar, changeProfile, fetchData, fetchDataUser, TUser } from './UserActionCreators';
 
-type TUser = {
-  id: number;
-  first_name: string;
-  second_name: string;
-  display_name: string;
-  phone: string;
-  login: string;
-  avatar: string;
-  email: string;
-};
 interface UserState {
-  user: TUser | null;
+  user: TUser | undefined;
   isLoading: boolean;
   error: string | undefined;
 }
 
 const initialState: UserState = {
-  // user: null, ошибка lint
-  user: null,
+  user: undefined,
   isLoading: false,
   error: '',
 };
@@ -59,7 +48,8 @@ export const userSlice = createSlice({
       .addCase(changeProfile.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(changeProfile.fulfilled, (state) => {
+      .addCase(changeProfile.fulfilled, (state, action) => {
+        state.user = action.payload;
         state.isLoading = false;
       })
       .addCase(changeProfile.rejected, (state, action) => {
