@@ -1,7 +1,7 @@
 import { Box, Center, Container, Flex, Heading, Image } from '@chakra-ui/react';
 
 import { LoginForm, Link } from '@app/components';
-import { ROUTES } from '@app/types';
+import { Routes } from '@app/const';
 
 import logo from '../../assets/images/logo_login.jpg';
 
@@ -21,7 +21,7 @@ export function LoginPage() {
         <Box width="3.5xl" bg="lightBlue" borderRadius={5} pb={2} pt={3}>
           <Flex gap={2.5} direction="column">
             <LoginForm />
-            <Link to={ROUTES.REGISTER} textAlign="center" fontSize="xl">
+            <Link to={Routes.REGISTER} textAlign="center" fontSize="xl">
               {LoginText.link.toUpperCase()}
             </Link>
           </Flex>

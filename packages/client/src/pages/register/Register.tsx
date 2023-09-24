@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Image, SimpleGrid } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import { ROUTES } from '@app/types';
+import { Routes } from '@app/const';
 import { ErrorBoundary, Link, SignUpForm } from '@app/components';
 
 import logo from '../../assets/images/logo.jpg';
@@ -32,7 +32,7 @@ export function RegisterPage() {
         <Box width="1.5xl" height="3.5xl" bg="lightBlue" borderRadius={5} p={10}>
           <Flex gap={2} h="100%" justifyContent="space-between" direction="column">
             <SignUpForm />
-            <Link to={ROUTES.LOGIN} textAlign="center" fontSize="xl">
+            <Link to={Routes.LOGIN} textAlign="center" fontSize="xl">
               {RegisterText.link.toUpperCase()}
             </Link>
           </Flex>
