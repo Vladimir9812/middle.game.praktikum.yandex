@@ -19,13 +19,12 @@ export function FormTextArea(properties: FormInputProperties) {
     name,
     placeholder,
     isInvalid,
-    value = '',
-    errorMessage = '',
+    errorMessage,
     height = 'auto',
     fullWidth = false,
-    onChange = (e) => console.log(e.target),
+    value,
+    onChange,
   } = properties;
-  console.log(value);
   return (
     <Box mb={8} w={fullWidth ? '100%' : 'auto'}>
       <Textarea
@@ -42,6 +41,7 @@ export function FormTextArea(properties: FormInputProperties) {
         bg="white"
         textAlign="center"
         h={height}
+        value={value}
         onChange={onChange}
       />
       <FormErrorMessage>{errorMessage}</FormErrorMessage>

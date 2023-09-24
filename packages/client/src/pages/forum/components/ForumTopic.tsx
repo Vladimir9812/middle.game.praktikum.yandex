@@ -29,20 +29,13 @@ export function ForumTopic() {
   const parameters = useParams();
 
   useEffect(() => {
-    const fetchData = async () =>
-      new Promise((res) => {
-        setTimeout(() => {
-          const item = mock.data.allTheme.find((index) => String(index.id) === parameters.id);
-          const newItem = {
-            ...item,
-            comments: mock.data.comments,
-          };
+    const item = mock.data.allTheme.find((index) => String(index.id) === parameters.id);
+    const newItem = {
+      ...item,
+      comments: mock.data.comments,
+    };
 
-          setData(newItem);
-          res({});
-        }, 1000);
-      });
-    fetchData();
+    setData(newItem);
   }, []);
 
   useEffect(() => {
@@ -50,17 +43,20 @@ export function ForumTopic() {
     setPaginatedItems(data?.comments ? data.comments.slice(itemOffset, endOffset) : []);
   }, [data, itemOffset]);
 
-  const handlePageClick = (event: { selected: number }) => {
-    const newOffset = (event.selected * itemsPerPage) % (data?.comments?.length || 1);
-    setItemOffset(newOffset);
-  };
+  const handlePageClick = useCallback(
+    (event: { selected: number }) => {
+      const newOffset = (event.selected * itemsPerPage) % (data?.comments?.length || 1);
+      setItemOffset(newOffset);
+    },
+    [data],
+  );
 
   const onChange = useCallback((e: ChangeEvent) => {
     const element = e.target as HTMLInputElement;
     setInputText(element.value);
   }, []);
 
-  const sendData = () => {
+  const sendData = useCallback(() => {
     const dataCopy = { ...data };
 
     dataCopy.comments.push({
@@ -71,7 +67,8 @@ export function ForumTopic() {
       commentsCount: dataCopy.commentsCount,
     });
     setData(dataCopy);
-  };
+    setInputText('');
+  }, [data, inputText]);
 
   return (
     <Flex direction="column" justifyContent="space-between" h="100%">
@@ -90,6 +87,7 @@ export function ForumTopic() {
             name="topit-description"
             placeholder="Enter your message"
             isInvalid={false}
+            value={inputText}
             onChange={onChange}
             fullWidth
           />

@@ -5,9 +5,16 @@ import { FormInput, FormTextArea } from '@app/components';
 
 import styles from '../Forum.module.css';
 
+type TopicType = {
+  id: number | string /* пока что добавляю string для создания топика */;
+  name: string;
+  creationDate: Date | string;
+  commentsCount: number;
+};
+
 type CreateTopicProperties = {
   onClose: () => void;
-  onConfirm: (data: any) => void;
+  onConfirm: (data: TopicType) => void;
 };
 
 export function CreateTopic({ onConfirm, onClose }: CreateTopicProperties) {
@@ -25,7 +32,7 @@ export function CreateTopic({ onConfirm, onClose }: CreateTopicProperties) {
 
   const onChange = (e: ChangeEvent) => {
     const element = e.target as HTMLInputElement;
-    if (element.name === 'topit-name') {
+    if (element.name === 'topic-name') {
       setFormState((previousState) => ({
         ...previousState,
         topicName: element.value,
@@ -41,16 +48,17 @@ export function CreateTopic({ onConfirm, onClose }: CreateTopicProperties) {
   return (
     <>
       <FormInput
-        name="topit-name"
+        name="topic-name"
         placeholder="Enter topic name"
         isInvalid={false}
         onChange={onChange}
       />
       <FormTextArea
-        name="topit-description"
+        name="topic-description"
         placeholder="Enter topic description"
         isInvalid={false}
         height="150px"
+        value={formState.topicDescription}
         onChange={onChange}
       />
       <Flex mt={20} mb={10} className={styles.modal_footer}>

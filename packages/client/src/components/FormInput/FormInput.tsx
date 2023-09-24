@@ -12,16 +12,7 @@ type FormInputProperties = {
 };
 
 export function FormInput(properties: FormInputProperties) {
-  const {
-    name,
-    placeholder,
-    isInvalid,
-    value = '',
-    type = 'text',
-    errorMessage = '',
-    onChange = (e) => console.log(e.target),
-  } = properties;
-  console.log(value);
+  const { name, placeholder, isInvalid, type, errorMessage, onChange } = properties;
   return (
     <Box mb={8}>
       <Input
