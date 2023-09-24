@@ -41,7 +41,7 @@ export function NotFoundPage() {
               color="black"
               to="/"
             >
-              <GoBackIcon />
+              <Icons.GoBackIcon />
               {GO_HOME_TEMPLATE}
             </Link>
           </Button>
