@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box, FormErrorMessage, forwardRef, Input } from '@chakra-ui/react';
 import { omit } from 'lodash';
+import { ChangeEvent } from 'react';
 
 type FormInputProperties = {
   name: string;
@@ -37,7 +38,6 @@ export const FormInput = forwardRef((properties: FormInputProperties, reference)
         _placeholder={{
           textAlign: 'center',
         }}
-        onChange={onChange}
       />
       <FormErrorMessage fontSize="xs" mt={1} justifyContent="center" w="100%">
         {errorMessage}
