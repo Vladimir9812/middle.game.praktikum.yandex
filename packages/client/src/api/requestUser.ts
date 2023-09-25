@@ -2,7 +2,7 @@ const baseUrl = 'https://ya-praktikum.tech/api/v2';
 type FormDataUser = {
   [key: string]: string;
 };
-export class MyApi {
+export class UserApi {
   // eslint-disable-next-line class-methods-use-this
   private async handleResponse(response: Response) {
     if (response.status !== 200) {

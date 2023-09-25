@@ -1,9 +1,7 @@
 import { Button, Flex, Heading } from '@chakra-ui/react';
 import { Dispatch, SetStateAction } from 'react';
 
-import { EditProfileForm, Icons } from '@app/components';
-
-import { TField } from '../ViewProfileContent/ViewProfileContent';
+import { EditProfileForm, Icons, TField } from '@app/components';
 
 type Properties = {
   handleSaveClick: () => void;

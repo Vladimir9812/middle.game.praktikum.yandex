@@ -16,8 +16,7 @@ import { ChangeEvent, useRef } from 'react';
 
 import { Icons, ProfileItem } from '@app/components';
 import { useAppSelector } from '@app/hooks';
-
-import { TUser } from '../../store/slices/UserActionCreators';
+import { TUser } from '@app/store';
 
 export type TField = {
   name: string;

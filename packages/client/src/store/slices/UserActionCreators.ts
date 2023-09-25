@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { MyApi } from '../../api/requestUser';
+import { UserApi } from '@app/api';
 
 type FormDataUser = {
   [key: string]: string;
@@ -10,7 +10,7 @@ const headers = {
   'Content-Type': 'application/json;charset=utf-8',
 };
 
-const api = new MyApi();
+const api = new UserApi();
 
 export type TUser = {
   id: number;

@@ -3,8 +3,8 @@ import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 
 import { FormInput, FormButton } from '@app/components';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
+import { changePassword, changeProfile } from '@app/store';
 
-import { changePassword, changeProfile } from '../../store/slices/UserActionCreators';
 import { TField } from '../ViewProfileContent/ViewProfileContent';
 
 const buttonText = 'save';
