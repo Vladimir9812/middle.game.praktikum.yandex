@@ -1,4 +1,5 @@
-const baseUrl = 'https://ya-praktikum.tech/api/v2';
+import { BASE_URL } from '@app/utils';
+
 type FormDataUser = {
   [key: string]: string;
 };
@@ -14,7 +15,7 @@ export class UserApi {
 
   public async fetchData() {
     try {
-      const response = await fetch(`${baseUrl}/auth/user`, {
+      const response = await fetch(`${BASE_URL}/auth/user`, {
         credentials: 'include',
       });
       return await this.handleResponse(response);
@@ -28,7 +29,7 @@ export class UserApi {
 
   public async fetchDataUser(headers: FormDataUser, user: FormDataUser) {
     try {
-      const response = await fetch(`${baseUrl}/auth/signin`, {
+      const response = await fetch(`${BASE_URL}/auth/signin`, {
         method: 'POST',
         headers,
         body: JSON.stringify(user),
@@ -45,7 +46,7 @@ export class UserApi {
 
   public async changeProfile(headers: FormDataUser, userData: FormDataUser) {
     try {
-      const response = await fetch(`${baseUrl}/user/profile`, {
+      const response = await fetch(`${BASE_URL}/user/profile`, {
         method: 'PUT',
         headers,
         body: JSON.stringify(userData),
@@ -62,7 +63,7 @@ export class UserApi {
 
   public async changePassword(headers: FormDataUser, passwordData: FormDataUser) {
     try {
-      const response = await fetch(`${baseUrl}/user/password`, {
+      const response = await fetch(`${BASE_URL}/user/password`, {
         method: 'PUT',
         headers,
         body: JSON.stringify(passwordData),
@@ -79,7 +80,7 @@ export class UserApi {
 
   public async changeAvatar(formData: FormData) {
     try {
-      const response = await fetch(`${baseUrl}/user/profile/avatar`, {
+      const response = await fetch(`${BASE_URL}/user/profile/avatar`, {
         method: 'PUT',
         body: formData,
         credentials: 'include',
