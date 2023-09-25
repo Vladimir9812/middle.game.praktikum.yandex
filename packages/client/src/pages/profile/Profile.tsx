@@ -3,8 +3,7 @@ import { useDisclosure } from '@chakra-ui/react';
 
 import { useAppDispatch } from '@app/hooks';
 import { ViewProfileContent, EditProfileContent } from '@app/components';
-
-import { changeAvatar, fetchData, fetchDataUser } from '../../store/slices/UserActionCreators';
+import { changeAvatar, fetchData, fetchDataUser } from '@app/store';
 
 const fields = [
   {

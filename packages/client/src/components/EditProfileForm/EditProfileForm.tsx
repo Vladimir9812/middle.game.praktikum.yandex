@@ -13,15 +13,13 @@ type FormDataUser = {
   [key: string]: string;
 };
 
-export function EditProfileForm({
-  setIsEditing,
-  fields,
-  passwordInputs,
-}: {
+type Properties = {
   setIsEditing: Dispatch<SetStateAction<boolean>>;
   fields: TField[];
   passwordInputs: TField[];
-}) {
+};
+
+export function EditProfileForm({ setIsEditing, fields, passwordInputs }: Properties) {
   const { user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 

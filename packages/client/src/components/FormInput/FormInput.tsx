@@ -3,7 +3,7 @@ import { Box, FormErrorMessage, forwardRef, Input } from '@chakra-ui/react';
 import { omit } from 'lodash';
 import { ChangeEvent } from 'react';
 
-type FormInputProperties = {
+type Properties = {
   name: string;
   placeholder: string;
   isInvalid: boolean;
@@ -12,12 +12,12 @@ type FormInputProperties = {
   errorMessage?: string;
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   mb?: number;
-  id?: string;
   width?: string;
+  id?: string;
 };
 
 
-export const FormInput = forwardRef((properties: FormInputProperties, reference) => {
+export const FormInput = forwardRef((properties: Properties, reference) => {
   const { placeholder = '', errorMessage = '', mb, width, value, id, onChange } = properties;
   const inputProperties = omit(properties, ['errorMessage']);
   return (
@@ -35,9 +35,9 @@ export const FormInput = forwardRef((properties: FormInputProperties, reference)
         focusBorderColor="blue"
         bg="white"
         textAlign="center"
+        onChange={onChange}
         value={value}
         id={id}
-        onChange={onChange}
         _hover={{
           background: 'white',
         }}

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { MyApi } from './requestUser';
+import { MyApi } from '../../api/requestUser';
 
 type FormDataUser = {
   [key: string]: string;

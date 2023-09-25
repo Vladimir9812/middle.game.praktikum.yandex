@@ -5,17 +5,19 @@ import { EditProfileForm, Icons } from '@app/components';
 
 import { TField } from '../ViewProfileContent/ViewProfileContent';
 
+type Properties = {
+  handleSaveClick: () => void;
+  setIsEditing: Dispatch<SetStateAction<boolean>>;
+  fields: TField[];
+  passwordInputs: TField[];
+};
+
 export function EditProfileContent({
   handleSaveClick,
   setIsEditing,
   fields,
   passwordInputs,
-}: {
-  handleSaveClick: () => void;
-  setIsEditing: Dispatch<SetStateAction<boolean>>;
-  fields: TField[];
-  passwordInputs: TField[];
-}) {
+}: Properties) {
   return (
     <Flex display="flex" align="center" justify="center" direction="column">
       <Heading as="h1" fontSize="4.5rem" mt="4.1rem" fontWeight="400">

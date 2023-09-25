@@ -26,6 +26,15 @@ export type TField = {
   profileItem?: boolean;
   editProfileItem?: boolean;
 };
+type Properties = {
+  handleEditClick: () => void;
+  handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleSubmit: () => void;
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  fields: TField[];
+};
 export function ViewProfileContent({
   handleEditClick,
   handleInputChange,
@@ -34,15 +43,7 @@ export function ViewProfileContent({
   onOpen,
   onClose,
   fields,
-}: {
-  handleEditClick: () => void;
-  handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: () => void;
-  isOpen: boolean;
-  onOpen: () => void;
-  onClose: () => void;
-  fields: TField[];
-}) {
+}: Properties) {
   const { user } = useAppSelector((state) => state.user);
   const finalReference = useRef(null);
   const createsItem = (field: TField) => {
