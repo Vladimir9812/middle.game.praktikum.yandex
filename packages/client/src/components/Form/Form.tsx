@@ -35,17 +35,20 @@ export function Form({ inputs, buttonText, mb, validationSchema }: Properties) {
       display="flex"
       flexDirection="column"
     >
-      {inputs.map((input) => (
-        <FormInput
-          {...register(input.name)}
-          mb={mb}
-          key={input.name}
-          name={input.name}
-          placeholder={input.placeholder}
-          isInvalid={!!errors[`${input.name}`]}
-          errorMessage={errors[`${input.name}`]?.message?.toString()}
-        />
-      ))}
+      {inputs.map((input) => {
+        const { name, placeholder } = input;
+        return (
+          <FormInput
+            {...register(name)}
+            mb={mb}
+            key={name}
+            name={name}
+            placeholder={placeholder}
+            isInvalid={!!errors[`${name}`]}
+            errorMessage={errors[`${name}`]?.message?.toString()}
+          />
+        );
+      })}
       <FormButton isDisabled={!isValid} label={buttonText.toUpperCase()} />
     </FormControl>
   );
