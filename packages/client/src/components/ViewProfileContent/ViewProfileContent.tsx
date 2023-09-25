@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { ChangeEvent, useRef } from 'react';
 
-import { EditIcon, ProfileItem } from '@app/components';
+import { Icons, ProfileItem } from '@app/components';
 import { useAppSelector } from '@app/hooks';
 
 import { TUser } from '../../store/slices/UserActionCreators';
@@ -101,7 +101,7 @@ export function ViewProfileContent({
           left="50"
           padding="0"
         >
-          <EditIcon />
+          <Icons.EditIcon />
         </Button>
         <Button
           border="none"

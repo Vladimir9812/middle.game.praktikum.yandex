@@ -1,7 +1,7 @@
 import { Button, Flex, Heading } from '@chakra-ui/react';
 import { Dispatch, SetStateAction } from 'react';
 
-import { EditProfileForm, GoBack } from '@app/components';
+import { EditProfileForm, Icons } from '@app/components';
 
 import { TField } from '../ViewProfileContent/ViewProfileContent';
 
@@ -41,7 +41,7 @@ export function EditProfileContent({
           left="50"
           padding="0"
         >
-          <GoBack />
+          <Icons.GoBack />
         </Button>
         <EditProfileForm
           setIsEditing={setIsEditing}

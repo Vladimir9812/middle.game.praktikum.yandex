@@ -10,7 +10,7 @@ type FormInputProperties = {
   value?: string;
   type?: string;
   errorMessage?: string;
-  onChange?: (event: ChangeEvent) => void;
+  onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   mb?: number;
   id?: string;
   width?: string;
@@ -18,7 +18,7 @@ type FormInputProperties = {
 
 
 export const FormInput = forwardRef((properties: FormInputProperties, reference) => {
-  const { placeholder = '', errorMessage = '', mb } = properties;
+  const { placeholder = '', errorMessage = '', mb, width, value, id, onChange } = properties;
   const inputProperties = omit(properties, ['errorMessage']);
   return (
     <Box mb={mb}>
