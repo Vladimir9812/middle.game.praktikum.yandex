@@ -9,9 +9,15 @@ type Properties = {
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
 
-export function FormButton({ isDisabled, label,  onSubmit, type, onClick }: Properties) {
+export function FormButton({ isDisabled, label, onSubmit, type, onClick }: Properties) {
   return (
-    <Button isDisabled={isDisabled} size="lg" colorScheme="red" onClick={onSubmit} type={type}>
+    <Button
+      isDisabled={isDisabled}
+      size="lg"
+      colorScheme="red"
+      onClick={onSubmit || onClick}
+      type={type}
+    >
       {label}
     </Button>
   );

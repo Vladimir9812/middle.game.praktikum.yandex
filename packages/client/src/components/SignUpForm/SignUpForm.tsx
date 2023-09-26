@@ -1,6 +1,6 @@
 import { FormControl } from '@chakra-ui/react';
 
-import { FormInput, FormButton } from '@app/components';
+import { FormButton, FormInput } from '@app/components';
 
 const inputs = [
   {
