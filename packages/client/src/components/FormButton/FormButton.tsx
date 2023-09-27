@@ -4,7 +4,7 @@ import { MouseEventHandler } from 'react';
 type Properties = {
   label: string;
   onSubmit?: MouseEventHandler<HTMLButtonElement>;
-  isDisabled: boolean;
+  isDisabled?: boolean;
   type?: 'button' | 'submit' | 'reset' | undefined;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };

@@ -31,7 +31,7 @@ const inputs = [
 
 const buttonText = 'Sign up';
 
-export function SignUpForm() {
+export function SignUpFormNew() {
   return (
     <FormControl as="form" alignItems="center" display="flex" flexDirection="column">
       {inputs.map((input) => (
