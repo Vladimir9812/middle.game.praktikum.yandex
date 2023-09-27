@@ -19,5 +19,5 @@ export const Icons = {
   PlayerIcon,
   TrashItemIcon,
   EditIcon,
-  GoBackIcon
+  GoBack,
 };

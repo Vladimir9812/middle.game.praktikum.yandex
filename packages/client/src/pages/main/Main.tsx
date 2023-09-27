@@ -2,16 +2,9 @@ import { Box, Button, Center } from '@chakra-ui/react';
 
 import { BACKGROUND_CONST } from '@app/utils';
 import { Icons, Link } from '@app/components';
-import { Routes } from '@app/const';
+import { Routes, TEXT } from '@app/const';
 
 import styles from './Main.module.css';
-
-const enum MainText {
-  game = 'New game',
-  leaders = 'Leaders',
-  forum = 'forum',
-  player = 'player',
-}
 
 export function MainPage() {
   return (
@@ -27,7 +20,7 @@ export function MainPage() {
               fontWeight="normal"
             >
               <Icons.ConsoleIcon />
-              {MainText.game.toUpperCase()}
+              {TEXT.gameLink}
             </Link>
           </Button>
           <Button variant="link" className={styles['nav-button']} borderRadius={0}>
@@ -39,7 +32,7 @@ export function MainPage() {
               fontWeight="normal"
             >
               <Icons.CupIcon />
-              {MainText.leaders.toUpperCase()}
+              {TEXT.leadersLink}
             </Link>
           </Button>
           <Button variant="link" className={styles['nav-button']} borderRadius={0}>
@@ -51,7 +44,7 @@ export function MainPage() {
               fontWeight="normal"
             >
               <Icons.ForumIcon />
-              {MainText.forum.toUpperCase()}
+              {TEXT.forumLink}
             </Link>
           </Button>
           <Button variant="link" className={styles['nav-button']} borderRadius={0}>
@@ -63,7 +56,7 @@ export function MainPage() {
               fontWeight="normal"
             >
               <Icons.PlayerIcon />
-              {MainText.player.toUpperCase()}
+              {TEXT.playerLink}
             </Link>
           </Button>
         </Box>
