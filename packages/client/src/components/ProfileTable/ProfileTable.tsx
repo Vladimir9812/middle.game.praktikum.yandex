@@ -17,14 +17,9 @@ import { ChangeEvent, useRef } from 'react';
 import { Icons, ProfileItem } from '@app/components';
 import { useAppSelector } from '@app/hooks';
 import { TUser } from '@app/store';
+import { FieldName, Field } from '@app/types';
+import { ProfileFields, staticBaseUrl } from '@app/const';
 
-export type TField = {
-  name: string;
-  label: string;
-  placeholder: string;
-  profileItem?: boolean;
-  editProfileItem?: boolean;
-};
 type Properties = {
   handleEditClick: () => void;
   handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -32,9 +27,9 @@ type Properties = {
   isOpen: boolean;
   onOpen: () => void;
   onClose: () => void;
-  fields: TField[];
+  fields: ProfileFields;
 };
-export function ViewProfileContent({
+export function ProfileTable({
   handleEditClick,
   handleInputChange,
   handleSubmit,
@@ -45,37 +40,39 @@ export function ViewProfileContent({
 }: Properties) {
   const { user } = useAppSelector((state) => state.user);
   const finalReference = useRef(null);
-  const createItem = (field: TField) => {
-    if (field.name === 'full_name') {
+  const createItem = (field: Field) => {
+    if (field.name === FieldName.FULL_NAME) {
       return (
         <ProfileItem
           key="name"
-          name={field.label}
+          name={field?.label ?? ''}
           value={`${user?.first_name || ''} ${user?.second_name || ''}`}
         />
       );
     }
-    if (field.name === 'phone') {
+    if (field.name === FieldName.PHONE) {
       return (
         <ProfileItem
           key={field.name}
-          name={field.label}
+          name={field?.label ?? ''}
           value={user?.phone.replace(/(\d)(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 $2 $3 $4 $5') || ''}
         />
       );
     }
+
+    // TODO Add logic for game score in profile
+    if (field.name === FieldName.SCORE) {
+      return <ProfileItem key={field.name} name={field?.label ?? ''} value="1984" />;
+    }
+
     return (
       <ProfileItem
         key={field.name}
-        name={field.label}
+        name={field?.label ?? ''}
         value={user ? user[field.name as keyof TUser] : ''}
       />
     );
   };
-
-  const profileItems = fields
-    .filter((field) => field?.profileItem)
-    .map((field) => createItem(field));
 
   return (
     <Flex display="flex" align="center" justify="center" direction="column" height="100vh">
@@ -116,12 +113,7 @@ export function ViewProfileContent({
           type="button"
           onClick={onOpen}
         >
-          <Image
-            w="100%"
-            h="100%"
-            alt="avatar"
-            src={`https://ya-praktikum.tech/api/v2/resources/${user?.avatar}`}
-          />
+          <Image w="100%" h="100%" alt="avatar" src={`${staticBaseUrl}/${user?.avatar}`} />
         </Button>
         <Modal finalFocusRef={finalReference} isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
@@ -139,7 +131,7 @@ export function ViewProfileContent({
           </ModalContent>
         </Modal>
         <Flex flexDirection="column" pt="1.6rem">
-          {profileItems}
+          {fields.map((element) => createItem(element))}
         </Flex>
       </Flex>
     </Flex>
