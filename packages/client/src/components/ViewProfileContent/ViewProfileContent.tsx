@@ -45,7 +45,7 @@ export function ViewProfileContent({
 }: Properties) {
   const { user } = useAppSelector((state) => state.user);
   const finalReference = useRef(null);
-  const createsItem = (field: TField) => {
+  const createItem = (field: TField) => {
     if (field.name === 'full_name') {
       return (
         <ProfileItem
@@ -75,7 +75,7 @@ export function ViewProfileContent({
 
   const profileItems = fields
     .filter((field) => field?.profileItem)
-    .map((field) => createsItem(field));
+    .map((field) => createItem(field));
 
   return (
     <Flex display="flex" align="center" justify="center" direction="column" height="100vh">
