@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-import { changeAvatar, changeProfile, fetchData, fetchDataUser, TUser } from './UserActionCreators';
+import { changeAvatar, changeProfile, getUser, signin, TUser } from './UserActionCreators';
 
 interface UserState {
   user: TUser | undefined;
@@ -22,25 +22,25 @@ export const userSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchData.pending, (state) => {
+      .addCase(getUser.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchData.fulfilled, (state, action) => {
+      .addCase(getUser.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user = action.payload;
       })
-      .addCase(fetchData.rejected, (state, action) => {
+      .addCase(getUser.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
       })
 
-      .addCase(fetchDataUser.pending, (state) => {
+      .addCase(signin.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchDataUser.fulfilled, (state) => {
+      .addCase(signin.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(fetchDataUser.rejected, (state, action) => {
+      .addCase(signin.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
       })
