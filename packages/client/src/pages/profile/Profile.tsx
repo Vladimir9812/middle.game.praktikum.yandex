@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 
 import { useAppDispatch } from '@app/hooks';
 import { ViewProfileContent, EditProfileContent } from '@app/components';
-import { changeAvatar, fetchData, fetchDataUser } from '@app/store';
+import { changeAvatar } from '@app/store';
 
 const fields = [
   {
@@ -82,12 +82,6 @@ export function ProfilePage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isEditing, setIsEditing] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
-  useEffect(() => {
-    dispatch(fetchDataUser()).then(() => {
-      dispatch(fetchData());
-    });
-  }, []);
 
   const handleEditClick = () => {
     setIsEditing(true);

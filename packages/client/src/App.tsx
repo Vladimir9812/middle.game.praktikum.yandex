@@ -1,8 +1,12 @@
+import './App.css';
+
 import { ChakraProvider } from '@chakra-ui/react';
 import '@fontsource/ubuntu-mono/cyrillic.css';
 import '@fontsource/ubuntu-mono/latin.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 
+import { useAppDispatch } from '@app/hooks';
 import { ErrorBoundary } from '@app/components';
 import {
   ForumPage,
@@ -16,13 +20,27 @@ import {
   ServiceUnavailable,
   GameOverPage,
 } from '@app/pages';
+import { getUser, signin } from '@app/store';
 
-import './App.css';
 import { theme } from './chakraTheme';
 import { ForumList } from './pages/forum/components/ForumList';
 import { ForumTopic } from './pages/forum/components/ForumTopic';
 
 export function App() {
+  const dispatch = useAppDispatch();
+  const initialDataFetch = useRef(false);
+
+  useEffect(() => {
+    if (initialDataFetch.current) {
+      return;
+    }
+    initialDataFetch.current = true;
+    (async () => {
+      dispatch(signin());
+      dispatch(getUser());
+    })();
+  }, []);
+
   return (
     <ChakraProvider theme={theme}>
       <BrowserRouter>
