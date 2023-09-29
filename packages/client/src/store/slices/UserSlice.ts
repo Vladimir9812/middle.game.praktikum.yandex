@@ -2,10 +2,12 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-import { changeAvatar, changeProfile, getUser, signin, TUser } from './UserActionCreators';
+import { User } from '@app/types';
+
+import { changeAvatar, changeProfile, getUser, signin } from './UserActionCreators';
 
 interface UserState {
-  user: TUser | undefined;
+  user: User | undefined;
   isLoading: boolean;
   error: string | undefined;
 }

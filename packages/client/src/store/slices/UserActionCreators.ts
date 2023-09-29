@@ -7,16 +7,6 @@ import { AnyObject } from '../../types/AnyObject';
 const userApi = new UserApi();
 const authApi = new AuthApi();
 
-export type TUser = {
-  id: number;
-  first_name: string;
-  second_name: string;
-  display_name: string;
-  phone: string;
-  login: string;
-  avatar: string;
-  email: string;
-};
 // данные для запроса
 const user = {
   login: 'lertwq',

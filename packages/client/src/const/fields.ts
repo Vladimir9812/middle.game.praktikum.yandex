@@ -30,19 +30,22 @@ const fields: Array<Field> = [
     label: 'Email',
   },
   {
+    name: FieldName.PASSWORD_OLD,
+    placeholder: 'Old password',
+    label: 'Old password',
+    type: 'password',
+  },
+  {
     name: FieldName.PASSWORD,
     placeholder: 'Enter password',
     label: 'Password',
+    type: 'password',
   },
   {
     name: FieldName.PASSWORD_REPEAT,
     placeholder: 'Repeat password',
     label: 'Repeat password',
-  },
-  {
-    name: FieldName.PASSWORD_OLD,
-    placeholder: 'Repeat password',
-    label: 'Repeat password',
+    type: 'password',
   },
 ];
 
@@ -50,7 +53,10 @@ export const loginFields = fields.filter(
   (field) => field.name === FieldName.LOGIN || field.name === FieldName.PASSWORD,
 );
 export const registerFields = fields.filter(
-  (field) => field.name !== FieldName.PASSWORD_OLD && field.name !== FieldName.SCORE,
+  (field) =>
+    field.name !== FieldName.PASSWORD_OLD &&
+    field.name !== FieldName.SCORE &&
+    field.name !== FieldName.FULL_NAME,
 );
 
 export const profileFields = fields.filter(
@@ -60,6 +66,13 @@ export const profileFields = fields.filter(
     field.name === FieldName.DISPLAY_NAME ||
     field.name === FieldName.PHONE ||
     field.name === FieldName.EMAIL,
+);
+
+export const editProfileFields = fields.filter(
+  (field) =>
+    field.name !== FieldName.SCORE &&
+    field.name !== FieldName.FULL_NAME &&
+    field.name !== FieldName.LOGIN,
 );
 
 export type ProfileFields = typeof profileFields;

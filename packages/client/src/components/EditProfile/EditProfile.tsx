@@ -1,21 +1,18 @@
+import { Button, Flex, Heading } from '@chakra-ui/react';
 import { Button, Flex, Heading, useBreakpointValue } from '@chakra-ui/react';
 import { Dispatch, SetStateAction } from 'react';
 
-import { EditProfileForm, Icons, TField } from '@app/components';
+import { ProfileForm, Icons } from '@app/components';
+import { useAppSelector } from '@app/hooks';
 
 type Properties = {
   handleSaveClick: () => void;
-  setIsEditing: Dispatch<SetStateAction<boolean>>;
-  fields: TField[];
-  passwordInputs: TField[];
 };
 
-export function EditProfileContent({
+export function EditProfile({
   handleSaveClick,
-  setIsEditing,
-  fields,
-  passwordInputs,
 }: Properties) {
+  const { user } = useAppSelector((state) => state.user);
   const headingSize = useBreakpointValue({ base: '4xl', md: '6xl', lg: '7xl' });
   return (
     <Flex display="flex" align="center" justify="center" direction="column" height="100vh">
@@ -46,11 +43,7 @@ export function EditProfileContent({
         >
           <Icons.GoBackProfileIcon />
         </Button>
-        <EditProfileForm
-          setIsEditing={setIsEditing}
-          fields={fields}
-          passwordInputs={passwordInputs}
-        />
+        <ProfileForm user={user} />
       </Flex>
     </Flex>
   );

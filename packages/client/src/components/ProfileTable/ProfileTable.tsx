@@ -16,8 +16,7 @@ import { ChangeEvent, useRef } from 'react';
 
 import { Icons, ProfileItem } from '@app/components';
 import { useAppSelector } from '@app/hooks';
-import { TUser } from '@app/store';
-import { FieldName, Field } from '@app/types';
+import { FieldName, Field, User } from '@app/types';
 import { ProfileFields, staticBaseUrl } from '@app/const';
 
 type Properties = {
@@ -69,7 +68,7 @@ export function ProfileTable({
       <ProfileItem
         key={field.name}
         name={field?.label ?? ''}
-        value={user ? user[field.name as keyof TUser] : ''}
+        value={user ? user[field.name as keyof User] : ''}
       />
     );
   };
