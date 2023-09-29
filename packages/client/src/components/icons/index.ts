@@ -8,6 +8,7 @@ import { PlayerIcon } from './PlayerIcon';
 import { TrashItemIcon } from './TrashItemIcon';
 import { EditIcon } from './Edit';
 import { GoBack } from './GoBack';
+import { BestPlayer } from './BestPlayer';
 
 export const Icons = {
   ConsoleIcon,
@@ -20,4 +21,5 @@ export const Icons = {
   TrashItemIcon,
   EditIcon,
   GoBack,
+  BestPlayer
 };
