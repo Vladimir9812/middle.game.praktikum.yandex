@@ -18,7 +18,7 @@ export function LeaderboardItem({ place, player, score, background, isHeader, ic
   return (
     <Flex
       background={background}
-      w="100vh"
+      w="100vw"
       h="100vh"
       alignItems="center"
       justifyContent="space-between"
