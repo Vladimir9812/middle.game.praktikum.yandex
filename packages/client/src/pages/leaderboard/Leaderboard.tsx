@@ -76,7 +76,7 @@ export function LeaderboardPage() {
               player={item.player}
               score={item.score}
               background={index % 2 === 0 ? 'orange' : 'red'}
-              icon={index === 0 ? <Icons.BestPlayer /> : null}
+              icon={index === 0 ? <Icons.BestPlayer /> : undefined}
             />
           ))}
         </Flex>
