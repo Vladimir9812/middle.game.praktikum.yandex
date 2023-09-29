@@ -4,20 +4,27 @@ type Properties = {
   value: string | number;
   width: string;
   placeLetterSpacing: string;
+  marginRight?: string;
 };
-export function LeaderboardItemContent({ value, width, placeLetterSpacing }: Properties) {
+export function LeaderboardItemContent({
+  value,
+  width,
+  placeLetterSpacing,
+  marginRight,
+}: Properties) {
   return (
     <Box
-      h="35px"
+      h="2.1rem"
       background="white"
       borderRadius="5px"
-      boxShadow="10px 5px 10px 2px rgba(0, 0, 0, 0.25)"
+      boxShadow="0.6rem 0.3rem 0.6rem 0.1rem rgba(0, 0, 0, 0.25)"
       display="flex"
       alignItems="center"
       justifyContent="center"
-      padding="4px"
+      padding="1"
       width={width}
       letterSpacing={placeLetterSpacing}
+      marginRight={marginRight}
     >
       {value}
     </Box>

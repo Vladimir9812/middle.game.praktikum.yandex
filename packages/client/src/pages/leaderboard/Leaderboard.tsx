@@ -1,6 +1,6 @@
-import { Flex, Heading, useBreakpointValue } from '@chakra-ui/react';
+import { Box, Flex, Heading, useBreakpointValue } from '@chakra-ui/react';
 
-import { LeaderboardItem } from '@app/components';
+import { Icons, LeaderboardItem } from '@app/components';
 
 const data = [
   {
@@ -37,44 +37,50 @@ const data = [
 
 export function LeaderboardPage() {
   const headingSize = useBreakpointValue({ base: '3xl', md: '4xl', lg: '7xl' });
-  const gapSize = useBreakpointValue({ base: '55px', md: '35px', lg: '55px' });
-  const maxH = useBreakpointValue({ base: '3xl', md: '4xl', lg: '5xl' });
-
   return (
-    <Flex h="100vh" display="flex" align="center" justify="flex-start" direction="column">
-      <Heading as="h1" fontSize={headingSize} marginTop="10" fontWeight="400">
-        Game masters
-      </Heading>
-      <Flex
-        maxW="58.5rem"
-        maxH={maxH}
-        w="100%"
-        // h="100vh" // Высота равна высоте окна (заменено на maxH)
-        borderRadius="15"
-        backgroundColor="lightBlue"
-        pt={9}
-        pb={9}
-        pl={16}
-        pr={16}
-        direction="column"
-        align="center"
-        position="relative"
-        gap={gapSize}
-        overflowY="auto"
-        marginBottom="96px"
-      >
-        <LeaderboardItem place="place" player="player" score="score" background="violet" isHeader />
-        {data.map((item, index) => (
+    <Box display="flex" alignItems="flex-start" height="100vh">
+      <Box margin="0 auto">
+        <Heading as="h1" fontSize={headingSize} marginTop="16" fontWeight="400" ml="16">
+          Game masters
+        </Heading>
+        <Flex
+          marginTop="6"
+          maxW="4xl"
+          maxH="47rem"
+          w="100%"
+          height="100%"
+          borderRadius="15"
+          backgroundColor="lightBlue"
+          pt={9}
+          pb={9}
+          pl={16}
+          pr={16}
+          direction="column"
+          align="center"
+          gap="14"
+          overflowY="auto"
+          justify="center"
+        >
           <LeaderboardItem
-            isHeader={false}
-            key={item.place}
-            place={item.place}
-            player={item.player}
-            score={item.score}
-            background={index % 2 === 0 ? 'orange' : 'red'}
+            place="place"
+            player="player"
+            score="score"
+            background="violet"
+            isHeader
           />
-        ))}
-      </Flex>
-    </Flex>
+          {data.map((item, index) => (
+            <LeaderboardItem
+              isHeader={false}
+              key={item.place}
+              place={item.place}
+              player={item.player}
+              score={item.score}
+              background={index % 2 === 0 ? 'orange' : 'red'}
+              icon={index === 0 ? <Icons.BestPlayer /> : null}
+            />
+          ))}
+        </Flex>
+      </Box>
+    </Box>
   );
 }
