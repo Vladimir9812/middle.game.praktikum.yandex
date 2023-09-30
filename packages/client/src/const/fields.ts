@@ -71,10 +71,7 @@ export const profileFields = fields.filter(
 );
 
 export const editProfileFields = fields.filter(
-  (field) =>
-    field.name !== FieldName.SCORE &&
-    field.name !== FieldName.FULL_NAME &&
-    field.name !== FieldName.LOGIN,
+  (field) => field.name !== FieldName.SCORE && field.name !== FieldName.FULL_NAME,
 );
 
 export type ProfileFields = typeof profileFields;

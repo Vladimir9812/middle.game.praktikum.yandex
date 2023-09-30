@@ -3,11 +3,11 @@ import { createIcon } from '@chakra-ui/icon';
 
 export const UserHandUpIcon = createIcon({
   displayName: 'UserHandUpIcon',
-  viewBox: '0 0 120 100',
+  viewBox: '0 0 800 800',
   defaultProps: {
     fill: 'none',
-    width: '80px',
-    height: '80px',
+    width: '48px',
+    height: '48px',
   },
   path: (
     <>

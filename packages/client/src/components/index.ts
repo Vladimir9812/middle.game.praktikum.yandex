@@ -20,3 +20,4 @@ export { LeaderboardItemContent } from './LeaderboardItemContent/LeaderboardItem
 export { Layout } from './Layout/Layout';
 export { NavigationElement } from './NavigationElement/NavigationElement';
 export { Navigation } from './Navigation/Navigation';
+export { ProfileTableControls } from './ProfileTableControls/ProfileTableControls';

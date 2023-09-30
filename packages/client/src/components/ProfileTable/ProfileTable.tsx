@@ -14,10 +14,18 @@ import {
 } from '@chakra-ui/react';
 import { ChangeEvent, useRef } from 'react';
 
-import { Icons, ProfileItem } from '@app/components';
+import { ProfileItem, ProfileTableControls } from '@app/components';
 import { useAppSelector } from '@app/hooks';
 import { Field, User } from '@app/types';
 import { ProfileFields, staticBaseUrl, FieldName } from '@app/const';
+
+const profileTitleTexts = {
+  title: 'Player',
+  modal: {
+    title: 'Upload avatar file',
+    button: 'Add',
+  },
+};
 
 type Properties = {
   handleEditClick: () => void;
@@ -75,14 +83,13 @@ export function ProfileTable({
 
   return (
     <Flex display="flex" align="center" justify="center" direction="column" height="100vh">
-      <Heading as="h1" fontSize="7xl" mt="16" fontWeight="400">
-        Player
+      <Heading as="h1" fontSize="7xl" marginTop="16" fontWeight="400">
+        {profileTitleTexts.title}
       </Heading>
       <Flex
         maxW="4xl"
         maxH="3xl"
         width="100vw"
-        height="100vh"
         borderRadius="15"
         backgroundColor="lightBlue"
         justify="flex-start"
@@ -92,43 +99,37 @@ export function ProfileTable({
         position="relative"
         mb={24}
       >
-        <Button
-          onClick={handleEditClick}
-          fontSize="xl"
-          position="absolute"
-          top="30"
-          left="50"
-          padding="0"
-        >
-          <Icons.EditIcon />
-        </Button>
-        <Button
-          border="none"
-          padding="0"
-          maxW="19rem"
-          maxH="18rem"
-          w="100%"
-          h="100%"
-          type="button"
-          onClick={onOpen}
-        >
-          <Image w="100%" h="100%" alt="avatar" src={`${staticBaseUrl}/${user?.avatar}`} />
-        </Button>
+        <ProfileTableControls
+          handleEdit={handleEditClick}
+          handleLogout={() => {
+            console.log('logout');
+          }}
+        />
         <Modal finalFocusRef={finalReference} isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Modal Title</ModalHeader>
+            <ModalHeader>{profileTitleTexts.modal.title}</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
               <Input type="file" name="picture" onChange={handleInputChange} />
             </ModalBody>
             <ModalFooter>
               <Button variant="ghost" onClick={handleSubmit}>
-                Добавить
+                {profileTitleTexts.modal.button}
               </Button>
             </ModalFooter>
           </ModalContent>
         </Modal>
+        <Button
+          border="none"
+          padding="0"
+          width="19rem"
+          height="18rem"
+          type="button"
+          onClick={onOpen}
+        >
+          <Image w="100%" h="100%" alt="avatar" src={`${staticBaseUrl}/${user?.avatar}`} />
+        </Button>
         <Flex flexDirection="column" pt="1.6rem">
           {fields.map((element) => createItem(element))}
         </Flex>
