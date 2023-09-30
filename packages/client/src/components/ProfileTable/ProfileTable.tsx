@@ -16,8 +16,8 @@ import { ChangeEvent, useRef } from 'react';
 
 import { Icons, ProfileItem } from '@app/components';
 import { useAppSelector } from '@app/hooks';
-import { FieldName, Field, User } from '@app/types';
-import { ProfileFields, staticBaseUrl } from '@app/const';
+import { Field, User } from '@app/types';
+import { ProfileFields, staticBaseUrl, FieldName } from '@app/const';
 
 type Properties = {
   handleEditClick: () => void;

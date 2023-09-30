@@ -1,4 +1,4 @@
-import { FieldName } from './FieldName';
+import { FieldName } from '@app/const';
 
 export type Field = {
   name: Partial<FieldName>;

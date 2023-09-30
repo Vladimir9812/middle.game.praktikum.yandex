@@ -7,7 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 
 import { useAppDispatch } from '@app/hooks';
-import { ErrorBoundary } from '@app/components';
+import { ErrorBoundary, Layout } from '@app/components';
 import {
   ForumPage,
   GamePage,
@@ -46,11 +46,11 @@ export function App() {
       <BrowserRouter>
         <ErrorBoundary isPage componentName="App">
           <Routes>
-            <Route path="/">
-              <Route index element={<MainPage />} />
-              <Route path="login" element={<LoginPage />} />
-              <Route path="register" element={<RegisterPage />} />
-              <Route path="game" element={<GamePage />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="register" element={<RegisterPage />} />
+            <Route path="game" element={<GamePage />} />
+            <Route index element={<MainPage />} />
+            <Route path="/" element={<Layout />}>
               <Route path="profile" element={<ProfilePage />} />
               <Route path="forum" element={<ForumPage />}>
                 <Route index element={<ForumList />} />

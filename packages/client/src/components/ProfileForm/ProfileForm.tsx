@@ -1,8 +1,8 @@
 import { pick } from 'lodash';
 
 import { Form } from '@app/components';
-import { editProfileSchema, editProfileFields } from '@app/const';
-import { FieldName, User } from '@app/types';
+import { editProfileSchema, editProfileFields, FieldName } from '@app/const';
+import { User } from '@app/types';
 
 const buttonText = 'Save';
 

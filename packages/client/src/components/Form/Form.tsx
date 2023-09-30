@@ -5,7 +5,8 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import Joi, { PartialSchemaMap } from 'joi';
 
 import { FormButton, FormInput } from '@app/components';
-import { Field, FieldName } from '@app/types';
+import { Field } from '@app/types';
+import { FieldName } from '@app/const';
 
 type Properties = {
   inputs: Array<Field>;

@@ -44,7 +44,7 @@ export class BaseApi {
     return response;
   }
 
-  public async post({ route, data }: { route: Url; data: RequestData }) {
+  public async post({ route, data }: { route: Url; data?: RequestData }) {
     try {
       const response = await fetch(
         `${this._baseUrl}/${route}`,

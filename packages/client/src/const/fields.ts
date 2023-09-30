@@ -1,4 +1,6 @@
-import { Field, FieldName } from '@app/types';
+import { Field } from '@app/types';
+
+import { FieldName } from './fieldName';
 
 const fields: Array<Field> = [
   { name: FieldName.SCORE, placeholder: '', label: 'Score' },
