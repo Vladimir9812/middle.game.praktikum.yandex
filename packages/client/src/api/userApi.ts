@@ -7,7 +7,7 @@ const enum UserApiRoutes {
   BASE = 'user',
   PROFILE = 'profile',
   PASSWORD = 'password',
-  AVATAR = 'avatar',
+  AVATAR = 'profile/avatar',
 }
 
 const baseUserApi = new BaseApi(UserApiRoutes.BASE, true);

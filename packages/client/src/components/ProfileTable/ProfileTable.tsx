@@ -89,53 +89,55 @@ export function ProfileTable({
   };
 
   return (
-    <Flex display="flex" align="center" justify="center" direction="column" height="100vh">
-      <Heading as="h1" fontSize="7xl" marginTop="16" fontWeight="400">
-        {profileTitleTexts.title}
-      </Heading>
-      <Flex
-        maxW="4xl"
-        maxH="3xl"
-        width="100vw"
-        borderRadius="15"
-        backgroundColor="lightBlue"
-        justify="flex-start"
-        pt={29}
-        direction="column"
-        align="center"
-        position="relative"
-        mb={24}
-      >
-        <ProfileTableControls handleEdit={handleEditClick} handleLogout={onLogout} />
-        <Modal finalFocusRef={finalReference} isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>{profileTitleTexts.modal.title}</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Input type="file" name="picture" onChange={handleInputChange} />
-            </ModalBody>
-            <ModalFooter>
-              <Button variant="ghost" onClick={handleSubmit}>
-                {profileTitleTexts.modal.button}
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-        <Button
-          border="none"
-          padding="0"
-          width="19rem"
-          height="18rem"
-          type="button"
-          onClick={onOpen}
+    <>
+      <Flex display="flex" align="center" justify="center" direction="column">
+        <Heading as="h1" fontSize="7xl" marginTop="16" fontWeight="400">
+          {profileTitleTexts.title}
+        </Heading>
+        <Flex
+          maxW="4xl"
+          h="3xl"
+          width="100vw"
+          borderRadius="15"
+          backgroundColor="lightBlue"
+          justify="flex-start"
+          pt={29}
+          direction="column"
+          align="center"
+          position="relative"
+          mb={24}
         >
-          <Image w="100%" h="100%" alt="avatar" src={`${staticBaseUrl}/${user?.avatar}`} />
-        </Button>
-        <Flex flexDirection="column" pt="1.6rem">
-          {fields.map((element) => createItem(element))}
+          <ProfileTableControls handleEdit={handleEditClick} handleLogout={onLogout} />
+          <Button
+            border="none"
+            padding="0"
+            width="19rem"
+            height="18rem"
+            type="button"
+            onClick={onOpen}
+          >
+            <Image w="100%" h="100%" alt="avatar" src={`${staticBaseUrl}/${user?.avatar}`} />
+          </Button>
+          <Flex flexDirection="column" pt="1.6rem">
+            {fields.map((element) => createItem(element))}
+          </Flex>
         </Flex>
       </Flex>
-    </Flex>
+      <Modal finalFocusRef={finalReference} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>{profileTitleTexts.modal.title}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Input type="file" name="picture" onChange={handleInputChange} />
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="ghost" onClick={handleSubmit}>
+              {profileTitleTexts.modal.button}
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 }

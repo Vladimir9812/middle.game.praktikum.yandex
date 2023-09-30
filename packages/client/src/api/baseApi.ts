@@ -31,7 +31,7 @@ export class BaseApi {
   private getFetchOptions = (method: Method, data?: RequestData) => ({
     method,
     credentials: this.credentials,
-    headers: jsonHeader,
+    headers: data instanceof FormData ? undefined : jsonHeader,
     body: data && data instanceof FormData ? data : data ? JSON.stringify(data) : undefined,
   });
 
