@@ -4,7 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 import { User } from '@app/types';
 
-import { changeAvatar, changeProfile, getUser, signin } from './UserActionCreators';
+import { changeAvatar, changeProfile, getUser, signin, signup, logout } from './UserActionCreators';
 
 interface UserState {
   user: User | undefined;
@@ -36,6 +36,18 @@ export const userSlice = createSlice({
         state.error = action.error.message;
       })
 
+      .addCase(logout.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.isLoading = false;
+        state.user = undefined;
+      })
+      .addCase(logout.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+
       .addCase(signin.pending, (state) => {
         state.isLoading = true;
       })
@@ -43,6 +55,17 @@ export const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(signin.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.error.message;
+      })
+
+      .addCase(signup.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(signup.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(signup.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message;
       })

@@ -1,3 +1,5 @@
+import { LoginData, SignUpData } from '@app/types';
+
 import { BaseApi } from './baseApi';
 
 const enum AuthApiRoutes {
@@ -7,20 +9,6 @@ const enum AuthApiRoutes {
   USER = 'user',
   LOGOUT = 'logout',
 }
-
-type LoginData = {
-  login: string;
-  password: string;
-};
-
-type SignUpData = {
-  first_name: string;
-  second_name: string;
-  login: string;
-  email: string;
-  password: string;
-  phone: string;
-};
 
 const baseUserApi = new BaseApi(AuthApiRoutes.BASE, true);
 

@@ -15,9 +15,10 @@ import {
 import { ChangeEvent, useRef } from 'react';
 
 import { ProfileItem, ProfileTableControls } from '@app/components';
-import { useAppSelector } from '@app/hooks';
+import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { Field, User } from '@app/types';
 import { ProfileFields, staticBaseUrl, FieldName } from '@app/const';
+import { logout } from '@app/store';
 
 const profileTitleTexts = {
   title: 'Player',
@@ -36,6 +37,7 @@ type Properties = {
   onClose: () => void;
   fields: ProfileFields;
 };
+
 export function ProfileTable({
   handleEditClick,
   handleInputChange,
@@ -47,6 +49,11 @@ export function ProfileTable({
 }: Properties) {
   const { user } = useAppSelector((state) => state.user);
   const finalReference = useRef(null);
+  const dispatch = useAppDispatch();
+  const onLogout = () => {
+    dispatch(logout());
+  };
+
   const createItem = (field: Field) => {
     if (field.name === FieldName.FULL_NAME) {
       return (
@@ -99,12 +106,7 @@ export function ProfileTable({
         position="relative"
         mb={24}
       >
-        <ProfileTableControls
-          handleEdit={handleEditClick}
-          handleLogout={() => {
-            console.log('logout');
-          }}
-        />
+        <ProfileTableControls handleEdit={handleEditClick} handleLogout={onLogout} />
         <Modal finalFocusRef={finalReference} isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>

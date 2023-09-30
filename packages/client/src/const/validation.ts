@@ -159,6 +159,7 @@ export const editProfileSchema = pick(profileSchema, [
   FieldName.PHONE,
   FieldName.PASSWORD_REPEAT,
   FieldName.PASSWORD_OLD,
+  FieldName.LOGIN,
 ]);
 
 export const loginSchema = pick(profileSchema, [[FieldName.LOGIN], [FieldName.PASSWORD]]);

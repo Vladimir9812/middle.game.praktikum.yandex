@@ -20,7 +20,7 @@ import {
   ServiceUnavailable,
   GameOverPage,
 } from '@app/pages';
-import { getUser, signin } from '@app/store';
+import { getUser } from '@app/store';
 
 import { theme } from './chakraTheme';
 import { ForumList } from './pages/forum/components/ForumList';
@@ -36,7 +36,6 @@ export function App() {
     }
     initialDataFetch.current = true;
     (async () => {
-      dispatch(signin());
       dispatch(getUser());
     })();
   }, []);

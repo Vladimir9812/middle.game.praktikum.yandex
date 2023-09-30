@@ -4,7 +4,7 @@ import { Icons, Modal } from '@app/components';
 
 type Properties = {
   handleEdit: () => void;
-  handleLogout?: () => void;
+  handleLogout: () => void;
 };
 
 const profileControlsText = {
@@ -38,7 +38,13 @@ export function ProfileTableControls({ handleEdit, handleLogout }: Properties) {
         size="xl"
         body={
           <Center pt={4} pb={5} gap={5}>
-            <Button colorScheme="red" onClick={handleLogout}>
+            <Button
+              colorScheme="red"
+              onClick={() => {
+                handleLogout();
+                onClose();
+              }}
+            >
               Logout
             </Button>
             <Button colorScheme="green" onClick={onClose}>
