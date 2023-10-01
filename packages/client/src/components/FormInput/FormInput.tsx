@@ -17,7 +17,7 @@ type Properties = {
 };
 
 export const FormInput = forwardRef((properties: Properties, reference) => {
-  const { placeholder = '', errorMessage = '', mb, width, value, name, onChange } = properties;
+  const { placeholder = '', errorMessage = '', mb, width, value, id, onChange } = properties;
   const inputProperties = omit(properties, ['errorMessage']);
   return (
     <Box mb={mb}>
@@ -36,7 +36,7 @@ export const FormInput = forwardRef((properties: Properties, reference) => {
         textAlign="center"
         onChange={onChange}
         value={value}
-        id={name}
+        id={id}
         _hover={{
           background: 'white',
         }}

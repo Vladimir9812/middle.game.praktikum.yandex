@@ -1,8 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Flex, FormControl, FormLabel } from '@chakra-ui/react';
-import { FieldValues, useForm } from 'react-hook-form';
+import { FieldError, FieldValues, useForm, UseFormRegister } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi, { PartialSchemaMap } from 'joi';
+import { v4 as makeUUID } from 'uuid';
 
 import { FormButton, FormInput } from '@app/components';
 import { Field } from '@app/types';
@@ -13,10 +14,44 @@ type Properties = {
   buttonText: string;
   mb: number;
   validationSchema: PartialSchemaMap<any>;
-  onSubmit?: (values: FieldValues) => void;
+  onSubmit: (values: FieldValues) => void;
   initialValues?: Record<Partial<FieldName>, string>;
   withLabel?: boolean;
 };
+
+type GetFormInputProperties = {
+  name: FieldName;
+  id: string;
+  type?: string;
+  placeholder: string;
+  isInvalid: boolean;
+  error?: FieldError;
+  register: UseFormRegister<Record<Partial<FieldName>, string>>;
+  mb: number;
+};
+
+const getFormInput = ({
+  name,
+  id,
+  type,
+  placeholder,
+  isInvalid,
+  error,
+  register,
+  mb,
+}: GetFormInputProperties) => (
+  <FormInput
+    {...register(name)}
+    mb={mb}
+    key={name}
+    name={name}
+    id={id}
+    type={type}
+    placeholder={placeholder}
+    isInvalid={isInvalid}
+    errorMessage={error?.message?.toString()}
+  />
+);
 
 export function Form({
   inputs,
@@ -24,9 +59,7 @@ export function Form({
   mb,
   validationSchema,
   initialValues,
-  onSubmit = (values: FieldValues) => {
-    console.log(values);
-  },
+  onSubmit,
   withLabel = false,
 }: Properties) {
   const {
@@ -51,35 +84,18 @@ export function Form({
     >
       {inputs.map((input: Field) => {
         const { name, placeholder, type, label } = input;
+        const error = errors[name];
+        const isInvalid = !!error;
+        const id = makeUUID();
         if (withLabel) {
           return (
-            <Flex alignItems="center" gap={5} w="70%" justifyContent="space-between" key={name}>
-              <FormLabel htmlFor={name}>{label}</FormLabel>
-              <FormInput
-                {...register(name)}
-                mb={mb}
-                key={name}
-                name={name}
-                type={type}
-                placeholder={placeholder}
-                isInvalid={!!errors[`${name}`]}
-                errorMessage={errors[`${name}`]?.message?.toString()}
-              />
+            <Flex alignItems="center" gap={5} w="70%" justifyContent="space-between" key={id}>
+              <FormLabel htmlFor={id}>{label}</FormLabel>
+              {getFormInput({ name, id, type, placeholder, isInvalid, error, register, mb })}
             </Flex>
           );
         }
-        return (
-          <FormInput
-            {...register(name)}
-            mb={mb}
-            key={name}
-            name={name}
-            type={type}
-            placeholder={placeholder}
-            isInvalid={!!errors[`${name}`]}
-            errorMessage={errors[`${name}`]?.message?.toString()}
-          />
-        );
+        return getFormInput({ name, id, type, placeholder, isInvalid, error, register, mb });
       })}
       <FormButton isDisabled={!isValid} label={buttonText.toUpperCase()} />
     </FormControl>

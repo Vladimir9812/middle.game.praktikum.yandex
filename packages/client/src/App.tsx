@@ -35,9 +35,7 @@ export function App() {
       return;
     }
     initialDataFetch.current = true;
-    (async () => {
-      dispatch(getUser());
-    })();
+    dispatch(getUser());
   }, []);
 
   return (
