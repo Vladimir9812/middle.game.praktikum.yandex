@@ -3,7 +3,7 @@ import { AbstractEntity } from '../AbstractEntity/AbstractEntity';
 export class EntityService {
   private static _instance: EntityService;
 
-  public readonly entities: AbstractEntity[] = [];
+  public readonly entities: AbstractEntity[];
 
   private constructor() {
     this.entities = [];
