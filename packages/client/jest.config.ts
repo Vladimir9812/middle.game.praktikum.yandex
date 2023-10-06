@@ -1,15 +1,24 @@
 import type { Config } from 'jest';
-// import { pathsToModuleNameMapper } from "ts-jest";
-// import { compilerOptions } from "./tsconfig.json";
-const jestConfig: Config = {
-  // moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
-  preset: 'ts-jest',
-  // moduleDirectories: ["<rootDir>"],
+
+const config: Config = {
+  coveragePathIgnorePatterns: ['/node_modules/'],
+  coverageProvider: 'babel',
+  collectCoverage: false,
+  maxWorkers: '50%',
+  verbose: true,
+  testEnvironment: 'jest-environment-jsdom',
+  testMatch: ['<rootDir>/src/**/*.test.{ts,tsx}'],
   moduleNameMapper: {
-    // "/^@app\/components$/": "components"
-    '^@/(.*)$': '<rootDir>/src/$1',
+    '^@app/(.*)$': '<rootDir>/src/$1',
+    '\\.(css|less)$': '<rootDir>/jestMock.js',
+    '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
+      '<rootDir>/jestMock.js',
   },
-  resolver: undefined,
+  transformIgnorePatterns: [
+    '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$',
+    '^.+\\.module\\.(css|sass|scss)$',
+  ],
+  modulePaths: [],
 };
 
-export default jestConfig;
+export default config;
