@@ -33,6 +33,7 @@
       "@app/engine": ["engine"]
     }
   },
-  "include": ["src/**/*", "public/**/*"],
+  "types": ["@types/jest"],
+  "include": ["src/**/*", "jest.config.ts", "public/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
