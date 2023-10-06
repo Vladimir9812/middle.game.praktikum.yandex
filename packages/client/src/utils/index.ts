@@ -1,2 +1,3 @@
 export { dateFormat } from './dateFormatter';
-export { BACKGROUND_CONST } from './textConstants';
+export { startServiceWorker } from './startServiceWorker';
+export { BACKGROUND_CONST, BASE_URL } from './textConstants';
