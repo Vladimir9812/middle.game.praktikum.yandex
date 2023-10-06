@@ -26,6 +26,17 @@ export default defineConfig(({ command, mode }) => {
     ],
     build: {
       assetsDir: 'src',
+      rollupOptions: {
+        output: {
+          assetFileNames: (file) => {
+            const isImage = /\.(png|jpe?g|svg|gif|tiff|bmp|ico)$/i.test(file.name);
+            if (isImage) {
+              return 'src/[name].[ext]';
+            }
+            return 'src/[name].[hash].[extname]';
+          },
+        },
+      },
     },
     server: {
       port: Number(process.env.CLIENT_PORT) || 3000,

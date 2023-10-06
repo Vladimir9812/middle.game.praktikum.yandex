@@ -1,6 +1,14 @@
 const CACHE_NAME = 'cache-name-v1';
 
-const URLS = ['/'];
+const URLS = [
+  '/',
+  '/src/Apple.png',
+  '/src/images/avatar.png',
+  '/src/images/game_over.png',
+  '/src/images/logo_login.png',
+  '/src/images/logo.png',
+  '/src/images/robot.png',
+];
 
 function timeout(delay) {
   return new Promise(function (resolve, reject) {
