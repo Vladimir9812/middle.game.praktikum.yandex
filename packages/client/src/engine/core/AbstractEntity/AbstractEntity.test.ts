@@ -14,17 +14,17 @@ class TestEntity extends AbstractEntity {
 
 describe('AbstractEntity', () => {
   it('should create an instance of AbstractEntity', () => {
-    const entity = new TestEntity();
-    expect(entity).toBeInstanceOf(TestEntity);
+    const testEntity = new TestEntity();
+    expect(testEntity).toBeInstanceOf(TestEntity);
   });
 
   it('should update position correctly', () => {
-    const entity = new TestEntity();
+    const testEntity2 = new TestEntity();
 
     const moveDirection = new Vector(5, 5);
-    entity.move(moveDirection);
+    testEntity2.move(moveDirection);
 
-    expect(entity.position.x).toBe(5);
-    expect(entity.position.y).toBe(5);
+    expect(testEntity2.position.x).toBe(5);
+    expect(testEntity2.position.y).toBe(5);
   });
 });

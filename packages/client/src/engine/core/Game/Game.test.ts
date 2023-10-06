@@ -16,12 +16,10 @@ describe('Game', () => {
   let animationFrameMock: jest.SpyInstance<number, [FrameRequestCallback]>;
 
   beforeEach(() => {
-    // Создаем экземпляр игры и мокаем функцию requestAnimationFrame
     game = new Game(document.createElement('canvas'), MockScene);
     let animationFrameCount = 0;
     animationFrameMock = jest.spyOn(window, 'requestAnimationFrame').mockImplementation(() => {
       if (animationFrameCount === 0) {
-        performance.now();
         animationFrameCount = 1;
       }
       return 0;
