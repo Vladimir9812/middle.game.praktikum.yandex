@@ -14,7 +14,7 @@ export function NavigationElement({ Icon, path }: NavigationElementProperties) {
   return (
     <ListItem
       key={path}
-      borderColor={`${isCurrentLocation ? 'orange' : 'transparent'}`}
+      borderColor={`${isCurrentLocation ? 'lightRed' : 'transparent'}`}
       className={styles.container}
     >
       <Link to={path}>

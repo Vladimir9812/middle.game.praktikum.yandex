@@ -1,4 +1,4 @@
-import { Button, Flex, Heading } from '@chakra-ui/react';
+import { Button, Flex, Heading, useBreakpointValue } from '@chakra-ui/react';
 
 import { ProfileForm, Icons } from '@app/components';
 import { useAppSelector } from '@app/hooks';
@@ -16,13 +16,12 @@ export function EditProfile({ handleSaveClick }: Properties) {
   const headingSize = useBreakpointValue({ base: '4xl', md: '6xl', lg: '7xl' });
   return (
     <Flex display="flex" align="center" justify="center" direction="column">
-      <Heading as="h1" fontSize={headingSize}  mt="16" fontWeight="400">
+      <Heading as="h1" fontSize={headingSize} mt="16" fontWeight="400">
         {editProfileText.title}
       </Heading>
       <Flex
-        maxW="4xl"
-        maxH="3xl"
-        width="100vh"
+        w="4xl"
+        h="3xl"
         borderRadius="15"
         backgroundColor="lightBlue"
         justify="center"
@@ -30,7 +29,6 @@ export function EditProfile({ handleSaveClick }: Properties) {
         direction="column"
         align="center"
         position="relative"
-        mb={24}
       >
         <Button
           onClick={handleSaveClick}

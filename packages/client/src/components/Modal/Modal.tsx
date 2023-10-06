@@ -17,7 +17,7 @@ type ModalProperties = {
   size: string;
   body: string | ReactNode;
   title: string | ReactNode;
-  isCentered: boolean;
+  isCentered?: boolean;
   bg?: string;
 };
 
