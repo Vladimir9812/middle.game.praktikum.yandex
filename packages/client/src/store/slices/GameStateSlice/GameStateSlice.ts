@@ -14,9 +14,8 @@ export const gameStateSlice = createSlice({
   name: 'gameSate',
   initialState,
   reducers: {
-    setGameState(state, action: PayloadAction<GameState>) {
-      // eslint-disable-next-line no-param-reassign
-      state.gameSate = action.payload;
+    setGameState(_state, action: PayloadAction<GameState>) {
+      return { gameSate: action.payload };
     },
   },
 });

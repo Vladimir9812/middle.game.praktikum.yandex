@@ -12,9 +12,8 @@ export const scoreSlice = createSlice({
   name: 'score',
   initialState,
   reducers: {
-    setScore(state, action: PayloadAction<number>) {
-      // eslint-disable-next-line no-param-reassign
-      state.score = action.payload;
+    setScore(_state, action: PayloadAction<number>) {
+      return { score: action.payload };
     },
   },
 });
