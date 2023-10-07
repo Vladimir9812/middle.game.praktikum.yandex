@@ -1,4 +1,7 @@
 import { AbstractEntity } from '../AbstractEntity/AbstractEntity';
+// import { SampleEntity } from '../../entities/SampleEntity/SampleEntity';
+
+import { EntitiesMapItem } from './types';
 
 import { EntitiesMapItem } from './types';
 
