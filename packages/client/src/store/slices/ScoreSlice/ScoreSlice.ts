@@ -18,3 +18,8 @@ export const scoreSlice = createSlice({
     },
   },
 });
+
+const { actions, reducer } = scoreSlice;
+
+export const scoreActions = actions;
+export default reducer;
