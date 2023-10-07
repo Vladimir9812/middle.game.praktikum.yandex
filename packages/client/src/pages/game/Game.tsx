@@ -1,6 +1,6 @@
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Heading, Text } from '@chakra-ui/react';
 
-import { EngineCanvas, FormButton } from '@app/components';
+import { EngineCanvas } from '@app/components';
 import { GameState } from '@app/types';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { gameStateActions } from '@app/store';
@@ -24,7 +24,9 @@ function GameNotStartedPageView() {
       <Box display="flex" alignItems="center" flexDirection="column" gap="40">
         <Heading>Ready?</Heading>
         <Text fontSize="2xl">Your highest score: {score.score}</Text>
-        <FormButton label="Play" onClick={onPlayClick} />
+        <Button onClick={onPlayClick} size="lg" colorScheme="red">
+          Play
+        </Button>
       </Box>
     </Box>
   );
@@ -45,7 +47,9 @@ function GameStaredPageView() {
       gap="10"
     >
       <EngineCanvas />
-      <FormButton label="Stop" onClick={onStopClick} />
+      <Button onClick={onStopClick} size="lg" colorScheme="red">
+        Stop
+      </Button>
     </Box>
   );
 }
@@ -71,7 +75,9 @@ function GameStoppedPageView() {
         <Heading>Your current score: {score.score}</Heading>
         <Text>Your highest score: {score.score}</Text>
       </Box>
-      <FormButton label="Play Again" onClick={onPlayAgainClick} />
+      <Button onClick={onPlayAgainClick} size="lg" colorScheme="red">
+        Play Again
+      </Button>
     </Box>
   );
 }
