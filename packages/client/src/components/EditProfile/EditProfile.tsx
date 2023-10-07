@@ -1,25 +1,23 @@
-import { Button, Flex, Heading } from '@chakra-ui/react';
-import { Dispatch, SetStateAction } from 'react';
+import { Button, Flex, Heading, useBreakpointValue } from '@chakra-ui/react';
 
-import { EditProfileForm, Icons, TField } from '@app/components';
+import { ProfileForm, Icons } from '@app/components';
+import { useAppSelector } from '@app/hooks';
 
 type Properties = {
   handleSaveClick: () => void;
-  setIsEditing: Dispatch<SetStateAction<boolean>>;
-  fields: TField[];
-  passwordInputs: TField[];
 };
 
-export function EditProfileContent({
-  handleSaveClick,
-  setIsEditing,
-  fields,
-  passwordInputs,
-}: Properties) {
+const editProfileText = {
+  title: 'Edit profile',
+};
+
+export function EditProfile({ handleSaveClick }: Properties) {
+  const { user } = useAppSelector((state) => state.user);
+  const headingSize = useBreakpointValue({ base: '4xl', md: '6xl', lg: '7xl' });
   return (
     <Flex display="flex" align="center" justify="center" direction="column">
-      <Heading as="h1" fontSize="4.5rem" mt="4.1rem" fontWeight="400">
-        Edit profile
+      <Heading as="h1" fontSize={headingSize} mt="16" fontWeight="400">
+        {editProfileText.title}
       </Heading>
       <Flex
         w="4xl"
@@ -41,13 +39,9 @@ export function EditProfileContent({
           left="50"
           padding="0"
         >
-          <Icons.GoBack />
+          <Icons.GoBackProfileIcon />
         </Button>
-        <EditProfileForm
-          setIsEditing={setIsEditing}
-          fields={fields}
-          passwordInputs={passwordInputs}
-        />
+        <ProfileForm user={user} goToProfileTable={handleSaveClick} />
       </Flex>
     </Flex>
   );

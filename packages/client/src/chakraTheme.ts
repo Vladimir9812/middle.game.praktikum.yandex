@@ -24,6 +24,10 @@ export const theme = extendTheme({
     lightBlue: '#CBFDFD',
     blue: '#4299E1',
     coral: '#FE6060',
+    lightRed: '#E53E3E',
+    violet: '#3E1972',
+    orange: '#FEBE60',
+    white: '#FFF',
   },
   sizes: {
     '1.5xl': '39rem',
