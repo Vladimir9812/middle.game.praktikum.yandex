@@ -12,16 +12,18 @@ class MockScene extends AbstractScene {
 }
 
 describe('Game', () => {
-  let game: Game;
+  let game: undefined | Game;
   let animationFrameMock: jest.SpyInstance<number, [FrameRequestCallback]>;
 
   beforeEach(() => {
     game = new Game(document.createElement('canvas'), MockScene);
     let animationFrameCount = 0;
+
     animationFrameMock = jest.spyOn(window, 'requestAnimationFrame').mockImplementation(() => {
       if (animationFrameCount === 0) {
         animationFrameCount = 1;
       }
+
       return 0;
     });
   });
@@ -29,24 +31,30 @@ describe('Game', () => {
   afterEach(() => {
     jest.restoreAllMocks();
     animationFrameMock.mockRestore();
+    game = undefined;
   });
 
-  it('should create an instance of Game', () => {
+  it('create an instance of Game', () => {
     expect(game).toBeInstanceOf(Game);
   });
 
-  it('should stop the game loop', () => {
-    game.start();
-    game.stop();
+  it('stop the game loop', () => {
+    game?.start();
+    game?.stop();
+
     expect(animationFrameMock).toHaveBeenCalledTimes(1);
   });
 
-  it('should call render method', () => {
+  it('call render method', () => {
     let renderCalled = false;
-    game.render = () => {
-      renderCalled = true;
-    };
-    game.start();
+
+    if (game) {
+      game.render = () => {
+        renderCalled = true;
+      };
+      game.start();
+    }
+
     expect(renderCalled).toBe(true);
   });
 });

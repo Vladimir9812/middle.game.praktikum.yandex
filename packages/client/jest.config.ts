@@ -1,6 +1,7 @@
 import type { Config } from 'jest';
 
 const config: Config = {
+  preset: 'ts-jest',
   coveragePathIgnorePatterns: ['/node_modules/'],
   coverageProvider: 'babel',
   collectCoverage: false,

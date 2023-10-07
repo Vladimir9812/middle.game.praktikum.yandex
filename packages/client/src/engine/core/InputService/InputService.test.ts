@@ -5,18 +5,29 @@ enum KeyCode {
 }
 
 describe('InputService', () => {
-  it('should create an instance of InputService', () => {
+  it('create an instance of InputService', () => {
     const inputService = InputService.getInstance();
+
     expect(inputService).toBeInstanceOf(InputService);
   });
 
-  it('should toggle input key state correctly', () => {
-    const inputService = InputService.getInstance();
-    const keyCode = KeyCode.KeyA;
+  describe('should toggle input key state correctly', () => {
+    it('toggle input key state to true', () => {
+      const inputService = InputService.getInstance();
+      const keyCode = KeyCode.KeyA;
 
-    inputService.toggleInputKeyState(keyCode);
-    expect(inputService.getInputKeyState(keyCode)).toBe(true);
-    inputService.toggleInputKeyState(keyCode);
-    expect(inputService.getInputKeyState(keyCode)).toBe(false);
+      inputService.toggleInputKeyState(keyCode);
+
+      expect(inputService.getInputKeyState(keyCode)).toBe(true);
+    });
+
+    it('toggle input key state to false', () => {
+      const inputService = InputService.getInstance();
+      const keyCode = KeyCode.KeyA;
+
+      inputService.toggleInputKeyState(keyCode);
+
+      expect(inputService.getInputKeyState(keyCode)).toBe(false);
+    });
   });
 });
