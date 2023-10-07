@@ -3,11 +3,11 @@ import './App.css';
 import { ChakraProvider } from '@chakra-ui/react';
 import '@fontsource/ubuntu-mono/cyrillic.css';
 import '@fontsource/ubuntu-mono/latin.css';
-import { useEffect, useRef } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 
-import { ErrorBoundary, Layout } from '@app/components';
 import { useAppDispatch } from '@app/hooks';
+import { ErrorBoundary, Layout } from '@app/components';
 import {
   ForumPage,
   GameOverPage,
