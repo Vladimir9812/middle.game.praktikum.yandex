@@ -1,14 +1,32 @@
 const CACHE_NAME = 'cache-name-v1';
 
-const URLS = [
+const urlsForDev = [
+  '/',
+  '/src/assets/Apple.png',
+  '/src/assets/images/avatar.png',
+  '/src/assets/images/game_over.png',
+  '/src/assets/images/logo_login.png',
+  '/src/assets/images/logo.png',
+  '/src/assets/images/robot.png',
+];
+
+const urlsForProd = [
   '/',
   '/src/Apple.png',
-  '/src/images/avatar.png',
-  '/src/images/game_over.png',
-  '/src/images/logo_login.png',
-  '/src/images/logo.png',
-  '/src/images/robot.png',
+  '/src/avatar.png',
+  '/src/game_over.png',
+  '/src/logo_login.png',
+  '/src/logo.png',
+  '/src/robot.png',
 ];
+
+let URLS;
+
+if (import.meta.env.PROD) {
+  URLS = urlsForProd;
+} else {
+  URLS = urlsForDev;
+}
 
 function timeout(delay) {
   return new Promise(function (resolve, reject) {
@@ -29,7 +47,6 @@ self.addEventListener('install', (event) => {
   event
     .waitUntil(
       caches.open(CACHE_NAME).then((cache) => {
-        cache.addAll(URLS); //загрузка тяжелых данных (дополнительные данные)
         return cache.addAll(URLS); //вернет важные данные в метод waitUntil (необходимые данные)
       }),
     )
