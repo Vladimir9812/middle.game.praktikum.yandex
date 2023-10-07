@@ -2,7 +2,7 @@ import { Box, Button, Heading, Text } from '@chakra-ui/react';
 
 import { EngineCanvas } from '@app/components';
 import { GameState } from '@app/types';
-import { useAppDispatch, useAppSelector } from '@app/hooks';
+import { useAppDispatch, useAppSelector, useProtectedRoute } from '@app/hooks';
 import { gameStateActions } from '@app/store';
 
 function GameNotStartedPageView() {
@@ -89,6 +89,7 @@ const PageView = {
 };
 
 export function GamePage() {
+  useProtectedRoute();
   const gameState = useAppSelector((state) => state.gameState);
   return PageView[gameState.gameSate];
 }

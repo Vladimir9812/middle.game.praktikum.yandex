@@ -2,8 +2,10 @@ import { Container, Flex } from '@chakra-ui/react';
 import { Outlet } from 'react-router-dom';
 
 import { BACKGROUND_CONST } from '@app/utils';
+import { useProtectedRoute } from '@app/hooks';
 
 export function ForumPage() {
+  useProtectedRoute();
   return (
     <Container maxW="container.lg" bg="transparent" color="#262626" h="100vh" pt="5vh" pb="5vh">
       <Flex

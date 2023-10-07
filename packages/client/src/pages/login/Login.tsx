@@ -2,10 +2,12 @@ import { Box, Center, Container, Flex, Heading, Image } from '@chakra-ui/react';
 
 import { LoginForm, Link } from '@app/components';
 import { Routes, TEXT } from '@app/const';
+import { useProtectedRoute } from '@app/hooks';
 
 import logo from '../../assets/images/logo_login.jpg';
 
 export function LoginPage() {
+  useProtectedRoute();
   return (
     <Container pb={6} maxW="1800px">
       <Center flexDirection="column">

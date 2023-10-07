@@ -3,10 +3,13 @@ import { Box, Button, Center } from '@chakra-ui/react';
 import { BACKGROUND_CONST } from '@app/utils';
 import { Icons, Link } from '@app/components';
 import { Routes, TEXT } from '@app/const';
+import { useProtectedRoute } from '@app/hooks';
 
 import styles from './Main.module.css';
 
 export function MainPage() {
+  useProtectedRoute();
+
   return (
     <Center h="100vh">
       <Box bg={BACKGROUND_CONST} as="nav" borderRadius="8px" w="50%">

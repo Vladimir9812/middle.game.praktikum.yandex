@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useDisclosure } from '@chakra-ui/react';
 
-import { useAppDispatch } from '@app/hooks';
+import { useAppDispatch, useProtectedRoute } from '@app/hooks';
 import { ProfileTable, EditProfile } from '@app/components';
 import { changeAvatar } from '@app/store';
 import { profileFields } from '@app/const';
 
 export function ProfilePage() {
+  useProtectedRoute();
   const dispatch = useAppDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isEditing, setIsEditing] = useState(false);

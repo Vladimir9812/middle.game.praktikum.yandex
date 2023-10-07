@@ -1,6 +1,7 @@
 import { Box, Flex, Heading, useBreakpointValue } from '@chakra-ui/react';
 
 import { Icons, LeaderboardItem } from '@app/components';
+import { useProtectedRoute } from '@app/hooks';
 
 const data = [
   {
@@ -36,6 +37,7 @@ const data = [
 ];
 
 export function LeaderboardPage() {
+  useProtectedRoute();
   const headingSize = useBreakpointValue({ base: '3xl', md: '4xl', lg: '7xl' });
   return (
     <Box display="flex" alignItems="flex-start" height="100vh">
