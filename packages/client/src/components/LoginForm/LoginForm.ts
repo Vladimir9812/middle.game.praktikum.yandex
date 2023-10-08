@@ -12,9 +12,9 @@ const buttonText = 'Enter';
 export function LoginForm() {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const onSubmit = (data: FieldValues) => {
-    dispatch(signin(data as LoginData));
-    dispatch(getUser());
+  const onSubmit = async (data: FieldValues) => {
+    await dispatch(signin(data as LoginData));
+    await dispatch(getUser());
     navigate(Routes.ROOT);
   };
   return Form({ inputs: loginFields, buttonText, mb: 5, validationSchema: loginSchema, onSubmit });
