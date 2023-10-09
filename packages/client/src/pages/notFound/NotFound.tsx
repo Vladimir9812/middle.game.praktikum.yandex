@@ -1,7 +1,6 @@
 import { Box, Button, Center, Flex, Heading, Image, Text } from '@chakra-ui/react';
 
 import { Icons, Link } from '@app/components';
-import { useProtectedRoute } from '@app/hooks';
 
 import Robot from '../../assets/images/robot.png';
 
@@ -10,7 +9,6 @@ import styles from './NotFound.module.css';
 const GO_HOME_TEMPLATE = 'Go home';
 
 export function NotFoundPage() {
-  useProtectedRoute();
   return (
     <Center h="100vh">
       <Flex flexDirection="column" alignItems="center">

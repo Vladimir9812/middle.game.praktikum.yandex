@@ -3,12 +3,10 @@ import { useState } from 'react';
 
 import { Routes, TEXT } from '@app/const';
 import { ErrorBoundary, Link, SignUpForm } from '@app/components';
-import { useProtectedRoute } from '@app/hooks';
 
 import logo from '../../assets/images/logo.jpg';
 
 export function RegisterPage() {
-  useProtectedRoute();
   const [imageLoadError, setImageLoadError] = useState(false);
 
   return (

@@ -2,14 +2,12 @@ import { Button, Center, Flex, Image, Box, Heading } from '@chakra-ui/react';
 
 import { Icons, Link } from '@app/components';
 import { Routes, TEXT } from '@app/const';
-import { useProtectedRoute } from '@app/hooks';
 
 import GameOver from '../../assets/images/game_over.png';
 
 import styles from './GameOver.module.css';
 
 export function GameOverPage() {
-  useProtectedRoute();
   return (
     <Center height="100vh">
       <Flex flexDirection="column" alignItems="center" gap="32px">
