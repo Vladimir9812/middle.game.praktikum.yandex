@@ -9,6 +9,8 @@ class MockScene extends AbstractScene {
   public render() {}
 
   public update() {}
+
+  public onDestroy() {}
 }
 
 describe('Game', () => {
@@ -16,7 +18,6 @@ describe('Game', () => {
   let animationFrameMock: jest.SpyInstance<number, [FrameRequestCallback]>;
 
   beforeEach(() => {
-    game = new Game(document.createElement('canvas'), MockScene);
     let animationFrameCount = 0;
 
     animationFrameMock = jest.spyOn(window, 'requestAnimationFrame').mockImplementation(() => {
@@ -35,10 +36,14 @@ describe('Game', () => {
   });
 
   it('create an instance of Game', () => {
+    game = new Game(document.createElement('canvas'), MockScene);
+
     expect(game).toBeInstanceOf(Game);
   });
 
   it('stop the game loop', () => {
+    game = new Game(document.createElement('canvas'), MockScene);
+
     game?.start();
     game?.stop();
 
@@ -47,6 +52,7 @@ describe('Game', () => {
 
   it('call render method', () => {
     let renderCalled = false;
+    game = new Game(document.createElement('canvas'), MockScene);
 
     if (game) {
       game.render = () => {
