@@ -60,7 +60,6 @@ export function App() {
                 <Route path={RouteNames.GAME} element={<GamePage />} />
                 <Route index element={<MainPage />} />
                 <Route path={RouteNames.SERVICE_UNAVAILABLE} element={<ServiceUnavailable />} />
-                <Route path="*" element={<NotFoundPage />} />
                 <Route path={RouteNames.ROOT} element={<Layout />}>
                   <Route path={RouteNames.PROFILE} element={<ProfilePage />} />
                   <Route path={RouteNames.FORUM} element={<ForumPage />}>
@@ -71,6 +70,7 @@ export function App() {
                   <Route path={RouteNames.GAME_OVER} element={<GameOverPage />} />
                 </Route>
               </Route>
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
           )}
         </ErrorBoundary>

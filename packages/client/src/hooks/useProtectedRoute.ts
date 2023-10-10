@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useMemo } from 'react';
 
-import { notAuthRoutes, protectedRoutes, Routes } from '../const/routes';
+import { protectedRoutes, Routes } from '../const/routes';
 
 import { useAppSelector } from './redux';
 
@@ -20,12 +20,11 @@ export const useProtectedRoute = () => {
   const isLoginPage = pathname === Routes.LOGIN;
   const isMainPage = pathname === Routes.ROOT;
   const isProtectedRouteLocation = protectedRoutes.includes(pathname as Routes);
-  const isNotAuthRouteLocation = notAuthRoutes.includes(pathname as Routes);
   if (auth && !isProtectedRouteLocation && !isMainPage) {
     redirect.to = Routes.ROOT;
     redirect.shouldRedirect = true;
   }
-  if (!auth && !isNotAuthRouteLocation && !isLoginPage) {
+  if (!auth && isProtectedRouteLocation && !isLoginPage) {
     redirect.to = Routes.LOGIN;
     redirect.shouldRedirect = true;
   }

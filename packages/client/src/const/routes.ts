@@ -20,5 +20,3 @@ export const protectedRoutes = [
   Routes.GAME_OVER,
   Routes.SERVICE_UNAVAILABLE,
 ];
-
-export const notAuthRoutes = [Routes.LOGIN, Routes.REGISTER];
