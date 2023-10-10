@@ -9,7 +9,7 @@ export const useProtectedRoute = () => {
   const { user } = useAppSelector((state) => state.user);
   const auth = !!user;
   const location = useLocation();
-  const { pathname } = location;
+  const { pathname } = location as { pathname: Routes };
   const redirect = useMemo(
     () => ({
       shouldRedirect: false,
@@ -19,12 +19,14 @@ export const useProtectedRoute = () => {
   );
   const isLoginPage = pathname === Routes.LOGIN;
   const isMainPage = pathname === Routes.ROOT;
-  const isProtectedRouteLocation = protectedRoutes.includes(pathname as Routes);
-  if (auth && !isProtectedRouteLocation && !isMainPage) {
+  const isProtectedRouteLocation = protectedRoutes.includes(pathname);
+  const redirectToLogin = !auth && isProtectedRouteLocation && !isLoginPage;
+  const redirectToMainPage = auth && !isProtectedRouteLocation && !isMainPage;
+  if (redirectToMainPage) {
     redirect.to = Routes.ROOT;
     redirect.shouldRedirect = true;
   }
-  if (!auth && isProtectedRouteLocation && !isLoginPage) {
+  if (redirectToLogin) {
     redirect.to = Routes.LOGIN;
     redirect.shouldRedirect = true;
   }
