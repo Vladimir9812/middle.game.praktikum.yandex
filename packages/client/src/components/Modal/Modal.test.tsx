@@ -2,7 +2,7 @@
 import '@testing-library/jest-dom';
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import { Modal } from '@app/components';
+import { Modal } from './Modal';
 
 const title = 'Test Modal';
 const body = 'Test body content';

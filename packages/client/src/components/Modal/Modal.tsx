@@ -8,8 +8,7 @@ import {
   Modal as ModalWindow,
 } from '@chakra-ui/react';
 import { ReactNode } from 'react';
-
-import { BACKGROUND_CONST } from '@app/utils';
+import { BACKGROUND_CONST } from '@app/utils/textConstants';
 
 type ModalProperties = {
   onClose: () => void;
