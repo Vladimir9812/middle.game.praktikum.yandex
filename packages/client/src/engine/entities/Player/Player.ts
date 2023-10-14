@@ -11,6 +11,7 @@ import tankDown from '../../../assets/images/game/tankDown.png';
 import Fire from '../../Actions/Fire';
 import { Entities } from '../types/Entities';
 import { makeBullet } from '../Bullet/makeBullet';
+import CheckCollision from '../../Actions/CheckCollision';
 
 const image = {
   down: tankDown,
@@ -65,25 +66,76 @@ export class Player extends AbstractEntity {
     );
   }
 
+  private get wallCollision() {
+    return CheckCollision.checkCollisionWithType(this, Entities.WALL);
+  }
+
   private handleInput() {
+    if (this.inputService.getInputKeyState(KeyCode.Space)) {
+      this.fire();
+    }
     if (this.inputService.getInputKeyState(KeyCode.KeyW)) {
-      this.move(new Vector(0, -1));
       this.direction = Directions.UP;
     }
     if (this.inputService.getInputKeyState(KeyCode.KeyS)) {
-      this.move(new Vector(0, 1));
       this.direction = Directions.DOWN;
     }
     if (this.inputService.getInputKeyState(KeyCode.KeyA)) {
-      this.move(new Vector(-1, 0));
       this.direction = Directions.LEFT;
     }
     if (this.inputService.getInputKeyState(KeyCode.KeyD)) {
-      this.move(new Vector(1, 0));
       this.direction = Directions.RIGHT;
     }
-    if (this.inputService.getInputKeyState(KeyCode.Space)) {
-      this.fire();
+
+    if (
+      this.inputService.getInputKeyState(KeyCode.KeyW) ||
+      this.inputService.getInputKeyState(KeyCode.KeyS) ||
+      this.inputService.getInputKeyState(KeyCode.KeyA) ||
+      this.inputService.getInputKeyState(KeyCode.KeyD)
+    ) {
+      switch (this.direction) {
+        case Directions.RIGHT: {
+          this.move(new Vector(1, 0));
+          break;
+        }
+        case Directions.LEFT: {
+          this.move(new Vector(-1, 0));
+          break;
+        }
+        case Directions.DOWN: {
+          this.move(new Vector(0, 1));
+          break;
+        }
+        case Directions.UP: {
+          this.move(new Vector(0, -1));
+          break;
+        }
+        default: // do nothing
+      }
+    }
+  }
+
+  private handleWallCollision() {
+    if (this.wallCollision) {
+      switch (this.direction) {
+        case Directions.RIGHT: {
+          this.move(new Vector(-1, 0));
+          break;
+        }
+        case Directions.LEFT: {
+          this.move(new Vector(1, 0));
+          break;
+        }
+        case Directions.DOWN: {
+          this.move(new Vector(0, -1));
+          break;
+        }
+        case Directions.UP: {
+          this.move(new Vector(0, 1));
+          break;
+        }
+        // no default
+      }
     }
   }
 
@@ -102,6 +154,7 @@ export class Player extends AbstractEntity {
 
   public update() {
     this.image.src = image[this.direction];
+    this.handleWallCollision();
     this.handleInput();
   }
 
