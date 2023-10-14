@@ -1,14 +1,21 @@
 import { AbstractScene } from '../../core/AbstractScene/AbstractScene';
-import { SampleObstacle } from '../../entities/SampleObstacle/SampleObstacle';
 import { SampleEntity } from '../../entities/SampleEntity/SampleEntity';
+import { makeWalls } from '../../entities/Wall/makeWalls';
 
 export class IntroScene extends AbstractScene {
   public constructor() {
     super();
-    const obstacles = [new SampleObstacle()];
-    const obstaclesMap = obstacles.map((obstacle) => ({ type: 'obstacle', entity: obstacle }));
-    this.registerEntities(...obstaclesMap, { type: 'player', entity: new SampleEntity() });
+    this.registerEntities(...makeWalls(50, 50, 750, 550, 120), {
+      type: 'player',
+      entity: new SampleEntity(),
+    });
   }
+
+  // public addObjectToScene() {
+  //   this.registerEntities(
+  //     {type: 'wall', new Wall()}
+  //   );
+  // }
 
   public render(deltaTime: number, context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
     context.strokeRect(0, 0, canvas.width, canvas.height);
