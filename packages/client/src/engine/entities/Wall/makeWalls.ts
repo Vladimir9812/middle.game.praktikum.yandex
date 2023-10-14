@@ -1,15 +1,13 @@
+import { Directions } from '../../../types/Directions';
+import { Entities } from '../types/Entities';
+import { Coords } from '../../../types/Coords';
+
 import { Wall } from './Wall';
 
 function getRandomArbitrary(min: number, max: number) {
   return Math.round(Math.random() * (max - min) + min);
 }
 
-const enum Directions {
-  RIGHT = 'right',
-  LEFT = 'left',
-  UP = 'up',
-  DOWN = 'down',
-}
 export const makeWalls = (
   width: number,
   height: number,
@@ -18,16 +16,16 @@ export const makeWalls = (
   numberOfBlocks: number,
 ) => {
   // const wallsArray = [];
-  const startPosition = {
-    x: getRandomArbitrary(width * 2, maxX - width),
+  const startPosition: Coords = {
+    x: getRandomArbitrary(width, maxX - width),
     y: getRandomArbitrary(height, maxY - height),
   };
-  const currentPosition = {
+  const currentPosition: Coords = {
     x: startPosition.x,
     y: startPosition.y,
   };
 
-  const coordsArray: { x: number; y: number }[] = [];
+  const coordsArray: Array<Coords> = [];
   // wallsArray.push({ type: 'wall', entity: new Wall(startPosition.x, startPosition.y) });
   coordsArray.push(startPosition);
 
@@ -40,22 +38,18 @@ export const makeWalls = (
     currentPosition.x += width;
     pushCoords();
   };
-
   const addLeft = () => {
     currentPosition.x -= width;
     pushCoords();
   };
-
   const addDown = () => {
     currentPosition.y += height;
     pushCoords();
   };
-
   const addUp = () => {
     currentPosition.y -= height;
     pushCoords();
   };
-
   const detectDirection = () => {
     const atBorder = {
       top: false,
@@ -69,7 +63,7 @@ export const makeWalls = (
     if (currentPosition.y - height < 0) {
       atBorder.top = true;
     }
-    if (currentPosition.x - width < width * 2) {
+    if (currentPosition.x - width < width) {
       atBorder.left = true;
     }
     if (currentPosition.x + width > maxX) {
@@ -159,8 +153,8 @@ export const makeWalls = (
     addCoords();
   }
 
-  return [...new Set(coordsArray)].map((coords) => ({
-    type: 'wall',
+  return coordsArray.map((coords) => ({
+    type: Entities.WALL,
     entity: new Wall(coords.x, coords.y),
   }));
 };

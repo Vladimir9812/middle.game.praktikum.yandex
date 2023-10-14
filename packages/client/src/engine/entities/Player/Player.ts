@@ -1,19 +1,30 @@
+import { debounce } from 'lodash';
+
 import { AbstractEntity, InputService, Vector } from '@app/engine';
 
+import { Directions } from '../../../types/Directions';
 import { KeyCode } from '../../core/InputService/types';
 import tankUp from '../../../assets/images/game/tankUp.png';
 import tankLeft from '../../../assets/images/game/tankLeft.png';
 import tankRight from '../../../assets/images/game/tankRight.png';
 import tankDown from '../../../assets/images/game/tankDown.png';
+import Fire from '../../Actions/Fire';
+import { Entities } from '../types/Entities';
+import { makeBullet } from '../Bullet/makeBullet';
 
 const image = {
-  DOWN: tankDown,
-  LEFT: tankLeft,
-  RIGHT: tankRight,
-  UP: tankUp,
+  down: tankDown,
+  left: tankLeft,
+  right: tankRight,
+  up: tankUp,
 };
-export class SampleEntity extends AbstractEntity {
+
+export class Player extends AbstractEntity {
   private inputService: InputService = InputService.getInstance();
+
+  private bulletSize = 10;
+
+  public direction: Directions = Directions.RIGHT;
 
   public velocity = new Vector(0, 0);
 
@@ -27,9 +38,12 @@ export class SampleEntity extends AbstractEntity {
 
   public fillColor = 'transparent';
 
+  private readonly fire: () => void;
+
   public constructor() {
-    super({ position: new Vector(1, 1), height: 45, width: 45 });
+    super({ position: new Vector(1, 1), height: 45, width: 40 });
     this.image.src = tankUp;
+    this.fire = debounce(this._fire, 30);
   }
 
   public render(_: number, context: CanvasRenderingContext2D) {
@@ -54,23 +68,40 @@ export class SampleEntity extends AbstractEntity {
   private handleInput() {
     if (this.inputService.getInputKeyState(KeyCode.KeyW)) {
       this.move(new Vector(0, -1));
-      this.image.src = image.UP;
+      this.direction = Directions.UP;
     }
     if (this.inputService.getInputKeyState(KeyCode.KeyS)) {
       this.move(new Vector(0, 1));
-      this.image.src = image.DOWN;
+      this.direction = Directions.DOWN;
     }
     if (this.inputService.getInputKeyState(KeyCode.KeyA)) {
       this.move(new Vector(-1, 0));
-      this.image.src = image.LEFT;
+      this.direction = Directions.LEFT;
     }
     if (this.inputService.getInputKeyState(KeyCode.KeyD)) {
       this.move(new Vector(1, 0));
-      this.image.src = image.RIGHT;
+      this.direction = Directions.RIGHT;
+    }
+    if (this.inputService.getInputKeyState(KeyCode.Space)) {
+      this.fire();
     }
   }
 
+  private _fire() {
+    Fire.makeShot({
+      type: Entities.BULLET,
+      entity: makeBullet({
+        direction: this.direction,
+        playerCoords: { x: this.posX, y: this.posY },
+        size: this.bulletSize,
+        playerWidth: this.width,
+        playerHeight: this.height,
+      }),
+    });
+  }
+
   public update() {
+    this.image.src = image[this.direction];
     this.handleInput();
   }
 
