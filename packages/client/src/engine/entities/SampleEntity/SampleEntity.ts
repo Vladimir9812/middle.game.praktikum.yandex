@@ -1,8 +1,17 @@
 import { AbstractEntity, InputService, Vector } from '@app/engine';
 
 import { KeyCode } from '../../core/InputService/types';
-import apple from '../../../assets/Apple.png';
+import tankUp from '../../../assets/images/game/tankUp.png';
+import tankLeft from '../../../assets/images/game/tankLeft.png';
+import tankRight from '../../../assets/images/game/tankRight.png';
+import tankDown from '../../../assets/images/game/tankDown.png';
 
+const image = {
+  DOWN: tankDown,
+  LEFT: tankLeft,
+  RIGHT: tankRight,
+  UP: tankUp,
+};
 export class SampleEntity extends AbstractEntity {
   private inputService: InputService = InputService.getInstance();
 
@@ -16,11 +25,11 @@ export class SampleEntity extends AbstractEntity {
 
   public image: HTMLImageElement = new Image();
 
-  public fillColor = '#000';
+  public fillColor = 'transparent';
 
   public constructor() {
-    super({ position: new Vector(50, 0), height: 50, width: 50 });
-    this.image.src = apple;
+    super({ position: new Vector(1, 1), height: 45, width: 45 });
+    this.image.src = tankUp;
   }
 
   public render(_: number, context: CanvasRenderingContext2D) {
@@ -45,15 +54,19 @@ export class SampleEntity extends AbstractEntity {
   private handleInput() {
     if (this.inputService.getInputKeyState(KeyCode.KeyW)) {
       this.move(new Vector(0, -1));
+      this.image.src = image.UP;
     }
     if (this.inputService.getInputKeyState(KeyCode.KeyS)) {
       this.move(new Vector(0, 1));
+      this.image.src = image.DOWN;
     }
     if (this.inputService.getInputKeyState(KeyCode.KeyA)) {
       this.move(new Vector(-1, 0));
+      this.image.src = image.LEFT;
     }
     if (this.inputService.getInputKeyState(KeyCode.KeyD)) {
       this.move(new Vector(1, 0));
+      this.image.src = image.RIGHT;
     }
   }
 
