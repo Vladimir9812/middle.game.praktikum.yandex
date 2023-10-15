@@ -1,3 +1,5 @@
+import { uniqWith, isEqual } from 'lodash';
+
 import { Directions } from '../../../types/Directions';
 import { Entities } from '../types/Entities';
 import { Coords } from '../../../types/Coords';
@@ -20,6 +22,7 @@ export const makeWalls = (
     x: getRandomArbitrary(width, maxX - width),
     y: getRandomArbitrary(height, maxY - height),
   };
+
   const currentPosition: Coords = {
     x: startPosition.x,
     y: startPosition.y,
@@ -144,6 +147,8 @@ export const makeWalls = (
     [Directions.DOWN]: addDown,
   };
 
+  const deleteDuplicates = (coords: Array<Coords>) => uniqWith(coords, isEqual);
+
   const addCoords = () => {
     detectDirection();
     addByDirection[direction]();
@@ -152,8 +157,7 @@ export const makeWalls = (
   for (let index = 0; index < numberOfBlocks; index += 1) {
     addCoords();
   }
-
-  return coordsArray.map((coords) => ({
+  return deleteDuplicates(coordsArray).map((coords) => ({
     type: Entities.WALL,
     entity: new Wall(coords.x, coords.y),
   }));
