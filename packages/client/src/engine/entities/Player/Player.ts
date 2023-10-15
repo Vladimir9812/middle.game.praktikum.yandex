@@ -25,6 +25,8 @@ export class Player extends AbstractEntity {
 
   private bulletSize = 10;
 
+  private canvasSize: { width: number; height: number } | undefined = undefined;
+
   public direction: Directions = Directions.RIGHT;
 
   public velocity = new Vector(0, 0);
@@ -48,6 +50,9 @@ export class Player extends AbstractEntity {
   }
 
   public render(_: number, context: CanvasRenderingContext2D) {
+    if (!this.canvasSize) {
+      this.canvasSize = { width: context.canvas.width, height: context.canvas.height };
+    }
     const previousFillStyle = context.fillStyle;
     this.prevPosition = this.position.copy();
     context.fillStyle = this.fillColor;
@@ -115,27 +120,42 @@ export class Player extends AbstractEntity {
     }
   }
 
+  private moveBack() {
+    switch (this.direction) {
+      case Directions.RIGHT: {
+        this.move(new Vector(-1, 0));
+        break;
+      }
+      case Directions.LEFT: {
+        this.move(new Vector(1, 0));
+        break;
+      }
+      case Directions.DOWN: {
+        this.move(new Vector(0, -1));
+        break;
+      }
+      case Directions.UP: {
+        this.move(new Vector(0, 1));
+        break;
+      }
+      // no default
+    }
+  }
+
+  private handleOutOfCanvas() {
+    if (
+      this.posX < 0 ||
+      this.posY < 0 ||
+      (this.canvasSize && this.posX + this.width > this.canvasSize.width) ||
+      (this.canvasSize && this.posY + this.height > this.canvasSize.height)
+    ) {
+      this.moveBack();
+    }
+  }
+
   private handleWallCollision() {
     if (this.wallCollision) {
-      switch (this.direction) {
-        case Directions.RIGHT: {
-          this.move(new Vector(-1, 0));
-          break;
-        }
-        case Directions.LEFT: {
-          this.move(new Vector(1, 0));
-          break;
-        }
-        case Directions.DOWN: {
-          this.move(new Vector(0, -1));
-          break;
-        }
-        case Directions.UP: {
-          this.move(new Vector(0, 1));
-          break;
-        }
-        // no default
-      }
+      this.moveBack();
     }
   }
 
@@ -155,6 +175,7 @@ export class Player extends AbstractEntity {
   public update() {
     this.image.src = image[this.direction];
     this.handleWallCollision();
+    this.handleOutOfCanvas();
     this.handleInput();
   }
 
