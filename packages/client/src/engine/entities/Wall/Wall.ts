@@ -1,6 +1,8 @@
 import { AbstractEntity, Vector } from '@app/engine';
 
 import wall from '../../../assets/images/game/brick.svg';
+import Destroy from '../../Actions/Destroy';
+import { Entities } from '../types/Entities';
 
 export class Wall extends AbstractEntity {
   public image: HTMLImageElement = new Image();
@@ -13,7 +15,7 @@ export class Wall extends AbstractEntity {
   }
 
   public destroy() {
-    console.log('I am to destroyed');
+    Destroy.deleteEntity({ type: Entities.WALL, entity: this });
   }
 
   public render(_: number, context: CanvasRenderingContext2D) {

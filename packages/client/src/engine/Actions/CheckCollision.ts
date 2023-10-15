@@ -10,10 +10,22 @@ class CheckCollision {
     const arrayToCheck = this.entityService.getEntitiesMap()[type];
     for (const element of arrayToCheck) {
       if (CollisionResolver.checkCollision(entity, element)) {
-        return true;
+        return {
+          collision: true,
+          entity: {
+            type,
+            entity: element,
+          },
+        };
       }
     }
-    return false;
+    return {
+      collision: false,
+      entity: {
+        type,
+        entity: undefined,
+      },
+    };
   }
 }
 

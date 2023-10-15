@@ -44,7 +44,7 @@ export class Player extends AbstractEntity {
   public constructor() {
     super({ position: new Vector(1, 1), height: 45, width: 40 });
     this.image.src = tankUp;
-    this.fire = debounce(this._fire, 30);
+    this.fire = debounce(this._fire, 40);
   }
 
   public render(_: number, context: CanvasRenderingContext2D) {
@@ -67,7 +67,7 @@ export class Player extends AbstractEntity {
   }
 
   private get wallCollision() {
-    return CheckCollision.checkCollisionWithType(this, Entities.WALL);
+    return CheckCollision.checkCollisionWithType(this, Entities.WALL).collision;
   }
 
   private handleInput() {

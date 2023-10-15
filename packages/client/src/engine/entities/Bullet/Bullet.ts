@@ -5,6 +5,8 @@ import bullet from '../../../assets/images/game/bullet.png';
 import { Coords } from '../../../types/Coords';
 import Destroy from '../../Actions/Destroy';
 import { Entities } from '../types/Entities';
+import CheckCollision from '../../Actions/CheckCollision';
+import { Wall } from '../Wall/Wall';
 
 export class Bullet extends AbstractEntity {
   public direction: Directions;
@@ -42,6 +44,10 @@ export class Bullet extends AbstractEntity {
     );
 
     this.checkOutOfScene(context);
+    if (this.wallCollision.collision) {
+      this.destroy();
+      (this.wallCollision.entity.entity as Wall).destroy();
+    }
   }
 
   private checkOutOfScene(context: CanvasRenderingContext2D) {
@@ -55,8 +61,11 @@ export class Bullet extends AbstractEntity {
     }
   }
 
+  private get wallCollision() {
+    return CheckCollision.checkCollisionWithType(this, Entities.WALL);
+  }
+
   private destroy() {
-    console.log('destroy');
     Destroy.deleteEntity({ type: Entities.BULLET, entity: this });
   }
 
