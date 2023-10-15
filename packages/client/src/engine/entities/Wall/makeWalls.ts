@@ -13,14 +13,16 @@ function getRandomArbitrary(min: number, max: number) {
 export const makeWalls = (
   width: number,
   height: number,
-  maxX: number,
-  maxY: number,
+  _maxX: number,
+  _maxY: number,
   numberOfBlocks: number,
 ) => {
+  const maxX = _maxX - width;
+  const maxY = _maxY - height;
   // const wallsArray = [];
   const startPosition: Coords = {
-    x: getRandomArbitrary(width, maxX - width),
-    y: getRandomArbitrary(height, maxY - height),
+    x: getRandomArbitrary(width, maxX),
+    y: getRandomArbitrary(height, maxY),
   };
 
   const currentPosition: Coords = {

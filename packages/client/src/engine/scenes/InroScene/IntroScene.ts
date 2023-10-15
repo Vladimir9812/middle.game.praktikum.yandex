@@ -1,20 +1,27 @@
 import { AbstractScene } from '../../core/AbstractScene/AbstractScene';
 import { Player } from '../../entities/Player/Player';
 import { makeWalls } from '../../entities/Wall/makeWalls';
-import { InputService } from '../../core/InputService/InputService';
-import { KeyCode } from '../../core/InputService/types';
 import { Entities } from '../../entities/types/Entities';
 import { EntitiesMapItem } from '../../core/EntityService/types';
 
 export class IntroScene extends AbstractScene {
-  private inputService: InputService = InputService.getInstance();
+  private canvasSize: { width: number; height: number } | undefined = undefined;
 
   public constructor() {
     super();
-    this.registerEntities(...makeWalls(50, 50, 750, 550, 120), {
+    this.registerEntities({
       type: Entities.PLAYER,
       entity: new Player(),
     });
+  }
+
+  private addWalls() {
+    if (!this.canvasSize?.width || !this.canvasSize.height) {
+      return;
+    }
+    this.registerEntities(
+      ...makeWalls(50, 50, this.canvasSize?.width, this.canvasSize?.height, 120),
+    );
   }
 
   public addObjectToScene(entity: EntitiesMapItem) {
@@ -22,10 +29,9 @@ export class IntroScene extends AbstractScene {
   }
 
   public render(deltaTime: number, context: CanvasRenderingContext2D, canvas: HTMLCanvasElement) {
-    if (this.inputService.getInputKeyState(KeyCode.Space)) {
-      // this.addObjectToScene();
-      // const player = this.entityService.getEntitiesMap()[Entities.PLAYER][0];
-      // this.addObjectToScene({ type: Entities.BULLET });
+    if (!this.canvasSize) {
+      this.canvasSize = { width: context.canvas.width, height: context.canvas.height };
+      this.addWalls();
     }
     context.strokeRect(0, 0, canvas.width, canvas.height);
     for (const entity of this.entityService.getEntities()) {
