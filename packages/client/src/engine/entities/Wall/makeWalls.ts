@@ -19,7 +19,6 @@ export const makeWalls = (
 ) => {
   const maxX = _maxX - width;
   const maxY = _maxY - height;
-  // const wallsArray = [];
   const startPosition: Coords = {
     x: getRandomArbitrary(width, maxX),
     y: getRandomArbitrary(height, maxY),
@@ -31,7 +30,6 @@ export const makeWalls = (
   };
 
   const coordsArray: Array<Coords> = [];
-  // wallsArray.push({ type: 'wall', entity: new Wall(startPosition.x, startPosition.y) });
   coordsArray.push(startPosition);
 
   let direction = Directions.RIGHT;
