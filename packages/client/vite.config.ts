@@ -26,6 +26,7 @@ export default defineConfig(({ command, mode }) => {
     ],
     build: {
       assetsDir: 'src',
+      minify: false,
       rollupOptions: {
         output: {
           assetFileNames: (file) => {

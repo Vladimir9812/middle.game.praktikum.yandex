@@ -10,7 +10,8 @@ import './index.css';
 
 const store = setupStore();
 
-ReactDOM.createRoot(document.querySelector('#root') as HTMLElement).render(
+ReactDOM.hydrateRoot(
+  document.querySelector('#root') as HTMLElement,
   <React.StrictMode>
     <Provider store={store}>
       <App />
