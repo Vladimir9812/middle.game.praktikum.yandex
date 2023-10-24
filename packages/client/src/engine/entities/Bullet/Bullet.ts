@@ -1,4 +1,5 @@
 import { AbstractEntity, Vector } from '@app/engine';
+import { BulletType } from '@app/types';
 
 import { Directions } from '../../../types/Directions';
 import bullet from '../../../assets/images/game/bullet.png';
@@ -19,10 +20,20 @@ export class Bullet extends AbstractEntity {
 
   public outOfScene = false;
 
-  public constructor(direction: Directions, coords: Coords, height: number, width: number) {
+  public type: BulletType;
+
+  public constructor(
+    direction: Directions,
+    coords: Coords,
+    height: number,
+    width: number,
+    type: BulletType,
+  ) {
     super({ position: new Vector(coords.x, coords.y), height, width });
+
     this.image.src = bullet;
     this.direction = direction;
+    this.type = type;
   }
 
   public render(_: number, context: CanvasRenderingContext2D) {
@@ -44,10 +55,15 @@ export class Bullet extends AbstractEntity {
     );
 
     this.checkOutOfScene(context);
+
     if (this.wallCollision.collision) {
       this.destroy();
       (this.wallCollision.entity.entity as Wall).destroy();
     }
+  }
+
+  public destroy() {
+    Destroy.deleteEntity({ type: Entities.BULLET, entity: this });
   }
 
   private checkOutOfScene(context: CanvasRenderingContext2D) {
@@ -63,10 +79,6 @@ export class Bullet extends AbstractEntity {
 
   private get wallCollision() {
     return CheckCollision.checkCollisionWithType(this, Entities.WALL);
-  }
-
-  private destroy() {
-    Destroy.deleteEntity({ type: Entities.BULLET, entity: this });
   }
 
   private handleMove() {

@@ -1,9 +1,12 @@
+import { BulletType } from '@app/types';
+
 import { Coords } from '../../../types/Coords';
 import { Directions } from '../../../types/Directions';
 
 import { Bullet } from './Bullet';
 
 type MakeBulletProperties = {
+  type: BulletType;
   direction: Directions;
   playerCoords: Coords;
   size: number;
@@ -11,6 +14,7 @@ type MakeBulletProperties = {
   playerHeight: number;
 };
 export const makeBullet = ({
+  type,
   direction,
   playerCoords,
   size,
@@ -42,5 +46,5 @@ export const makeBullet = ({
     default:
     // do nothing
   }
-  return new Bullet(direction, coords, size, size);
+  return new Bullet(direction, coords, size, size, type);
 };
