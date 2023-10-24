@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "tsc && vite",
     "build": "tsc && vite build",
+    "build:ssr": "tsc && vite build --config vite.config.ssr.js",
     "preview": "vite preview",
     "lint": "eslint . && stylelint ./src/**/*.css",
     "format": "prettier --write .",
