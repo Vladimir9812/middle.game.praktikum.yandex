@@ -11,6 +11,8 @@ import { modifyFilePlugin } from './vite-plugin-modify-file';
 
 dotenv.config();
 
+const developmentMode = process.env.NODE_ENV === 'development';
+
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   return {
@@ -22,6 +24,7 @@ export default defineConfig(({ command, mode }) => {
       modifyFilePlugin({
         filePath: 'dist/sw.js', // Путь к вашему файлу
         search: 'cache-name-v1', // Строка, которую нужно найти
+        developmentMode,
       }),
     ],
     build: {
