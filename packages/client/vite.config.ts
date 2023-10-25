@@ -14,7 +14,7 @@ dotenv.config();
 const developmentMode = process.env.NODE_ENV === 'development';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(() => {
   return {
     define: {
       __SERVER_PORT__: process.env.SERVER_PORT,
