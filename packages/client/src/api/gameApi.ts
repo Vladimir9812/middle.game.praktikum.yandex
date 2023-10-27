@@ -13,4 +13,8 @@ export class GameApi {
   public async sendScore(score: AnyObject) {
     return baseGameApi.post({ data: score });
   }
+
+  public async getLeaderboard(leaderboardData: any) {
+    return baseGameApi.post({ route: GameApiRoutes.ALL, data: leaderboardData });
+  }
 }
