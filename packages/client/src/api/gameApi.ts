@@ -1,3 +1,5 @@
+import { Leaderbord } from '@app/types';
+
 import { AnyObject } from '../types/AnyObject';
 
 import { BaseApi } from './baseApi';
@@ -14,7 +16,7 @@ export class GameApi {
     return baseGameApi.post({ data: score });
   }
 
-  public async getLeaderboard(leaderboardData: any) {
+  public async getLeaderboard(leaderboardData: Leaderbord) {
     return baseGameApi.post({ route: GameApiRoutes.ALL, data: leaderboardData });
   }
 }

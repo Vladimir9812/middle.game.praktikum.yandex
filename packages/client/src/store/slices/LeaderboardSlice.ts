@@ -4,9 +4,10 @@ import { createSlice } from '@reduxjs/toolkit';
 import { createLeaderboard } from '@app/utils/createLeaderboard';
 
 import { getLeaderboard } from '@app/store';
+import { Leaderbord } from '@app/types';
 
 type LeaderboardState = {
-  data: any;
+  data: Leaderbord[] | undefined;
   isLoading: boolean;
   error: string | undefined;
 };

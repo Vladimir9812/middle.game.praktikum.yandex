@@ -9,6 +9,7 @@ const gameApi = new GameApi();
 export const sendScore = createAsyncThunk('sendScore', async (score: AnyObject) =>
   gameApi.sendScore(score),
 );
-export const getLeaderboard = createAsyncThunk('getLeaderboard', async (leaderboardData: any) =>
-  gameApi.getLeaderboard(leaderboardData),
+export const getLeaderboard = createAsyncThunk(
+  'getLeaderboard',
+  async (leaderboardData: AnyObject) => gameApi.getLeaderboard(leaderboardData),
 );
