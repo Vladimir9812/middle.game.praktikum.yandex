@@ -1,13 +1,15 @@
 // For correct redux slice working
 /* eslint-disable no-param-reassign */
+import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 
 import { User } from '@app/types';
 
-import { changeAvatar, changeProfile, getUser, signin, signup, logout } from './UserActionCreators';
+import { changeAvatar, changeProfile, getUser, logout, signin, signup } from './UserActionCreators';
 
 interface UserState {
   user: User | undefined;
+  service_id?: string;
   isLoading: boolean;
   error: string | undefined;
   isLoggedIn: string;
@@ -15,6 +17,7 @@ interface UserState {
 
 const initialState: UserState = {
   user: undefined,
+  service_id: undefined,
   isLoading: false,
   error: '',
   isLoggedIn: 'pending',
@@ -23,7 +26,11 @@ const initialState: UserState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setServiceId(state, action: PayloadAction<string>) {
+      state.service_id = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getUser.pending, (state) => {
@@ -103,4 +110,5 @@ export const userSlice = createSlice({
   },
 });
 
+export const userSliceActions = userSlice.actions;
 export default userSlice.reducer;
