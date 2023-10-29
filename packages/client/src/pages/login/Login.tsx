@@ -1,9 +1,9 @@
-import { Box, Center, Container, Flex, Heading, Image } from '@chakra-ui/react';
+import { Box, Button, Center, Container, Flex, Heading, Image, Spinner } from '@chakra-ui/react';
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { OauthApi } from '@app/api';
-import { Link, LoginForm } from '@app/components';
+import { Icons, Link, LoginForm } from '@app/components';
 import { Routes, TEXT } from '@app/const';
 import { useAppDispatch } from '@app/hooks';
 import { getUser, userSliceActions } from '@app/store';
@@ -17,18 +17,17 @@ export function LoginPage() {
   const [loadPage, setLoadPage] = useState(false);
   const reference = useRef(null);
   const { origin } = window.location;
+  const code = searchParameters.get('code');
 
   const oauthLogin = async (error: React.MouseEvent<HTMLElement>) => {
     error.stopPropagation();
 
     try {
-      const res = await oauthApi.getOauthServiceId();
+      const response = await oauthApi.getOauthServiceId();
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      const { service_id } = res;
+      const { service_id } = response;
 
       dispatch(userSliceActions.setServiceId(service_id));
-
-      alert(service_id);
 
       // eslint-disable-next-line max-len
       window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${service_id}&redirect_uri=${origin}/signin`;
@@ -37,16 +36,14 @@ export function LoginPage() {
     }
   };
 
-  const signInRequest = async (code: string) => {
+  const signInRequest = async (appCode: string) => {
     try {
-      const res = await oauthApi.postOauthServiceByCode({
-        code,
+      await oauthApi.postOauthServiceByCode({
+        code: appCode,
         redirect_uri: `${origin}/signin`,
       });
-      console.log(res, 'RESPONSE');
 
-      const resp = await dispatch(getUser());
-      console.log(resp, 'resp');
+      await dispatch(getUser());
     } catch (error) {
       console.log(error);
     }
@@ -59,14 +56,16 @@ export function LoginPage() {
   }, [reference]);
 
   useEffect(() => {
-    if (loadPage) {
-      const code = searchParameters.get('code');
-      console.log(code, 'code');
+    if (loadPage && code) {
       signInRequest(String(code));
     }
-  }, [loadPage]);
+  }, [loadPage, code]);
 
-  return (
+  return code ? (
+    <Center h="100vh">
+      <Spinner size="xl" ref={reference} />
+    </Center>
+  ) : (
     <Container pb={6} maxW="1800px" ref={reference}>
       <Center flexDirection="column">
         <Image src={logo} width="5xl" height="xl" minWidth="lg" alt="Game logo" flex-shrink="0" />
@@ -79,9 +78,20 @@ export function LoginPage() {
             <Link to={Routes.REGISTER} textAlign="center" fontSize="xl">
               {TEXT.registerLink}
             </Link>
-            <button type="button" onClick={oauthLogin}>
-              Войти через яндекс
-            </button>
+            <Flex justifyContent="center">
+              <Button
+                colorScheme="blackAlpha"
+                size="md"
+                type="button"
+                onClick={oauthLogin}
+                leftIcon={<Icons.Yandex />}
+                bg="#000"
+                width="300px"
+                borderRadius="12px"
+              >
+                Войти через Яндекс
+              </Button>
+            </Flex>
           </Flex>
         </Box>
       </Center>
