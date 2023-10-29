@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { Icons, LeaderboardItem } from '@app/components';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { getLeaderboard } from '@app/store';
+import { Leaderbord } from '@app/types';
 
 export function LeaderboardPage() {
   const dispatch = useAppDispatch();
@@ -50,7 +51,7 @@ export function LeaderboardPage() {
             background="violet"
             isHeader
           />
-          {leaderboard?.map((item: any, index: number) => (
+          {leaderboard?.map((item: Leaderbord, index: number) => (
             <LeaderboardItem
               isHeader={false}
               key={item.place}
