@@ -9,19 +9,20 @@ type MakeBulletProperties = {
   type: BulletType;
   direction: Directions;
   playerCoords: Coords;
-  size: number;
   playerWidth: number;
   playerHeight: number;
 };
+
 export const makeBullet = ({
   type,
   direction,
   playerCoords,
-  size,
   playerWidth,
   playerHeight,
 }: MakeBulletProperties) => {
   const coords: Coords = { x: 0, y: 0 };
+  const size = 10;
+
   switch (direction) {
     case Directions.RIGHT: {
       coords.x = playerCoords.x + playerWidth;
@@ -46,5 +47,6 @@ export const makeBullet = ({
     default:
     // do nothing
   }
+
   return new Bullet(direction, coords, size, size, type);
 };

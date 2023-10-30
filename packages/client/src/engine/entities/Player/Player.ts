@@ -25,19 +25,9 @@ const image = {
 export class Player extends AbstractEntity {
   private inputService: InputService = InputService.getInstance();
 
-  private bulletSize = 10;
-
   private canvasSize: { width: number; height: number } | undefined = undefined;
 
   public direction: Directions = Directions.RIGHT;
-
-  public velocity = new Vector(0, 0);
-
-  public mass = 100;
-
-  public force = new Vector(0, this.mass * 100);
-
-  public acc = new Vector(0, 0);
 
   public image: HTMLImageElement = new Image();
 
@@ -188,7 +178,6 @@ export class Player extends AbstractEntity {
         type: BulletType.PLAYER,
         direction: this.direction,
         playerCoords: { x: this.posX, y: this.posY },
-        size: this.bulletSize,
         playerWidth: this.width,
         playerHeight: this.height,
       }),
@@ -207,13 +196,5 @@ export class Player extends AbstractEntity {
     this.handleWallCollision();
     this.handleOutOfCanvas();
     this.handleInput();
-  }
-
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  private addForce(deltaTime: number) {
-    this.acc = this.force.divideScalar(this.mass);
-    this.velocity = this.velocity.addScaled(this.acc, deltaTime);
-    this.position = this.position.addScaled(this.velocity, deltaTime);
   }
 }

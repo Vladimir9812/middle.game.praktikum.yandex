@@ -12,13 +12,9 @@ import { Wall } from '../Wall/Wall';
 export class Bullet extends AbstractEntity {
   public direction: Directions;
 
-  public acc = new Vector(0, 0);
-
   public image: HTMLImageElement = new Image();
 
   public fillColor = 'transparent';
-
-  public outOfScene = false;
 
   public type: BulletType;
 

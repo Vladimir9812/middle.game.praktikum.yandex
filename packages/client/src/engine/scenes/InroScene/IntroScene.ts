@@ -24,21 +24,36 @@ export class IntroScene extends AbstractScene {
       return;
     }
 
+    const enemyWidth = 40;
+    const enemyHeight = 45;
+
     this.registerEntities(
       {
         type: Entities.ENEMY,
-        entity: new Enemy(Directions.DOWN, new Vector(this.canvasSize.width - 40, 1)),
+        entity: new Enemy(
+          Directions.DOWN,
+          new Vector(this.canvasSize.width - enemyWidth, 1),
+          enemyWidth,
+          enemyHeight,
+        ),
       },
       {
         type: Entities.ENEMY,
         entity: new Enemy(
           Directions.LEFT,
-          new Vector(this.canvasSize.width - 40, this.canvasSize.height - 45),
+          new Vector(this.canvasSize.width - enemyWidth, this.canvasSize.height - enemyHeight),
+          enemyWidth,
+          enemyHeight,
         ),
       },
       {
         type: Entities.ENEMY,
-        entity: new Enemy(Directions.UP, new Vector(1, this.canvasSize.height - 45)),
+        entity: new Enemy(
+          Directions.UP,
+          new Vector(1, this.canvasSize.height - enemyHeight),
+          enemyWidth,
+          enemyHeight,
+        ),
       },
     );
   }
