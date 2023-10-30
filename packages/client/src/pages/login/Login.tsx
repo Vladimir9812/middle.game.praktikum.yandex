@@ -25,14 +25,14 @@ export function LoginPage() {
     try {
       const response = await oauthApi.getOauthServiceId();
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      const { service_id } = response;
+      const { service_id: serviceId } = response;
 
-      dispatch(userSliceActions.setServiceId(service_id));
+      dispatch(userSliceActions.setServiceId(serviceId));
 
       // eslint-disable-next-line max-len
-      window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${service_id}&redirect_uri=${origin}/signin`;
+      window.location.href = `https://oauth.yandex.ru/authorize?response_type=code&client_id=${serviceId}&redirect_uri=${origin}/signin`;
     } catch (error_) {
-      console.log(error_);
+      console.error(error_);
     }
   };
 
@@ -45,7 +45,7 @@ export function LoginPage() {
 
       await dispatch(getUser());
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
