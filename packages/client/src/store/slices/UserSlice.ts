@@ -9,7 +9,7 @@ import { changeAvatar, changeProfile, getUser, logout, signin, signup } from './
 
 interface UserState {
   user: User | undefined;
-  service_id?: string;
+  serviceId?: string;
   isLoading: boolean;
   error: string | undefined;
   isLoggedIn: string;
@@ -17,7 +17,7 @@ interface UserState {
 
 const initialState: UserState = {
   user: undefined,
-  service_id: undefined,
+  serviceId: undefined,
   isLoading: false,
   error: '',
   isLoggedIn: 'pending',
@@ -28,7 +28,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setServiceId(state, action: PayloadAction<string>) {
-      state.service_id = action.payload;
+      state.serviceId = action.payload;
     },
   },
   extraReducers: (builder) => {
