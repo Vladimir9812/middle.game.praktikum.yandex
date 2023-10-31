@@ -6,6 +6,7 @@ import { EngineCanvas, Icons } from '@app/components';
 import { GameState } from '@app/types';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 import { gameStateActions, sendScore } from '@app/store';
+import { teamName } from '@app/const';
 
 import { useDocument } from '../../hooks/useDocument';
 
@@ -30,7 +31,7 @@ function GameNotStartedPageView() {
 
 function GameStaredPageView() {
   const dispatch = useAppDispatch();
-  const { user } = useAppSelector((state) => state.user);
+  // const { user } = useAppSelector((state) => state.user);
   const score = useAppSelector((state) => state.score);
   const onStopClick = () => {
     const sendScoreData = {
@@ -38,7 +39,7 @@ function GameStaredPageView() {
         score: score.score,
       },
       ratingFieldName: 'score',
-      teamName: user?.login,
+      teamName,
     };
 
     dispatch(gameStateActions.setGameState(GameState.Stopped));
