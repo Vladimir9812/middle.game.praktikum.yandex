@@ -16,7 +16,7 @@
 1. в папке packages/client запустите скрипт yarn build:ssr
 2. в папке packages/client запустите скрипт yarn build
 3. в папке packages/server запустите скрипт yarn build
-4. тут должен быть скрипт на подобии yarn dev с nodemon но его еще нет
+4. в папке packages/server запустите скрипт yarn previev
 
 ### Как добавить зависимости?
 
