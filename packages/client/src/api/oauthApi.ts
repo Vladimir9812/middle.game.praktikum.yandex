@@ -8,7 +8,7 @@ type PostData = {
 
 let origin: Location | string = '';
 if (typeof window !== 'undefined') {
-  origin = window.location;
+  origin = window.location.origin;
 }
 
 const enum OauthApiRoutes {
