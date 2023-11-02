@@ -1,14 +1,17 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable unicorn/prevent-abbreviations */
 /* eslint-disable unicorn/no-await-expression-member */
+/* eslint-disable unicorn/prefer-top-level-await */
 /* eslint-disable unicorn/prefer-module */
-
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
-import dotenv from 'dotenv';
 import cors from 'cors';
-import { createServer as createViteServer } from 'vite';
-import type { ViteDevServer } from 'vite';
+import dotenv from 'dotenv';
 import express from 'express';
+import type { ViteDevServer } from 'vite';
+import { createServer as createViteServer } from 'vite';
 
 dotenv.config();
 
@@ -24,7 +27,7 @@ const startServer = async () => {
   let ssrClientPath = '/';
   if (!isDevelopment()) {
     distributionPath = path.dirname(require.resolve('client/dist/index.html'));
-    ssrClientPath = require.resolve('client/dist-ssr/client.js');
+    ssrClientPath = require.resolve('client/ssr-dist/client.js');
   }
   const sourcePath = path.dirname(require.resolve('client'));
 
@@ -60,8 +63,10 @@ const startServer = async () => {
         template = fs.readFileSync(path.resolve(distributionPath, 'index.html'), 'utf8');
       }
 
-      const render = isDevelopment()
-        ? (await vite!.ssrLoadModule(path.resolve(sourcePath, 'src/ssr.tsx'))).render
+      let render: (url: string) => Promise<string>;
+
+      render = isDevelopment()
+        ? (await vite!.ssrLoadModule(path.resolve(sourcePath, 'ssr.tsx'))).render
         : (await import(ssrClientPath)).render;
 
       const appHtml = await render(url);

@@ -1,3 +1,4 @@
+/* eslint-disable unicorn/no-negated-condition */
 import { BaseApi } from './baseApi';
 
 type PostData = {
