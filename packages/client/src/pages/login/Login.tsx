@@ -18,7 +18,7 @@ export function LoginPage() {
   const reference = useRef(null);
   let origin: Location | string = '';
   if (typeof window !== 'undefined') {
-    origin = window.location;
+    origin = window.location.origin;
   }
   const code = searchParameters.get('code');
 

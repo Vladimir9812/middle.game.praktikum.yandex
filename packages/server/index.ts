@@ -20,7 +20,7 @@ const isDevelopment = () => process.env.NODE_ENV === 'development';
 const startServer = async () => {
   const app = express();
   app.use(cors());
-  const port = Number(process.env.SERVER_PORT) || 3001;
+  const port = Number(process.env.SERVER_PORT) || 3000;
 
   let vite: ViteDevServer | undefined;
   let distributionPath = '/';
