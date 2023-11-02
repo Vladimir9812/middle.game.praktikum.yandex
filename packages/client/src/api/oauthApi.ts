@@ -5,7 +5,10 @@ type PostData = {
   redirect_uri: string;
 };
 
-const { origin } = window.location;
+let origin: Location | string = '';
+if (typeof window !== 'undefined') {
+  origin = window.location;
+}
 
 const enum OauthApiRoutes {
   GET_OAUTH_SERVICE_ID = 'oauth/yandex/service-id',

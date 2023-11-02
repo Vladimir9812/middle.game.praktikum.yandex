@@ -31,7 +31,7 @@ export default defineConfig(() => {
     build: {
       assetsDir: 'src',
       lib: {
-        entry: path.resolve(__dirname, 'src/ssr.tsx'),
+        entry: path.resolve(__dirname, 'ssr.tsx'),
         formats: ['cjs'],
         name: 'client',
       },
