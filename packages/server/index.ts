@@ -24,11 +24,12 @@ const startServer = async () => {
 
   let vite: ViteDevServer | undefined;
   let distributionPath = '/';
+  let ssrClientPath = '/';
   if (!isDevelopment()) {
     distributionPath = path.dirname(require.resolve('client/dist/index.html'));
+    ssrClientPath = require.resolve('client/ssr-dist/client.js');
   }
   const sourcePath = path.dirname(require.resolve('client'));
-  const ssrClientPath = require.resolve('client/ssr-dist/client.js');
 
   if (isDevelopment()) {
     vite = await createViteServer({
