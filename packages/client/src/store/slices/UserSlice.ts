@@ -15,22 +15,7 @@ interface UserState {
   isLoggedIn: string;
 }
 
-// const initialState: UserState = {
-//   user: undefined,
-//   serviceId: undefined,
-//   isLoading: false,
-//   error: '',
-//   isLoggedIn: 'pending',
-// };
-let preloadedState: UserState | undefined;
-
-if (typeof window !== 'undefined') {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  preloadedState = window.__USER_STATE__;
-}
-
-const initialState: UserState = preloadedState || {
+const initialState: UserState = {
   user: undefined,
   serviceId: undefined,
   isLoading: false,

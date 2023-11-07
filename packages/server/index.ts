@@ -13,26 +13,11 @@ import express from 'express';
 import type { ViteDevServer } from 'vite';
 import { createServer as createViteServer } from 'vite';
 
+import preloadState from './preloadState';
+
 dotenv.config();
 
 const isDevelopment = () => process.env.NODE_ENV === 'development';
-
-const initialUserState = JSON.stringify({
-  user: {
-    id: 0,
-    first_name: 'string',
-    second_name: 'string',
-    display_name: 'string',
-    phone: 'string',
-    login: 'string',
-    avatar: 'string',
-    email: 'string',
-  },
-  serviceId: undefined,
-  isLoading: false,
-  error: undefined,
-  isLoggedIn: 'pending',
-});
 
 const startServer = async () => {
   const app = express();
@@ -88,9 +73,13 @@ const startServer = async () => {
 
       const appHtml = await render(url);
 
-      const preloadedUser = `<script>window.__USER_STATE__=${initialUserState}</script>`;
+      const preloadedState = await preloadState();
 
-      const html = template.replace('<!--ssr-outlet-->', appHtml + preloadedUser);
+      const preloadedStateHtml = `<script>window.__PRELOADED_STATE__=${JSON.stringify(
+        preloadedState,
+      )}</script>`;
+
+      const html = template.replace('<!--ssr-outlet-->', preloadedStateHtml + appHtml);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (error) {
