@@ -1,3 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
+import fetch from 'cross-fetch';
+
 const baseUrl = 'https://ya-praktikum.tech/api/v2/';
 
 export default async function preloadState() {

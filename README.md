@@ -13,10 +13,9 @@
 
 ### Как запустить в режиме SSR в продакшен?
 
-1. в папке packages/client запустите скрипт yarn build:ssr
-2. в папке packages/client запустите скрипт yarn build
-3. в папке packages/server запустите скрипт yarn build
-4. в папке packages/server запустите скрипт yarn previev
+1. в папке packages/client запустите скрипт yarn build
+2. в папке packages/server запустите скрипт yarn build
+3. в папке packages/server запустите скрипт yarn previev
 
 ### Как добавить зависимости?
 
