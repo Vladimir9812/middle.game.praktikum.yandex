@@ -14,6 +14,7 @@ import type { ViteDevServer } from 'vite';
 import { createServer as createViteServer } from 'vite';
 
 import preloadState from './preloadState';
+import { createClientAndConnect } from './db';
 
 dotenv.config();
 
@@ -79,7 +80,7 @@ const startServer = async () => {
         preloadedState,
       )}</script>`;
 
-      const html = template.replace('<!--ssr-outlet-->', preloadedStateHtml + appHtml);
+      const html = template.replace('<!--ssr-outlet-->', appHtml + preloadedStateHtml);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (error) {
@@ -89,6 +90,8 @@ const startServer = async () => {
       next(error);
     }
   });
+
+  await createClientAndConnect();
 
   app.listen(port, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${port}`);

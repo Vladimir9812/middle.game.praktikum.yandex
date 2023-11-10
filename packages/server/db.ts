@@ -1,3 +1,5 @@
+import * as process from 'node:process';
+
 import { Client } from 'pg';
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } = process.env;
@@ -5,7 +7,7 @@ const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT } = process
 export const createClientAndConnect = async (): Promise<Client | null> => {
   try {
     const client = new Client({
-      user: POSTGRES_USER,
+      user: 'admin',
       host: 'localhost',
       database: POSTGRES_DB,
       password: POSTGRES_PASSWORD,
