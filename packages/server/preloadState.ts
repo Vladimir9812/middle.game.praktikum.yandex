@@ -1,6 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import fetch from 'cross-fetch';
-
 const baseUrl = 'https://ya-praktikum.tech/api/v2/';
 
 export default async function preloadState() {
@@ -12,6 +9,20 @@ export default async function preloadState() {
     }
     return response.json();
   });
-  console.log(user);
-  return { user: { user }, score: {}, gameState: {}, leaderboard: {} };
+  return {
+    user: { user, serviceId: undefined, isLoading: false, error: '', isLoggedIn: 'pending' },
+    score: {
+      score: 0,
+      isLoading: false,
+      error: '',
+    },
+    gameState: {
+      gameState: 0,
+    },
+    leaderboard: {
+      data: undefined,
+      isLoading: false,
+      error: '',
+    },
+  };
 }
