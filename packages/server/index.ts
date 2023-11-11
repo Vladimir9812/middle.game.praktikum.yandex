@@ -14,7 +14,7 @@ import type { ViteDevServer } from 'vite';
 import { createServer as createViteServer } from 'vite';
 
 import preloadState from './preloadState';
-import { createClientAndConnect } from './db';
+import { dbConnect } from './db/connect';
 
 dotenv.config();
 
@@ -91,7 +91,7 @@ const startServer = async () => {
     }
   });
 
-  await createClientAndConnect();
+  await dbConnect();
 
   app.listen(port, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${port}`);

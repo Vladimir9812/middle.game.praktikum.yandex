@@ -5,11 +5,9 @@ services:
   postgres:
     image: postgres:14
     ports:
-      - "5432:5432"
+      - '${POSTGRES_PORT}:${POSTGRES_PORT}'
     environment:
-     POSTGRES_USER: ${POSTGRES_USER}
-     POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-     POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_DB: ${POSTGRES_DB}
     env_file: ./postgres.env
     volumes:
       - ./tmp/pgdata:/var/lib/postgresql/data
@@ -46,6 +44,10 @@ services:
       - '${SERVER_PORT}:${SERVER_PORT}'
     environment:
       SERVER_PORT: ${SERVER_PORT}
+      POSTGRES_DB: ${POSTGRES_DB}
+    env_file: ./postgres.env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - postgres
     volumes:
