@@ -6,3 +6,4 @@ postgres.env
 dist
 tmp
 *.log
+postgresdata
