@@ -4,26 +4,50 @@
 /* eslint-disable unicorn/no-await-expression-member */
 /* eslint-disable unicorn/prefer-top-level-await */
 /* eslint-disable unicorn/prefer-module */
+/* eslint-disable import/no-extraneous-dependencies */
+
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import process from 'node:process';
 
 import cors from 'cors';
 import dotenv from 'dotenv';
 import express from 'express';
 import type { ViteDevServer } from 'vite';
 import { createServer as createViteServer } from 'vite';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+import type { RequestWithUser } from 'RequestWithUser';
 
 import preloadState from './preloadState';
 import { dbConnect } from './db/connect';
+import { auth } from './middlewares/auth';
+import { errorHandler } from './middlewares/errorHandler';
 
 dotenv.config();
 
 const isDevelopment = () => process.env.NODE_ENV === 'development';
+const { YANDEX_API_URL, SERVER_PORT } = process.env;
 
 const startServer = async () => {
   const app = express();
   app.use(cors());
-  const port = Number(process.env.SERVER_PORT) || 3000;
+  const port = Number(SERVER_PORT) || 3000;
+
+  // app.get('/api/v2/auth', (req, res) => {
+  //   console.log(req);
+  //   console.log(res);
+  //   console.log('here');
+  // });
+
+  app.use(
+    '/api/v2/',
+    createProxyMiddleware({
+      changeOrigin: true,
+      cookieDomainRewrite: { '*': '' },
+      target: YANDEX_API_URL,
+      logLevel: 'debug',
+    }),
+  );
 
   let vite: ViteDevServer | undefined;
   let distributionPath = '/';
@@ -44,6 +68,12 @@ const startServer = async () => {
     app.use(vite.middlewares);
   }
 
+  app.use(auth);
+
+  app.get('/api', (_, _res) => {
+    _res.json('👋 Howdy from the server :)');
+  });
+
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)');
   });
@@ -52,7 +82,7 @@ const startServer = async () => {
     app.use('/src', express.static(path.resolve(distributionPath, 'src'), { index: false }));
   }
 
-  app.use('*', async (request, res, next) => {
+  app.use('*', async (request: RequestWithUser, res, next) => {
     const url = request.originalUrl;
 
     try {
@@ -66,15 +96,14 @@ const startServer = async () => {
         template = fs.readFileSync(path.resolve(distributionPath, 'index.html'), 'utf8');
       }
 
-      let render: (url: string) => Promise<string>;
+      let render: (url: string, preloadedState: Record<string, any>) => Promise<string>;
+      const preloadedState = await preloadState(request.user || {});
 
       render = isDevelopment()
         ? (await vite!.ssrLoadModule(path.resolve(sourcePath, 'ssr.tsx'))).render
         : (await import(ssrClientPath)).render;
 
-      const appHtml = await render(url);
-
-      const preloadedState = await preloadState();
+      const appHtml = await render(url, preloadedState);
 
       const preloadedStateHtml = `<script>window.__PRELOADED_STATE__=${JSON.stringify(
         preloadedState,
@@ -96,6 +125,7 @@ const startServer = async () => {
   app.listen(port, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
   });
+  app.use(errorHandler);
 };
 
 startServer();

@@ -45,7 +45,9 @@ services:
     environment:
       SERVER_PORT: ${SERVER_PORT}
       POSTGRES_DB: ${POSTGRES_DB}
-    env_file: ./postgres.env
+    env_file:
+     - ./postgres.env
+     - ./server.env
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
