@@ -4,8 +4,8 @@ import type { NextFunction, Response } from 'express';
 import { Answer } from '../models/Answer';
 
 export const createAnswer = (request: RequestWithUser, response: Response, next: NextFunction) => {
-  const { author, title, text, thread } = request.body;
-  Answer.create({ author, title, text, thread })
+  const { author, text, thread } = request.body;
+  Answer.create({ author, text, thread })
     .then((answer) => response.send(answer.dataValues))
     .catch((error) => next(error));
 };
