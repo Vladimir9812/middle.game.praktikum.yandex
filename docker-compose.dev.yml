@@ -11,6 +11,11 @@ services:
     env_file: ./postgres.env
     volumes:
       - ./tmp/pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB
+      interval: 5s
+      timeout: 5s
+      retries: 5
     networks:
       - praktikum
 
@@ -51,7 +56,8 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     volumes:
       - type: bind
         source: ./

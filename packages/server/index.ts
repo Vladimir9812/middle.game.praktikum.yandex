@@ -45,7 +45,6 @@ const startServer = async () => {
       changeOrigin: true,
       cookieDomainRewrite: { '*': '' },
       target: YANDEX_API_URL,
-      logLevel: 'debug',
     }),
   );
 

@@ -25,7 +25,7 @@ if (typeof window !== 'undefined') {
   delete window.__PRELOADED_STATE__;
 }
 
-export function setupStore(ssrPreloadedState: State | undefined) {
+export function setupStore(ssrPreloadedState?: State) {
   if (!preloadedState) {
     preloadedState = ssrPreloadedState;
   }
