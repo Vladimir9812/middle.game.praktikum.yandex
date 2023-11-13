@@ -25,6 +25,7 @@ import { auth } from './middlewares/auth';
 import { errorHandler } from './middlewares/errorHandler';
 import { threadRoutes } from './routes/thread';
 import { answerRoutes } from './routes/answer';
+import { commentRoutes } from './routes/comment';
 
 dotenv.config();
 
@@ -79,6 +80,7 @@ const startServer = async () => {
 
   app.use('/api/forum/thread', threadRoutes);
   app.use('/api/forum/answer', answerRoutes);
+  app.use('/api/forum/comment', commentRoutes);
 
   app.use('*', async (request: RequestWithUser, res, next) => {
     const url = request.originalUrl;

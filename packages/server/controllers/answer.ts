@@ -18,8 +18,13 @@ export const deleteAnswer = (request: RequestWithUser, response: Response, next:
 };
 
 export const getAnswers = (request: RequestWithUser, response: Response, next: NextFunction) => {
-  const { limit, offset } = request.params;
-  Answer.findAll({ offset: Number(offset), limit: Number(limit) })
+  const { threadId } = request.params;
+  const { offset, limit } = request.query;
+  Answer.findAll({
+    where: { thread: threadId },
+    offset: offset ? Number(offset) : undefined,
+    limit: limit ? Number(limit) : undefined,
+  })
     .then((answers) => response.send({ data: answers }))
     .catch((error) => next(error));
 };

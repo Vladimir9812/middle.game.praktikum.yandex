@@ -18,8 +18,11 @@ export const deleteThread = (request: RequestWithUser, response: Response, next:
 };
 
 export const getThreads = (request: RequestWithUser, response: Response, next: NextFunction) => {
-  const { limit, offset } = request.params;
-  Thread.findAll({ offset: Number(offset), limit: Number(limit) })
+  const { offset, limit } = request.query;
+  Thread.findAll({
+    offset: offset ? Number(offset) : undefined,
+    limit: limit ? Number(limit) : undefined,
+  })
     .then((threads) => response.send({ data: threads }))
     .catch((error) => next(error));
 };

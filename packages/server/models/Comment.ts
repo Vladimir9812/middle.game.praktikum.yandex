@@ -5,14 +5,14 @@ import { sequelize } from '../db/sequelizeInit';
 
 import { Thread } from './Thread';
 
-interface IComment {
+export interface IComment {
   id: number;
   author: number;
   text: string;
   parentComment: number;
-  childComment: number;
-  thread: number;
+  childComment: number | IComment;
   answer: number;
+  isDeleted: boolean;
 }
 
 const commentModel: ModelAttributes<Model, IComment> = {
@@ -34,11 +34,10 @@ const commentModel: ModelAttributes<Model, IComment> = {
   childComment: {
     type: DataType.INTEGER,
   },
-  answer: {
-    type: DataType.INTEGER,
-    allowNull: false,
+  isDeleted: {
+    type: DataType.BOOLEAN,
   },
-  thread: {
+  answer: {
     type: DataType.INTEGER,
     allowNull: false,
     references: {
