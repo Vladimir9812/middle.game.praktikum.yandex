@@ -17,11 +17,14 @@ import type { ViteDevServer } from 'vite';
 import { createServer as createViteServer } from 'vite';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import type { RequestWithUser } from 'RequestWithUser';
+import bodyParser from 'body-parser';
 
 import preloadState from './preloadState';
 import { dbConnect } from './db/connect';
 import { auth } from './middlewares/auth';
 import { errorHandler } from './middlewares/errorHandler';
+import { threadRoutes } from './routes/thread';
+import { answerRoutes } from './routes/answer';
 
 dotenv.config();
 
@@ -31,13 +34,9 @@ const { YANDEX_API_URL, SERVER_PORT } = process.env;
 const startServer = async () => {
   const app = express();
   app.use(cors());
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
   const port = Number(SERVER_PORT) || 3000;
-
-  // app.get('/api/v2/auth', (req, res) => {
-  //   console.log(req);
-  //   console.log(res);
-  //   console.log('here');
-  // });
 
   app.use(
     '/api/v2/',
@@ -70,10 +69,6 @@ const startServer = async () => {
 
   app.use(auth);
 
-  app.get('/api', (_, _res) => {
-    _res.json('👋 Howdy from the server :)');
-  });
-
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)');
   });
@@ -81,6 +76,9 @@ const startServer = async () => {
   if (!isDevelopment()) {
     app.use('/src', express.static(path.resolve(distributionPath, 'src'), { index: false }));
   }
+
+  app.use('/api/forum/thread', threadRoutes);
+  app.use('/api/forum/answer', answerRoutes);
 
   app.use('*', async (request: RequestWithUser, res, next) => {
     const url = request.originalUrl;

@@ -7,8 +7,8 @@ import { sequelize } from './sequelizeInit';
 export async function dbConnect() {
   try {
     await sequelize.authenticate(); // Проверка аутентификации в БД
-    await Answer.sync();
     await Thread.sync();
+    await Answer.sync();
     await Comment.sync();
     await sequelize.sync(); // Синхронизация базы данных
     console.log('Database connected!');
