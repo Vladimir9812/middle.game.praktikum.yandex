@@ -46,4 +46,6 @@ const commentModel: ModelAttributes<Model, IComment> = {
     },
   },
 };
-export const Comment = sequelize.define('Comment', commentModel, {});
+export const Comment = sequelize.define('Comment', commentModel, {
+  indexes: [{ fields: ['answer'] }],
+});

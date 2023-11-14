@@ -14,7 +14,7 @@ answerRoutes.get(
 );
 answerRoutes.post(
   '/',
-  body(['author', 'title', 'text', 'thread']).escape().notEmpty().trim(),
+  body(['title', 'text', 'thread']).escape().notEmpty().trim(),
   validate,
   createAnswer,
 );

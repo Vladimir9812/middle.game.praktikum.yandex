@@ -2,21 +2,29 @@ import type { RequestWithUser } from 'RequestWithUser';
 import type { NextFunction, Response } from 'express';
 
 import { Comment, IComment } from '../models/Comment';
+import { checkAuthor } from '../utils/checkOwner';
 
 export const createComment = (request: RequestWithUser, response: Response, next: NextFunction) => {
-  const { author, text, answer, parentComment = null } = request.body;
-  Comment.create({ author, answer, text, parentComment, isDeleted: false })
+  const { text, answer, parentComment = null } = request.body;
+  Comment.create({ author: request?.user?.id, answer, text, parentComment, isDeleted: false })
     .then((comment) => response.send(comment.dataValues))
     .catch((error) => next(error));
 };
 
-export const deleteComment = (request: RequestWithUser, response: Response, next: NextFunction) => {
+export const deleteComment = async (
+  request: RequestWithUser,
+  response: Response,
+  next: NextFunction,
+) => {
   const { commentId } = request.params;
+  const userId = request?.user?.id;
+  const commentToDelete = await Comment.findOne({ where: { author: userId } });
+  checkAuthor(commentToDelete?.id, userId, next);
   Comment.update({ deleted: true }, { where: { id: commentId } })
     .then(() => response.status(200).send({ message: `comment ${commentId} marked as deleted` }))
     .catch((error) => next(error));
 };
-//
+
 export const getComments = async (
   request: RequestWithUser,
   response: Response,
@@ -40,9 +48,16 @@ export const getComments = async (
   response.status(200).send({ data: commentsTree });
 };
 
-export const editComment = (request: RequestWithUser, response: Response, next: NextFunction) => {
+export const editComment = async (
+  request: RequestWithUser,
+  response: Response,
+  next: NextFunction,
+) => {
   const { commentId } = request.params;
   const { text } = request.body;
+  const userId = request?.user?.id;
+  const commentToEdit = await Comment.findOne({ where: { author: userId } });
+  checkAuthor(commentToEdit?.id, userId, next);
 
   Comment.update({ text }, { where: { id: commentId } })
     .then((answer) => response.send({ answer }))

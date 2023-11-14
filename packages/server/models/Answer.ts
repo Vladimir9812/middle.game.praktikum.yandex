@@ -40,4 +40,6 @@ const answerModel: ModelAttributes<Model, IAnswer> = {
   },
 };
 
-export const Answer = sequelize.define('Answer', answerModel, {});
+export const Answer = sequelize.define('Answer', answerModel, {
+  indexes: [{ fields: ['thread'] }],
+});

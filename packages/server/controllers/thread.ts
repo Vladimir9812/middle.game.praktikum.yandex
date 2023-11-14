@@ -2,16 +2,25 @@ import type { RequestWithUser } from 'RequestWithUser';
 import type { NextFunction, Response } from 'express';
 
 import { Thread } from '../models/Thread';
+import { checkAuthor } from '../utils/checkOwner';
 
 export const createThread = (request: RequestWithUser, response: Response, next: NextFunction) => {
-  const { author, title } = request.body;
-  Thread.create({ author, title })
+  const { title } = request.body;
+  Thread.create({ author: request?.user?.id, title })
     .then((thread) => response.send(thread.dataValues))
     .catch((error) => next(error));
 };
 
-export const deleteThread = (request: RequestWithUser, response: Response, next: NextFunction) => {
+export const deleteThread = async (
+  request: RequestWithUser,
+  response: Response,
+  next: NextFunction,
+) => {
   const { threadId } = request.params;
+  const userId = request?.user?.id;
+  const threadToDelete = await Thread.findOne({ where: { author: userId } });
+  checkAuthor(threadToDelete?.id, userId, next);
+
   Thread.destroy({ where: { id: threadId } })
     .then(() => response.status(200).send({ message: `thread ${threadId} deleted` }))
     .catch((error) => next(error));
@@ -27,9 +36,16 @@ export const getThreads = (request: RequestWithUser, response: Response, next: N
     .catch((error) => next(error));
 };
 
-export const editThread = (request: RequestWithUser, response: Response, next: NextFunction) => {
+export const editThread = async (
+  request: RequestWithUser,
+  response: Response,
+  next: NextFunction,
+) => {
   const { threadId } = request.params;
   const { title } = request.body;
+  const userId = request?.user?.id;
+  const threadToEdit = await Thread.findOne({ where: { author: userId } });
+  checkAuthor(threadToEdit?.id, userId, next);
 
   Thread.update({ title }, { where: { id: threadId }, returning: true })
     .then((thread) => response.send({ thread }))

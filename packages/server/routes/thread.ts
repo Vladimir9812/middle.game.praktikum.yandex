@@ -7,12 +7,7 @@ import { validate } from '../middlewares/validate';
 
 const threadRoutes = Router();
 threadRoutes.get('/', getThreads);
-threadRoutes.post(
-  '/',
-  body(['author', 'title']).escape().notEmpty().trim(),
-  validate,
-  createThread,
-);
+threadRoutes.post('/', body(['title']).escape().notEmpty().trim(), validate, createThread);
 threadRoutes.delete(
   '/:threadId',
   param(['threadId']).escape().notEmpty().trim(),

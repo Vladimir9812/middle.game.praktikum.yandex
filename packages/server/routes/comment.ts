@@ -14,7 +14,7 @@ commentRoutes.get(
 );
 commentRoutes.post(
   '/',
-  body(['author', 'text', 'answer', 'parentComment']).escape().notEmpty().trim(),
+  body(['text', 'answer', 'parentComment']).escape().notEmpty().trim(),
   validate,
   createComment,
 );

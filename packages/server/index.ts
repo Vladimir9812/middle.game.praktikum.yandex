@@ -18,6 +18,7 @@ import { createServer as createViteServer } from 'vite';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import type { RequestWithUser } from 'RequestWithUser';
 import bodyParser from 'body-parser';
+import jsesc from 'jsesc';
 
 import preloadState from './preloadState';
 import { dbConnect } from './db/connect';
@@ -95,20 +96,23 @@ const startServer = async () => {
         template = fs.readFileSync(path.resolve(distributionPath, 'index.html'), 'utf8');
       }
 
-      let render: (url: string, preloadedState: Record<string, any>) => Promise<string>;
+      let render: (url: string, preloadedState?: Record<string, any>) => Promise<string>;
       const preloadedState = await preloadState(request.user || {});
 
       render = isDevelopment()
         ? (await vite!.ssrLoadModule(path.resolve(sourcePath, 'ssr.tsx'))).render
         : (await import(ssrClientPath)).render;
 
-      const appHtml = await render(url, preloadedState);
+      const preloadedStateSerialized = jsesc(preloadedState, {
+        json: true,
+        isScriptContext: true,
+      });
 
-      const preloadedStateHtml = `<script>window.__PRELOADED_STATE__=${JSON.stringify(
-        preloadedState,
-      )}</script>`;
+      const appHtml = await render(url, JSON.parse(preloadedStateSerialized));
 
-      const html = template.replace('<!--ssr-outlet-->', appHtml + preloadedStateHtml);
+      const html = template
+        .replace('<!--ssr-outlet-->', appHtml)
+        .replace('<!--store-data-->', preloadedStateSerialized);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (error) {

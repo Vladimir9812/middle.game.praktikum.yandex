@@ -2,19 +2,29 @@ import type { RequestWithUser } from 'RequestWithUser';
 import type { NextFunction, Response } from 'express';
 
 import { Answer } from '../models/Answer';
+import { checkAuthor } from '../utils/checkOwner';
 
 export const createAnswer = (request: RequestWithUser, response: Response, next: NextFunction) => {
-  const { author, text, thread } = request.body;
-  Answer.create({ author, text, thread })
+  const { text, thread } = request.body;
+  Answer.create({ author: request.user, text, thread })
     .then((answer) => response.send(answer.dataValues))
     .catch((error) => next(error));
 };
 
-export const deleteAnswer = (request: RequestWithUser, response: Response, next: NextFunction) => {
+export const deleteAnswer = async (
+  request: RequestWithUser,
+  response: Response,
+  next: NextFunction,
+) => {
   const { answerId } = request.params;
-  Answer.destroy({ where: { id: answerId } })
-    .then(() => response.status(200).send({ message: `answer ${answerId} deleted` }))
-    .catch((error) => next(error));
+  const userId = request?.user?.id;
+  const answerToDelete = await Answer.findOne({ where: { author: userId } });
+  checkAuthor(answerToDelete?.id, userId, next);
+  if (answerToDelete?.id.toString() === answerId) {
+    Answer.destroy({ where: { id: answerId } })
+      .then(() => response.status(200).send({ message: `answer ${answerId} deleted` }))
+      .catch((error) => next(error));
+  }
 };
 
 export const getAnswers = (request: RequestWithUser, response: Response, next: NextFunction) => {
@@ -29,10 +39,16 @@ export const getAnswers = (request: RequestWithUser, response: Response, next: N
     .catch((error) => next(error));
 };
 
-export const editAnswer = (request: RequestWithUser, response: Response, next: NextFunction) => {
+export const editAnswer = async (
+  request: RequestWithUser,
+  response: Response,
+  next: NextFunction,
+) => {
   const { answerId } = request.params;
   const { title, text } = request.body;
-
+  const userId = request?.user?.id;
+  const answerToDelete = await Answer.findOne({ where: { author: userId } });
+  checkAuthor(answerToDelete?.id, userId, next);
   Answer.update({ title, text }, { where: { id: answerId } })
     .then((answer) => response.send({ answer }))
     .catch((error) => next(error));
