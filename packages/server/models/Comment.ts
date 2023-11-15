@@ -3,7 +3,7 @@ import type { ModelAttributes } from 'sequelize';
 
 import { sequelize } from '../db/sequelizeInit';
 
-import { Thread } from './Thread';
+import { Answer } from './Answer';
 
 export interface IComment {
   id: number;
@@ -41,7 +41,7 @@ const commentModel: ModelAttributes<Model, IComment> = {
     type: DataType.INTEGER,
     allowNull: false,
     references: {
-      model: Thread,
+      model: Answer,
       key: 'id',
     },
   },

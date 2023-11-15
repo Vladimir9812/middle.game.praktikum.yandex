@@ -18,7 +18,7 @@ export const deleteThread = async (
 ) => {
   const { threadId } = request.params;
   const userId = request?.user?.id;
-  const threadToDelete = await Thread.findOne({ where: { author: userId } });
+  const threadToDelete = await Thread.findOne({ where: { id: threadId } });
   try {
     checkAuthor(threadToDelete?.dataValues.author, userId);
   } catch (error) {
@@ -47,7 +47,7 @@ export const editThread = async (
   const { threadId } = request.params;
   const { title } = request.body;
   const userId = request?.user?.id;
-  const threadToEdit = await Thread.findOne({ where: { author: userId } });
+  const threadToEdit = await Thread.findOne({ where: { id: threadId } });
   try {
     checkAuthor(threadToEdit?.dataValues.author, userId);
   } catch (error) {

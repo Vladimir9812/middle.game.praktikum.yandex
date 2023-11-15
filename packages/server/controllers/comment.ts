@@ -3,9 +3,20 @@ import type { NextFunction, Response } from 'express';
 
 import { Comment, IComment } from '../models/Comment';
 import { checkAuthor } from '../utils/checkAuthor';
+import { ValidationError } from '../errors/ValidationError';
 
-export const createComment = (request: RequestWithUser, response: Response, next: NextFunction) => {
+export const createComment = async (
+  request: RequestWithUser,
+  response: Response,
+  next: NextFunction,
+) => {
   const { text, answer, parentComment = null } = request.body;
+  if (parentComment) {
+    const parentCommentToCheck = await Comment.findOne({ where: { id: parentComment } });
+    if (!parentCommentToCheck) {
+      next(new ValidationError('Parent comment not exist'));
+    }
+  }
   Comment.create({ author: request?.user?.id, answer, text, parentComment, isDeleted: false })
     .then((comment) => response.send(comment.dataValues))
     .catch((error) => next(error));
@@ -18,7 +29,7 @@ export const deleteComment = async (
 ) => {
   const { commentId } = request.params;
   const userId = request?.user?.id;
-  const commentToDelete = await Comment.findOne({ where: { author: userId } });
+  const commentToDelete = await Comment.findOne({ where: { id: commentId } });
   try {
     checkAuthor(commentToDelete?.dataValues.author, userId);
   } catch (error) {
@@ -60,7 +71,7 @@ export const editComment = async (
   const { commentId } = request.params;
   const { text } = request.body;
   const userId = request?.user?.id;
-  const commentToEdit = await Comment.findOne({ where: { author: userId } });
+  const commentToEdit = await Comment.findOne({ where: { id: commentId } });
   try {
     checkAuthor(commentToEdit?.dataValues.author, userId);
   } catch (error) {
