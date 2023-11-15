@@ -133,7 +133,7 @@
 4. put /:threadId/edit - body: {title} изменяет заголовок темы
   ### Answer
 1. get /api/forum/:threadId - возвращает все ответы в теме
-2. post /api/forum body: {'title', 'text', 'thread'} - создаёт ответ и возвращает созданный ответ
+2. post /api/forum/answer body: {'title', 'text', 'thread'} - создаёт ответ и возвращает созданный ответ
 3. delete /api/forum/:answerId - удаляет ответ из БД
 4. put /api/forum/:threadId/edit body: {text} изменяет текст ответа
   ### Comment

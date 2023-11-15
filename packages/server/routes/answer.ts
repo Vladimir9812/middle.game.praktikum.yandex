@@ -25,7 +25,7 @@ answerRoutes.delete(
   deleteAnswer,
 );
 answerRoutes.put(
-  '/:threadId/edit',
+  '/:answerId/edit',
   param(['answerId']).escape().notEmpty().trim(),
   validate,
   editAnswer,

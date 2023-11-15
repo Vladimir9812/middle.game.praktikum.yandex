@@ -2,11 +2,12 @@ import type { RequestWithUser } from 'RequestWithUser';
 import type { NextFunction, Response } from 'express';
 
 import { Answer } from '../models/Answer';
-import { checkAuthor } from '../utils/checkOwner';
+import { checkAuthor } from '../utils/checkAuthor';
 
 export const createAnswer = (request: RequestWithUser, response: Response, next: NextFunction) => {
-  const { text, thread } = request.body;
-  Answer.create({ author: request.user, text, thread })
+  const { text, thread, title } = request.body;
+  console.log(thread);
+  Answer.create({ author: request?.user?.id, text, thread, title })
     .then((answer) => response.send(answer.dataValues))
     .catch((error) => next(error));
 };
@@ -19,7 +20,11 @@ export const deleteAnswer = async (
   const { answerId } = request.params;
   const userId = request?.user?.id;
   const answerToDelete = await Answer.findOne({ where: { author: userId } });
-  checkAuthor(answerToDelete?.id, userId, next);
+  try {
+    checkAuthor(answerToDelete?.dataValues.author, userId);
+  } catch (error) {
+    next(error);
+  }
   if (answerToDelete?.id.toString() === answerId) {
     Answer.destroy({ where: { id: answerId } })
       .then(() => response.status(200).send({ message: `answer ${answerId} deleted` }))
@@ -48,7 +53,11 @@ export const editAnswer = async (
   const { title, text } = request.body;
   const userId = request?.user?.id;
   const answerToDelete = await Answer.findOne({ where: { author: userId } });
-  checkAuthor(answerToDelete?.id, userId, next);
+  try {
+    checkAuthor(answerToDelete?.dataValues.author, userId);
+  } catch (error) {
+    next(error);
+  }
   Answer.update({ title, text }, { where: { id: answerId } })
     .then((answer) => response.send({ answer }))
     .catch((error) => next(error));

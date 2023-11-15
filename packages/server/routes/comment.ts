@@ -14,7 +14,7 @@ commentRoutes.get(
 );
 commentRoutes.post(
   '/',
-  body(['text', 'answer', 'parentComment']).escape().notEmpty().trim(),
+  body(['text', 'answer']).escape().notEmpty().trim(),
   validate,
   createComment,
 );
@@ -25,8 +25,8 @@ commentRoutes.delete(
   deleteComment,
 );
 commentRoutes.put(
-  '/:threadId/edit',
-  param(['threadId']).escape().notEmpty().trim(),
+  '/:commentId/edit',
+  param(['commentId']).escape().notEmpty().trim(),
   validate,
   editComment,
 );

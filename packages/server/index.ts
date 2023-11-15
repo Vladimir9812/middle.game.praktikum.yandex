@@ -116,6 +116,7 @@ const startServer = async () => {
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (error) {
+      console.log('here');
       if (isDevelopment()) {
         vite!.ssrFixStacktrace(error as Error);
       }
