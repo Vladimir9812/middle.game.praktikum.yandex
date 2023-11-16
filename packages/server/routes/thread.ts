@@ -3,21 +3,21 @@ import { Router } from 'express';
 import { body, param } from 'express-validator';
 
 import { createThread, deleteThread, editThread, getThreads } from '../controllers/thread';
-import { validate } from '../middlewares/validate';
+import { validateRequest } from '../middlewares/validateRequest';
 
 const threadRoutes = Router();
 threadRoutes.get('/', getThreads);
-threadRoutes.post('/', body(['title']).escape().notEmpty().trim(), validate, createThread);
+threadRoutes.post('/', body(['title']).escape().notEmpty().trim(), validateRequest, createThread);
 threadRoutes.delete(
   '/:threadId',
   param(['threadId']).escape().notEmpty().trim(),
-  validate,
+  validateRequest,
   deleteThread,
 );
 threadRoutes.put(
   '/:threadId/edit',
   param(['threadId']).escape().notEmpty().trim(),
-  validate,
+  validateRequest,
   editThread,
 );
 

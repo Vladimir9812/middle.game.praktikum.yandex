@@ -5,7 +5,7 @@ import { sequelize } from '../db/sequelizeInit';
 
 import { Thread } from './Thread';
 
-interface IAnswer {
+interface IAnswerModel {
   id: number;
   author: number;
   text: string;
@@ -13,7 +13,7 @@ interface IAnswer {
   thread: number;
 }
 
-const answerModel: ModelAttributes<Model, IAnswer> = {
+const answerModel: ModelAttributes<Model, IAnswerModel> = {
   id: {
     type: DataType.INTEGER,
     autoIncrement: true,

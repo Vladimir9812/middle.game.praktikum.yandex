@@ -1,7 +1,7 @@
 import type { RequestWithUser } from 'RequestWithUser';
 import type { NextFunction, Response } from 'express';
 
-import { Comment, IComment } from '../models/Comment';
+import { Comment, ICommentModel } from '../models/Comment';
 import { checkAuthor } from '../utils/checkAuthor';
 import { ValidationError } from '../errors/ValidationError';
 
@@ -31,7 +31,7 @@ export const deleteComment = async (
   const userId = request?.user?.id;
   const commentToDelete = await Comment.findOne({ where: { id: commentId } });
   try {
-    checkAuthor(commentToDelete?.dataValues.author, userId);
+    checkAuthor(commentToDelete?.dataValues.author, userId as string);
   } catch (error) {
     next(error);
   }
@@ -48,7 +48,7 @@ export const getComments = async (
   const { answerId } = request.params;
   const commentsArray = (await Comment.findAll({
     where: { answer: answerId },
-  })) as unknown as IComment[];
+  })) as unknown as ICommentModel[];
   const commentsTree = [];
   for (const comment of commentsArray) {
     if (comment.parentComment) {
@@ -73,7 +73,7 @@ export const editComment = async (
   const userId = request?.user?.id;
   const commentToEdit = await Comment.findOne({ where: { id: commentId } });
   try {
-    checkAuthor(commentToEdit?.dataValues.author, userId);
+    checkAuthor(commentToEdit?.dataValues.author, userId as string);
   } catch (error) {
     next(error);
   }

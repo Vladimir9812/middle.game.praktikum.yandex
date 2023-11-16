@@ -3,13 +3,13 @@ import type { ModelAttributes } from 'sequelize';
 
 import { sequelize } from '../db/sequelizeInit';
 
-interface IThread {
+interface IThreadModel {
   id: number;
   author: number;
   title: string;
 }
 
-export const threadModel: ModelAttributes<Model, IThread> = {
+export const threadModel: ModelAttributes<Model, IThreadModel> = {
   id: {
     type: DataType.INTEGER,
     autoIncrement: true,

@@ -20,7 +20,7 @@ export const deleteAnswer = async (
   const userId = request?.user?.id;
   const answerToDelete = await Answer.findOne({ where: { id: answerId } });
   try {
-    checkAuthor(answerToDelete?.dataValues.author, userId);
+    checkAuthor(answerToDelete?.dataValues.author, userId as string);
   } catch (error) {
     next(error);
   }
@@ -51,7 +51,7 @@ export const editAnswer = async (
   const userId = request?.user?.id;
   const answerToEdit = await Answer.findOne({ where: { id: answerId } });
   try {
-    checkAuthor(answerToEdit?.dataValues.author, userId);
+    checkAuthor(answerToEdit?.dataValues.author, userId as string);
   } catch (error) {
     next(error);
   }

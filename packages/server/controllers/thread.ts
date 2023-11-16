@@ -20,7 +20,7 @@ export const deleteThread = async (
   const userId = request?.user?.id;
   const threadToDelete = await Thread.findOne({ where: { id: threadId } });
   try {
-    checkAuthor(threadToDelete?.dataValues.author, userId);
+    checkAuthor(threadToDelete?.dataValues.author, userId as string);
   } catch (error) {
     next(error);
   }
@@ -49,7 +49,7 @@ export const editThread = async (
   const userId = request?.user?.id;
   const threadToEdit = await Thread.findOne({ where: { id: threadId } });
   try {
-    checkAuthor(threadToEdit?.dataValues.author, userId);
+    checkAuthor(threadToEdit?.dataValues.author, userId as string);
   } catch (error) {
     next(error);
   }

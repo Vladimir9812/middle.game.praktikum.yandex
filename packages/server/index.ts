@@ -22,7 +22,7 @@ import jsesc from 'jsesc';
 
 import preloadState from './preloadState';
 import { dbConnect } from './db/connect';
-import { auth } from './middlewares/auth';
+import { authMiddleware } from './middlewares/authMiddleware';
 import { errorHandler } from './middlewares/errorHandler';
 import { threadRoutes } from './routes/thread';
 import { answerRoutes } from './routes/answer';
@@ -68,7 +68,7 @@ const startServer = async () => {
     app.use(vite.middlewares);
   }
 
-  app.use(auth);
+  app.use(authMiddleware);
 
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)');

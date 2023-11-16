@@ -3,31 +3,31 @@ import { Router } from 'express';
 import { body, param } from 'express-validator';
 
 import { createComment, deleteComment, editComment, getComments } from '../controllers/comment';
-import { validate } from '../middlewares/validate';
+import { validateRequest } from '../middlewares/validateRequest';
 
 const commentRoutes = Router();
 commentRoutes.get(
   '/:answerId',
   param(['answerId']).escape().notEmpty().trim(),
-  validate,
+  validateRequest,
   getComments,
 );
 commentRoutes.post(
   '/',
   body(['text', 'answer']).escape().notEmpty().trim(),
-  validate,
+  validateRequest,
   createComment,
 );
 commentRoutes.delete(
   '/:commentId',
   param(['commentId']).escape().notEmpty().trim(),
-  validate,
+  validateRequest,
   deleteComment,
 );
 commentRoutes.put(
   '/:commentId/edit',
   param(['commentId']).escape().notEmpty().trim(),
-  validate,
+  validateRequest,
   editComment,
 );
 

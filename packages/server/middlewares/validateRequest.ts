@@ -3,7 +3,11 @@ import { validationResult } from 'express-validator';
 import type { RequestWithUser } from 'RequestWithUser';
 import type { NextFunction, Response } from 'express';
 
-export const validate = (request: RequestWithUser, response: Response, next: NextFunction) => {
+export const validateRequest = (
+  request: RequestWithUser,
+  response: Response,
+  next: NextFunction,
+) => {
   const result = validationResult(request);
   if (!result.isEmpty()) {
     response.send({ errors: result.array() });

@@ -3,31 +3,31 @@ import { Router } from 'express';
 import { body, param } from 'express-validator';
 
 import { createAnswer, deleteAnswer, editAnswer, getAnswers } from '../controllers/answer';
-import { validate } from '../middlewares/validate';
+import { validateRequest } from '../middlewares/validateRequest';
 
 const answerRoutes = Router();
 answerRoutes.get(
   '/:threadId',
   param(['threadId']).escape().notEmpty().trim(),
-  validate,
+  validateRequest,
   getAnswers,
 );
 answerRoutes.post(
   '/',
   body(['title', 'text', 'thread']).escape().notEmpty().trim(),
-  validate,
+  validateRequest,
   createAnswer,
 );
 answerRoutes.delete(
   '/:answerId',
   param(['answerId']).escape().notEmpty().trim(),
-  validate,
+  validateRequest,
   deleteAnswer,
 );
 answerRoutes.put(
   '/:answerId/edit',
   param(['answerId']).escape().notEmpty().trim(),
-  validate,
+  validateRequest,
   editAnswer,
 );
 

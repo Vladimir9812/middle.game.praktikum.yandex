@@ -5,7 +5,11 @@ import { getUserInfo } from '../utils/getUserInfo';
 import { protectedRoutes } from '../const/protectedRoutes';
 import { AuthorizationError } from '../errors/AuthorizationError';
 
-export const auth = async (request: RequestWithUser, _response: Response, next: NextFunction) => {
+export const authMiddleware = async (
+  request: RequestWithUser,
+  _response: Response,
+  next: NextFunction,
+) => {
   const url = request.originalUrl;
   const isProtectedRoute = protectedRoutes.some((protectedRoute) => url.startsWith(protectedRoute));
   if (request.user) {

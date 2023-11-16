@@ -5,17 +5,17 @@ import { sequelize } from '../db/sequelizeInit';
 
 import { Answer } from './Answer';
 
-export interface IComment {
+export interface ICommentModel {
   id: number;
   author: number;
   text: string;
   parentComment: number;
-  childComment: number | IComment;
+  childComment: number | ICommentModel;
   answer: number;
   isDeleted: boolean;
 }
 
-const commentModel: ModelAttributes<Model, IComment> = {
+const commentModel: ModelAttributes<Model, ICommentModel> = {
   id: {
     type: DataType.INTEGER,
     autoIncrement: true,
