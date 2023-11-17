@@ -36,10 +36,6 @@ const { YANDEX_API_URL, SERVER_PORT } = process.env;
 const startServer = async () => {
   const app = express();
   app.use(cors());
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true }));
-  const port = Number(SERVER_PORT) || 3000;
-
   app.use(
     '/api/v2/',
     createProxyMiddleware({
@@ -48,6 +44,9 @@ const startServer = async () => {
       target: YANDEX_API_URL,
     }),
   );
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: true }));
+  const port = Number(SERVER_PORT) || 3000;
 
   let vite: ViteDevServer | undefined;
   let distributionPath = '/';
@@ -116,7 +115,6 @@ const startServer = async () => {
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (error) {
-      console.log('here');
       if (isDevelopment()) {
         vite!.ssrFixStacktrace(error as Error);
       }
