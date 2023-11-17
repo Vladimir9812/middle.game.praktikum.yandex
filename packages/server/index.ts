@@ -21,7 +21,7 @@ import bodyParser from 'body-parser';
 import jsesc from 'jsesc';
 
 import preloadState from './preloadState';
-import { dbConnect } from './db/connect';
+// import { dbConnect } from './db/connect';
 import { authMiddleware } from './middlewares/authMiddleware';
 import { errorHandler } from './middlewares/errorHandler';
 import { threadRoutes } from './routes/thread';
@@ -35,7 +35,6 @@ const { YANDEX_API_URL, SERVER_PORT } = process.env;
 
 const startServer = async () => {
   const app = express();
-  app.use(cors());
   app.use(
     '/api/v2/',
     createProxyMiddleware({
@@ -44,6 +43,8 @@ const startServer = async () => {
       target: YANDEX_API_URL,
     }),
   );
+  app.use(cors());
+
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
   const port = Number(SERVER_PORT) || 3000;
@@ -121,8 +122,6 @@ const startServer = async () => {
       next(error);
     }
   });
-
-  await dbConnect();
 
   app.listen(port, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
