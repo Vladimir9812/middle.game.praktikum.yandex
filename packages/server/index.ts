@@ -21,7 +21,7 @@ import bodyParser from 'body-parser';
 import jsesc from 'jsesc';
 
 import preloadState from './preloadState';
-// import { dbConnect } from './db/connect';
+import { dbConnect } from './db/connect';
 import { authMiddleware } from './middlewares/authMiddleware';
 import { errorHandler } from './middlewares/errorHandler';
 import { threadRoutes } from './routes/thread';
@@ -122,6 +122,8 @@ const startServer = async () => {
       next(error);
     }
   });
+
+  await dbConnect();
 
   app.listen(port, () => {
     console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
