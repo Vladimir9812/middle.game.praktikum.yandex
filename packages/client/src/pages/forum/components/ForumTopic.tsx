@@ -1,11 +1,13 @@
 import { Box, Button, Flex } from '@chakra-ui/react';
-import { ChangeEvent, useCallback, useEffect, useState, useId } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { FormTextArea, Icons, Link, Pagination } from '@app/components';
+import { useAppDispatch, useAppSelector } from '@app/hooks';
 
 import styles from '../Forum.module.css';
 import mock from '../mock.json';
+import { createNewAnswer, getAllAnswer } from '../../../store/slices/ForumActionCreators';
 
 import { ForumTopicComment } from './ForumTopicComment';
 
@@ -20,22 +22,30 @@ type GridItemType = {
 const itemsPerPage = 5;
 
 export function ForumTopic() {
+  const { answer } = useAppSelector((state) => state.forum);
   const [data, setData] = useState<GridItemType>();
   const [paginatedItems, setPaginatedItems] = useState([]);
   const [inputText, setInputText] = useState('');
   const [itemOffset, setItemOffset] = useState(0);
-
+  const dispatch = useAppDispatch();
   const parameters = useParams();
 
   useEffect(() => {
-    const item = mock.data.allTheme.find((index) => String(index.id) === parameters.id);
+    if (parameters.id) {
+      dispatch(getAllAnswer(`${parameters.id}`));
+    }
+  }, []);
+
+  useEffect(() => {
+    const item = answer.find((index) => String(index.tread) === parameters.id);
     const newItem = {
       ...item,
       comments: mock.data.comments,
     };
+    console.log(newItem);
 
     setData(newItem);
-  }, []);
+  }, [answer]);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -56,18 +66,15 @@ export function ForumTopic() {
   }, []);
 
   const sendData = useCallback(() => {
-    const dataCopy = { ...data };
-
-    dataCopy.comments.push({
-      id: useId(),
-      name: 'Ivanessson',
-      creationDate: new Date().toISOString(),
-      comment: inputText,
-      commentsCount: dataCopy.commentsCount,
-    });
-    setData(dataCopy);
+    const body = {
+      title: inputText,
+      text: inputText,
+      thread: parameters.id,
+    };
+    console.log(body);
+    dispatch(createNewAnswer(body));
     setInputText('');
-  }, [data, inputText]);
+  }, [data, inputText, parameters.id, dispatch, createNewAnswer]);
 
   return (
     <Flex direction="column" justifyContent="space-between" h="100%">
