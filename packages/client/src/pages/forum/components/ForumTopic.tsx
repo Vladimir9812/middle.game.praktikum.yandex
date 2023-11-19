@@ -68,7 +68,6 @@ export function ForumTopic() {
     setInputText('');
   }, [data, inputText, parameters.id, dispatch, createNewAnswer]);
 
-  console.log(paginatedItems);
   return (
     <Flex direction="column" justifyContent="space-between" h="100%">
       <Link to="/forum" className={styles.go_back_icon}>

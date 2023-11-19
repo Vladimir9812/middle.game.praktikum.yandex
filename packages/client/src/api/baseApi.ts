@@ -103,7 +103,6 @@ export class BaseApi {
 
   public async delete({ route, data }: { route: Url; data?: RequestData }) {
     try {
-      console.log(route);
       const response = await fetch(
         `${this._baseUrl}/${route}`,
         this.getFetchOptions(Method.DELETE, data),

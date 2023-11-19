@@ -67,7 +67,6 @@ export const forumSlice = createSlice({
       })
       .addCase(deleteTread.fulfilled, (state, action) => {
         state.isLoading = false;
-        // console.log(action.meta.arg)
         state.tread = state.tread.filter((item) => item.id !== Number(action.meta.arg));
       })
       .addCase(deleteTread.rejected, (state, action) => {
