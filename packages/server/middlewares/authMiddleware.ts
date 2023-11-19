@@ -1,6 +1,6 @@
 import type { Response, NextFunction } from 'express';
-import type { RequestWithUser } from 'RequestWithUser';
 
+import type { RequestWithUser } from '../types/RequestWithUser';
 import { getUserInfo } from '../utils/getUserInfo';
 import { protectedRoutes } from '../const/protectedRoutes';
 import { AuthorizationError } from '../errors/AuthorizationError';
@@ -25,9 +25,10 @@ export const authMiddleware = async (
     return;
   }
   const user = await getUserInfo(cookie);
-  if (!user && protectedRoutes.includes(url)) {
+  if (!user && isProtectedRoute) {
     next(new AuthorizationError('Not authorized'));
+  } else {
+    request.user = user;
+    next();
   }
-  request.user = user;
-  next();
 };
