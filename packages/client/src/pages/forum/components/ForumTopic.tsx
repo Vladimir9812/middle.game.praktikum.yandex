@@ -12,7 +12,7 @@ import { createNewAnswer, getAllAnswer } from '../../../store/slices/ForumAction
 import { ForumTopicComment } from './ForumTopicComment';
 
 type GridItemType = {
-  id?: number | string /* пока что добавляю string для создания топика */;
+  id?: number | string;
   name?: string;
   creationDate?: Date | string;
   commentsCount?: number;
@@ -71,7 +71,6 @@ export function ForumTopic() {
       text: inputText,
       thread: parameters.id,
     };
-    console.log(body);
     dispatch(createNewAnswer(body));
     setInputText('');
   }, [data, inputText, parameters.id, dispatch, createNewAnswer]);

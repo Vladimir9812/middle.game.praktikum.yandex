@@ -93,7 +93,7 @@ export const forumSlice = createSlice({
       })
       .addCase(createNewAnswer.rejected, (state, action) => {
         state.isLoading = false;
-        // state.error = action.payload.message;
+        state.error = action.error.message;
       });
   },
 });

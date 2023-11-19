@@ -6,10 +6,7 @@ import { FormInput, FormTextArea } from '@app/components';
 import styles from '../Forum.module.css';
 
 type TopicType = {
-  // id: number | string /* пока что добавляю string для создания топика */;
   title: string;
-  // creationDate: Date | string;
-  // commentsCount: number;
 };
 
 type CreateTopicProperties = {
