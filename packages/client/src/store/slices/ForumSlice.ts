@@ -65,8 +65,10 @@ export const forumSlice = createSlice({
       .addCase(deleteTread.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(deleteTread.fulfilled, (state) => {
+      .addCase(deleteTread.fulfilled, (state, action) => {
         state.isLoading = false;
+        // console.log(action.meta.arg)
+        state.tread = state.tread.filter((item) => item.id !== Number(action.meta.arg));
       })
       .addCase(deleteTread.rejected, (state, action) => {
         state.isLoading = false;
@@ -77,7 +79,7 @@ export const forumSlice = createSlice({
       })
       .addCase(getAllAnswer.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.answer = action.payload;
+        state.answer = action.payload.data;
       })
       .addCase(getAllAnswer.rejected, (state, action) => {
         state.isLoading = false;
@@ -89,6 +91,7 @@ export const forumSlice = createSlice({
       })
       .addCase(createNewAnswer.fulfilled, (state, action) => {
         state.isLoading = false;
+
         state.answer = [...state.answer, JSON.parse(action.payload)];
       })
       .addCase(createNewAnswer.rejected, (state, action) => {

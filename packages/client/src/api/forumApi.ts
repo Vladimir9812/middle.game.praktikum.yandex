@@ -26,11 +26,11 @@ export class ForumApi {
   }
 
   public async deleteTread(threadId: Url) {
-    return baseForumApi.delete({ route: threadId });
+    return baseForumApi.delete({ route: `thread/${threadId}` });
   }
 
   public async getAllAnswer(threadId: Url) {
-    return baseForumApi.get({ route: threadId });
+    return baseForumApi.get({ route: `answer/${threadId}` });
   }
 
   public async createNewAnswer(body: AnyObject) {

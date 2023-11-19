@@ -6,7 +6,6 @@ import { Icons, Link, Modal, Pagination } from '@app/components';
 import { useAppDispatch, useAppSelector } from '@app/hooks';
 
 import styles from '../Forum.module.css';
-// import mock from '../mock.json';
 import {
   createNewThread,
   deleteTread,
@@ -17,7 +16,7 @@ import { TTread } from '../../../store/slices/ForumSlice';
 import { CreateTopic } from './CreateTopic';
 import { GridColumnTemplate } from './GridColumnTemplate';
 
-const titleItemList = ['Themes', 'Date', 'Comments', ''];
+const titleItemList = ['Themes', 'Date', ''];
 const itemsPerPage = 10;
 
 export function ForumList() {
