@@ -1,7 +1,7 @@
 name: Redeploy project
 on:
    pull_request:
-    branches: ['release', 'main']
+    branches: ['release', 'dev']
 
 jobs:
   redeploy-project:
